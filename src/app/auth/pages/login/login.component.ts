@@ -27,7 +27,7 @@ export class LoginComponent {
   onSubmit(): void {
     if (this.loginForm.valid) {
       console.log('Formulario de login:', this.loginForm.value);
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/home']);
     }
   }
 

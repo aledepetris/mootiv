@@ -1,0 +1,30 @@
+<p-card>
+  <ng-template pTemplate="header">
+    <div class="flex justify-content-between align-items-center px-4">
+      <div>
+        <div class="text-xl font-bold gap-2 mt-2">{{ alumn.nombre }} {{ alumn.apellido }}</div>
+        <div class="text-sm text-secondary gap-2 mt-2">info importante 1</div>
+      </div>
+    </div>
+  </ng-template>
+
+  <img [src]="alumn | alumnImage" [alt]="alumn.nombre" class="responsive-img">
+
+  <div class="mt-1">
+    <h4 class="text-lg">info importante 2</h4>
+    <p>
+      <strong>Alumno desde:</strong> {{ alumn.nombre }}
+      <br>
+      <div class="flex flex-wrap gap-2 mt-2">
+        <p-chip *ngFor="let name of alumn.nombre.split(',') | slice:0:3" label="{{ name }}"></p-chip>
+      </div>
+  </div>
+
+  <p-divider></p-divider>
+
+  <div class="flex justify-content-between mt-2">
+    <button pButton pRipple type="button" icon="pi pi-check" class="p-button-rounded p-button-outlined" [routerLink]="['/alumns/edit', alumn.id ]"></button>
+    <button pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-danger p-button-outlined" [routerLink]="['/alumns', alumn.id ]"></button>
+  </div>
+
+</p-card>

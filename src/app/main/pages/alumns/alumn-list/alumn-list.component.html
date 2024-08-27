@@ -3,7 +3,7 @@
   <ul class="list-none p-0 m-0 flex align-items-center font-medium mb-3">
       <li>
           <a class="text-500 no-underline line-height-3 cursor-pointer"
-          routerLink="/home"
+          routerLink="/"
           >Dashboard</a>
       </li>
       <li class="px-2">
@@ -62,7 +62,7 @@
 
   <div class="grid mx-4 my-2">
     <div *ngFor="let alumn of showedAlumns"
-        class="col-12 sm:col-6 md:col-4 lg:col-4 xl:col-3">
+        class="col-12 sm:col-6 md:col-4 lg:col-3 xl:col-2">
       <app-alumn-card [alumn]="alumn"></app-alumn-card>
     </div>
   </div>

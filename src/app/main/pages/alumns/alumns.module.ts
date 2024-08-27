@@ -13,13 +13,19 @@ import { RippleModule } from 'primeng/ripple';
 import { ButtonModule } from 'primeng/button';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { FormsModule } from '@angular/forms';
-
+import { AlumnNewComponent } from './alumn-new/alumn-new.component';
+import { DropdownModule } from 'primeng/dropdown';
+import { CascadeSelectModule } from "primeng/cascadeselect";
+import { MultiSelectModule } from "primeng/multiselect";
+import { InputTextareaModule } from "primeng/inputtextarea";
+import { InputTextModule } from "primeng/inputtext";
 
 @NgModule({
   declarations: [
     AlumnListComponent,
     AlumnCardComponent,
-    AlumnImagePipe
+    AlumnImagePipe,
+    AlumnNewComponent
   ],
   imports: [
     CommonModule,
@@ -31,7 +37,12 @@ import { FormsModule } from '@angular/forms';
     ButtonModule,
     RippleModule,
     AutoCompleteModule,
-    FormsModule
+    CascadeSelectModule,
+    DropdownModule,
+    FormsModule,
+		MultiSelectModule,
+		InputTextareaModule,
+		InputTextModule
   ]
 })
 export class AlumnsModule { }

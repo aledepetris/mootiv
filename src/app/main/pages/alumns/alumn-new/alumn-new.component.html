@@ -1,0 +1,126 @@
+<div class="surface-section px-5 py-4 md:px-5 lg:px-5">
+  <ul class="list-none p-0 m-0 flex align-items-center font-medium mb-3">
+    <li>
+      <a class="text-500 no-underline line-height-3 cursor-pointer" routerLink="/">Dashboard</a>
+    </li>
+    <li class="px-2">
+      <i class="pi pi-angle-right text-500 line-height-3"></i>
+    </li>
+    <li>
+      <a class="text-500 no-underline line-height-3 cursor-pointer" routerLink="/alumns">Alumnos</a>
+    </li>
+    <li class="px-2">
+      <i class="pi pi-angle-right text-500 line-height-3"></i>
+    </li>
+    <li>
+      <span class="text-900 line-height-3">Nuevo</span>
+    </li>
+  </ul>
+
+  <div class="col-12">
+    <div class="card">
+      <h5>Registrar nuevo alumno</h5>
+      <p-divider></p-divider>
+      <div class="p-fluid p-formgrid grid">
+        <div class="col-12 md:col-7">
+          <div class="p-fluid p-formgrid grid">
+            <div class="field col-6">
+              <label htmlFor="state">Tipo Documento</label>
+              <p-dropdown [options]="dropdownItems" optionLabel="name" [(ngModel)]="selectedState"></p-dropdown>
+            </div>
+            <div class="field col-6">
+              <label htmlFor="firstname2">Número</label>
+              <input pInputText id="firstname2" type="text" />
+            </div>
+            <div class="field col-6">
+              <label htmlFor="firstname2">Nombre</label>
+              <input pInputText id="firstname2" type="text" />
+            </div>
+            <div class="field col-6">
+              <label htmlFor="lastname2">Apellido</label>
+              <input pInputText id="lastname2" type="text" />
+            </div>
+            <div class="field col-12">
+              <label htmlFor="email">Email</label>
+              <input pInputText id="email" type="text" />
+            </div>
+          </div>
+        </div>
+
+        <div class="md:col-1 text-center">
+        </div>
+
+        <div class="col-12 md:col-4 text-center mb-3">
+          <div class="p-d-flex p-jc-center p-ai-center my-4">
+            <img src="assets/no-image.png" alt="No Image" style="width: 150px; height: 150px; border-radius: 50%;" />
+          </div>
+          <div class="mt-4">
+            <button pButton type="button" label="Subir Foto" style="width: 60%;"></button>
+          </div>
+        </div>
+
+        <div class="col-12 sm:col-6 md:col-4">
+          <div class="field">
+            <label htmlFor="birthdate">Teléfono</label>
+            <input pInputText id="birthdate" type="text" />
+          </div>
+        </div>
+
+        <div class="col-12 sm:col-6 md:col-4">
+          <div class="field">
+            <label htmlFor="state">Sexo</label>
+            <p-dropdown [options]="dropdownItems" optionLabel="name" [(ngModel)]="selectedState"></p-dropdown>
+          </div>
+        </div>
+
+        <div class="col-12 sm:col-12 md:col-4">
+          <div class="field">
+            <label htmlFor="birthdate">Nacimiento</label>
+            <input pInputText id="birthdate" type="text" />
+          </div>
+        </div>
+
+
+
+        <div class="col-12 md:col-6">
+          <div class="field">
+            <label htmlFor="state">Pais</label>
+            <p-dropdown [options]="dropdownItems" optionLabel="name" [(ngModel)]="selectedState"></p-dropdown>
+          </div>
+        </div>
+
+        <div class="col-12 md:col-6">
+          <div class="field">
+            <label htmlFor="state">Estado</label>
+            <p-dropdown [options]="dropdownItems" optionLabel="name" [(ngModel)]="selectedState"></p-dropdown>
+          </div>
+        </div>
+
+        <div class="col-8">
+          <div class="field">
+            <label htmlFor="city">Ciudad</label>
+            <input pInputText id="city" type="text" />
+          </div>
+        </div>
+
+        <div class="col-4">
+          <div class="field">
+            <label htmlFor="zip">Zip</label>
+            <input pInputText id="zip" type="text" />
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="field">
+            <label htmlFor="address">Dirección</label>
+            <input pInputTextarea id="address" rows="4" />
+          </div>
+        </div>
+
+      </div>
+
+      <div class="p-d-flex p-jc-center p-mt-3 text-right">
+        <button pButton label="Submit"></button>
+      </div>
+    </div>
+  </div>

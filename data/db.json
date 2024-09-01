@@ -1,18 +1,72 @@
 {
   "alumns":[
-    { "id": "1", "nombre": "Juan", "apellido": "Pérez"},
-    { "id": "2", "nombre": "María", "apellido": "Gómez"},
-    { "id": "3", "nombre": "Pedro", "apellido": "Sánchez", "alt_img": "https://img.freepik.com/premium-photo/indifferent-young-man_488220-7589.jpg"},
-    { "id": "5", "nombre": "Laura", "apellido": "Martínez"},
-    { "id": "6", "nombre": "Carlos", "apellido": "Gómez", "alt_img": "https://img.freepik.com/free-photo/front-view-man-posing_23-2148364843.jpg?size=626&ext=jpg'"},
-    { "id": "7", "nombre": "María", "apellido": "López"},
-    { "id": "8", "nombre": "Daniel", "apellido": "Hernández", "alt_img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkfdACh-GIs0PZe4xDiKWUrWRNkoFyPr0FKR_9UNFakzmxggHY7jUHt-3NirPZYOfvSs4&usqp=CAU'"},
-    { "id": "9", "nombre": "Juan", "apellido": "Pérez"},
-    { "id": "10", "nombre": "Lucía", "apellido": "Díaz"},
-    { "id": "11", "nombre": "Ana", "apellido": "Sánchez"},
-    { "id": "12", "nombre": "Miguel", "apellido": "Torres"},
-    { "id": "13", "nombre": "Sofía", "apellido": "Ramírez"},
-    { "id": "14", "nombre": "David", "apellido": "Fernández", "alt_img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHr74Pjdj__bQPnZK-BFujbwgnP1t5PIqkig&s'"},
-    { "id": "15", "nombre": "Elena", "apellido": "Moreno", "alt_img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgrj5C--bGdUkkZ3XUl8326RyhzQr59ZiP_A&s" }
+    {
+      "id": "1",
+      "nombre": "Juan",
+      "apellido": "Pérez"},
+    {
+      "id": "2",
+      "nombre": "María",
+      "apellido": "Gómez"},
+    {
+      "id": "3",
+      "nombre": "Pedro",
+      "apellido": "Sánchez",
+      "alt_img": "https://img.freepik.com/premium-photo/indifferent-young-man_488220-7589.jpg"
+    },
+    {
+      "id": "5",
+      "nombre": "Laura",
+      "apellido": "Martínez"},
+    {
+      "id": "6",
+      "nombre": "Carlos",
+      "apellido": "Gómez",
+      "alt_img": "https://img.freepik.com/free-photo/front-view-man-posing_23-2148364843.jpg?size=626&ext=jpg'"
+    },
+    {
+      "id": "7",
+      "nombre": "María",
+      "apellido": "López"},
+    {
+      "id": "8",
+      "nombre": "Daniel",
+      "apellido": "Hernández",
+      "alt_img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkfdACh-GIs0PZe4xDiKWUrWRNkoFyPr0FKR_9UNFakzmxggHY7jUHt-3NirPZYOfvSs4&usqp=CAU'"
+    },
+    {
+      "id": "9",
+      "nombre": "Juan",
+      "apellido": "Pérez"},
+    {
+      "id": "10",
+      "nombre": "Lucía",
+      "apellido": "Díaz"},
+    {
+      "id": "11",
+      "nombre": "Ana",
+      "apellido": "Sánchez"},
+    {
+      "id": "12",
+      "nombre": "Miguel",
+      "apellido": "Torres"
+    },
+    {
+      "id": "13",
+      "nombre": "Sofía",
+      "apellido": "Ramírez"
+    },
+    {
+      "id": "14",
+      "nombre": "David",
+      "apellido": "Fernández",
+      "alt_img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHr74Pjdj__bQPnZK-BFujbwgnP1t5PIqkig&s'"
+    },
+    {
+      "id": "15",
+      "nombre": "Elena",
+      "apellido": "Moreno",
+      "alt_img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgrj5C--bGdUkkZ3XUl8326RyhzQr59ZiP_A&s"
+   }
   ]
 }

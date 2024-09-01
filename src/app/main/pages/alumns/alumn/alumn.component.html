@@ -1,0 +1,28 @@
+<ng-template #divLoading>
+  <div class="flex-container">
+    <p-progressSpinner></p-progressSpinner>
+  </div>
+</ng-template>
+
+<div *ngIf="alumn; else divLoading" class="grid p-2">
+  <div class="surface-section px-5 py-4 md:px-5 lg:px-5">
+    <ul class="list-none p-0 m-0 flex align-items-center font-medium mb-3">
+      <li>
+        <a class="text-500 no-underline line-height-3 cursor-pointer" routerLink="/">Dashboard</a>
+      </li>
+      <li class="px-2">
+        <i class="pi pi-angle-right text-500 line-height-3"></i>
+      </li>
+      <li>
+        <a class="text-500 no-underline line-height-3 cursor-pointer" routerLink="/alumns">Alumnos</a>
+      </li>
+      <li class="px-2">
+        <i class="pi pi-angle-right text-500 line-height-3"></i>
+      </li>
+      <li>
+        <span class="text-900 line-height-3"> {{ alumn.nombre }} {{ alumn.apellido }}</span>
+      </li>
+    </ul>
+</div>
+
+

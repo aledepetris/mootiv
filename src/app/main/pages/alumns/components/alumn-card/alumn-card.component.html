@@ -22,9 +22,8 @@
 
   <p-divider></p-divider>
 
-  <div class="flex justify-content-between mt-2">
-    <button pButton pRipple label="Rutina" icon="pi pi-book" [routerLink]="['/alumns/edit', alumn.id ]"></button>
-    <button pButton pRipple type="button" icon="pi pi-ellipsis-v" class="p-button-rounded p-button-secondary p-button-text"></button>
+  <div class="flex justify-content-end mt-2">
+    <button pButton pRipple label="Ver" icon="pi pi-eye" iconPos="right" [routerLink]="['/alumns', alumn.id]"></button>
   </div>
 
 </p-card>

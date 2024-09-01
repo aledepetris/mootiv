@@ -19,13 +19,16 @@ import { CascadeSelectModule } from "primeng/cascadeselect";
 import { MultiSelectModule } from "primeng/multiselect";
 import { InputTextareaModule } from "primeng/inputtextarea";
 import { InputTextModule } from "primeng/inputtext";
+import { AlumnComponent } from './alumn/alumn.component';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @NgModule({
   declarations: [
     AlumnListComponent,
     AlumnCardComponent,
     AlumnImagePipe,
-    AlumnNewComponent
+    AlumnNewComponent,
+    AlumnComponent
   ],
   imports: [
     CommonModule,
@@ -42,7 +45,8 @@ import { InputTextModule } from "primeng/inputtext";
     FormsModule,
 		MultiSelectModule,
 		InputTextareaModule,
-		InputTextModule
+		InputTextModule,
+    ProgressSpinnerModule
   ]
 })
 export class AlumnsModule { }

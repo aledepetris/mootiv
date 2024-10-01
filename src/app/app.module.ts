@@ -12,7 +12,7 @@ import { AppLayoutModule } from './layout/app.layout.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AppLayoutModule
+    AppLayoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

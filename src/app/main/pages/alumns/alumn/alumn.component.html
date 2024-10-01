@@ -26,14 +26,20 @@
 
     <div class="grid">
       <div class="col-12">
-        <div class="card">
+        <div class="col-12">
           <h4>{{ alumn.nombre }} {{ alumn.apellido }}</h4>
           <div class="grid">
               <div class="col-12 sm:col-3 lg:col-2 flex align-items-center justify-content-center">
                 <img [src]="alumn | alumnImage" [alt]="alumn.nombre" class="responsive-img">
               </div>
-            <div class="col-12 sm:col-9 lg:col-10 px-5 pt-2">
-              <p>This is your empty page template to start building beautiful applications.</p>
+            <div class="col-12 sm:col-9 lg:col-10 pt-1">
+              <ul>
+                <li class="py-1"><b>Edad:</b> {{alumn.height}}</li>
+                <li class="py-1"><b>Objetivo:</b> {{alumn.height}}</li>
+                <li class="py-1"><b>Frecuencia:</b> {{alumn.lastTraining}}</li>
+                <li class="py-1"><b>Peso:</b> {{alumn.height}}</li>
+                <li class="py-1"><b>Altura:</b> {{alumn.weight}}</li>
+              </ul>
             </div>
           </div>
         </div>
@@ -41,18 +47,17 @@
 
       <div class="col-12 md:col-6">
         <div class="card">
-          <h4>Próximo día</h4>
+          <h4>Calendario entrenamiento</h4>
           <p>This is your empty page template to start building beautiful applications.</p>
         </div>
       </div>
 
       <div class="col-12 md:col-6">
         <div class="card">
-          <h4>Semana Actual</h4>
+          <h4>Proximo día</h4>
           <p>This is your empty page template to start building beautiful applications.</p>
         </div>
       </div>
     </div>
-
 </div>
 

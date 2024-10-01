@@ -3,4 +3,7 @@ export interface Alumn {
     nombre:           string;
     apellido:         string;
     alt_img?:         string;
+    weight:           string;
+    height:           string;
+    lastTraining:     string;
 }

@@ -21,6 +21,7 @@ import { InputTextareaModule } from "primeng/inputtextarea";
 import { InputTextModule } from "primeng/inputtext";
 import { AlumnComponent } from './alumn/alumn.component';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { TimelineModule } from 'primeng/timeline';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 		MultiSelectModule,
 		InputTextareaModule,
 		InputTextModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    TimelineModule
   ]
 })
 export class AlumnsModule { }

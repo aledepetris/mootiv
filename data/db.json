@@ -7,12 +7,20 @@
     {
       "id": "2",
       "nombre": "María",
-      "apellido": "Gómez"},
+      "apellido": "Gómez",
+      "weight": "70.5",
+      "height": "1.65",
+      "lastTraining": "12/09/2024"
+    },
     {
       "id": "3",
       "nombre": "Pedro",
       "apellido": "Sánchez",
-      "alt_img": "https://img.freepik.com/premium-photo/indifferent-young-man_488220-7589.jpg"
+      "alt_img": "https://img.freepik.com/premium-photo/indifferent-young-man_488220-7589.jpg",
+      "weight": "72.5",
+      "height": "1.84",
+      "lastTraining": "13/09/2024"
+
     },
     {
       "id": "5",

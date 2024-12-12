@@ -1,25 +1,25 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Alumn } from '../interfaces/alumn.interface';
 import { environment } from '../../../environments/environment';
+import { Trainer } from '../interfaces/trainer.interface';
 
 @Injectable({providedIn: 'root'})
-export class AlumnsService {
+export class TrainersService {
 
   private baseUrl: string = environment.baseUrl;
-  private basePath: string = '/student'
+  private basePath: string = '/trainer'
 
   constructor( private http: HttpClient) {}
 
-  getAlumns(): Observable<Alumn[]> {
-    return this.http.get<Alumn[]>(
+  getTrainers(): Observable<Trainer[]> {
+    return this.http.get<Trainer[]>(
       `${ this.baseUrl + this.basePath }`
     )
   }
 
-  getAlumnById(id: string): Observable<Alumn|undefined> {
-    return this.http.get<Alumn>(
+  getTrainerById(id: string): Observable<Trainer|undefined> {
+    return this.http.get<Trainer>(
       `${ this.baseUrl + this.basePath }/${ id }`
     )
   }

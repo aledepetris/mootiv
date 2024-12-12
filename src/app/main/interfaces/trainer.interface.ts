@@ -1,4 +1,4 @@
-export interface Alumn {
+export interface Trainer {
     id?:               string;
     alt_img?:         string;
     name:           string;
@@ -8,7 +8,4 @@ export interface Alumn {
     telephone:        string;
     students:         string;
     active:           string;
-    weight?:           string;
-    height?:           string;
-    lastTraining:     string;
 }

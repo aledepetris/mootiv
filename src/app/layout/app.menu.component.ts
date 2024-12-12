@@ -21,6 +21,22 @@ export class AppMenuComponent implements OnInit {
         ]
       },
       {
+        label: 'Admin',
+        items: [
+          { label: 'Entrenadores', icon: 'pi pi-fw pi-home', routerLink: ['/trainers'] },
+        ]
+      },
+      {
+        label: 'Backoffice',
+        items: [
+          { label: 'Affecciones', icon: 'pi pi-fw pi-home', routerLink: ['/affections'] },
+          { label: 'Ejercicios', icon: 'pi pi-fw pi-home', routerLink: ['/exercises'] },
+          { label: 'Tipos Ejercicios', icon: 'pi pi-fw pi-home', routerLink: ['/exerciseTypes'] },
+          { label: 'Objetivos', icon: 'pi pi-fw pi-home', routerLink: ['/goals'] },
+          { label: 'Equipamiento', icon: 'pi pi-fw pi-home', routerLink: ['/equipment'] },
+        ]
+      },
+      {
         label: 'Alumnos',
         items: [
           { label: 'Alumnos', icon: 'pi pi-fw pi-users', routerLink: ['/alumns'] },

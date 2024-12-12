@@ -42,7 +42,7 @@ export class AlumnListComponent {
 
   onAlumnSelect(event: AutoCompleteSelectEvent) {
     let alumn = event.value as Alumn;
-    this.selectedAlumnAdvanced = alumn.nombre + " " + alumn.apellido;
+    this.selectedAlumnAdvanced = alumn.name + " " + alumn.lastName;
     this.showedAlumns = [alumn];
   }
 

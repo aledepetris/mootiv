@@ -14,6 +14,7 @@ import { AppLayoutComponent } from "./layout/app.layout.component";
                     { path: 'equipments', loadChildren: () => import('./main/pages/equipment/equipment.module').then(m => m.EquipmentsModule) },
                     { path: 'affections', loadChildren: () => import('./main/pages/affections/affection.module').then(m => m.AffectionsModule) },
                     { path: 'exercisetypes', loadChildren: () => import('./main/pages/exercise-types/exercise-types.module').then(m => m.ExerciseTypesModule) },
+                    { path: 'trainingtypes', loadChildren: () => import('./main/pages/training-types/training-types.module').then(m => m.TrainingTypesModule) },
 
 
                     { path: 'uikit', loadChildren: () => import('./demo/components/uikit/uikit.module').then(m => m.UIkitModule) },

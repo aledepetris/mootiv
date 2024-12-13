@@ -4,8 +4,7 @@
         <div class="card p-fluid flex align-items-center" style="width: 100%;">
             <!-- Sección de Formulario -->
             <div class="flex-1 p-1">
-                <h5 class="mb-3">{{ isEditMode ? 'Editar Tipo de Entrenamiento' : 'Nuevo Tipo de Entrenamiento' }}</h5>
-                <br>
+                <h5 class="mb-3">{{ isEditMode ? 'Editar Tipo de Ejercicio' : 'Nuevo Tipo de Ejercicio' }}</h5>
                 <!-- Nombre -->
                 <div class="field mb-3">
                     <label for="name">Nombre</label>
@@ -19,6 +18,8 @@
                     <textarea pInputTextarea id="description" rows="3" placeholder="Ingrese la descripción"
                         [(ngModel)]="exerciseTypeForm.description" name="description"></textarea>
                 </div>
+
+                <br>
 
                 <div class="field mb-3">
                     <button pButton type="button" label="{{ isEditMode ? 'Actualizar' : 'Guardar' }}"

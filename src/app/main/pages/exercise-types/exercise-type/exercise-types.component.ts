@@ -35,18 +35,18 @@ export class ExerciseTypeComponent implements OnInit {
         });
     }
 
-    // Cargar datos del tipo de entrenamiento para edición
+    // Cargar datos del tipo de ejercicio para edición
     loadExerciseType(id: number): void {
         this.exerciseTypesService.getExerciseTypeById(id).subscribe({
             next: (exerciseType: ExerciseType) => {
                 this.exerciseTypeForm = exerciseType; // Cargar los datos al formulario
             },
             error: (error) => {
-                console.error('Error al cargar el tipo de entrenamiento:', error);
+                console.error('Error al cargar el tipo de ejercicio:', error);
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
-                    text: 'Hubo un problema al cargar el tipo de entrenamiento. Intente nuevamente.',
+                    text: 'Hubo un problema al cargar el tipo de ejercicio. Intente nuevamente.',
                     confirmButtonText: 'Aceptar',
                 }).then(() => this.router.navigate(['/exercisetypes'])); // Redirigir si hay error
             },
@@ -72,12 +72,12 @@ export class ExerciseTypeComponent implements OnInit {
                     Swal.fire({
                         icon: 'success',
                         title: '¡Éxito!',
-                        text: 'El tipo de entrenamiento se actualizó correctamente.',
+                        text: 'El tipo de ejercicio se actualizó correctamente.',
                         confirmButtonText: 'Aceptar',
                     }).then(() => this.router.navigate(['/exercisetypes']));
                 },
                 error: (error) => {
-                    console.error('Error al actualizar el tipo de entrenamiento:', error);
+                    console.error('Error al actualizar el tipo de ejercicio:', error);
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',
@@ -93,12 +93,12 @@ export class ExerciseTypeComponent implements OnInit {
                     Swal.fire({
                         icon: 'success',
                         title: '¡Éxito!',
-                        text: 'El tipo de entrenamiento se creó correctamente.',
+                        text: 'El tipo de ejercicio se creó correctamente.',
                         confirmButtonText: 'Aceptar',
                     }).then(() => this.router.navigate(['/exercisetypes']));
                 },
                 error: (error) => {
-                    console.error('Error al crear el tipo de entrenamiento:', error);
+                    console.error('Error al crear el tipo de ejercicio:', error);
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',

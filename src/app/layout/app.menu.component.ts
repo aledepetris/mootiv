@@ -30,7 +30,6 @@ export class AppMenuComponent implements OnInit {
                 label: 'Backoffice',
                 items: [
                     { label: 'Affecciones', icon: 'pi pi-fw pi-heart', routerLink: ['/affections'] },
-                    { label: 'Ejercicios', icon: 'pi pi-fw pi-play', routerLink: ['/exercises'] },
                     { label: 'Equipamiento', icon: 'pi pi-fw pi-cog', routerLink: ['/equipments'] },
                     { label: 'Musculos', icon: 'pi pi-fw pi-bolt', routerLink: ['/muscles'] },
                     { label: 'Objetivos', icon: 'pi pi-fw pi-star', routerLink: ['/goals'] },
@@ -41,9 +40,8 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'Ejercitación',
                 items: [
-                    { label: 'Ejercicios', icon: 'pi pi-fw pi-users', routerLink: ['/students'] },
-                    { label: 'Plantillas', icon: 'pi pi-fw pi-users', routerLink: ['/students'] },
-
+                    { label: 'Ejercicios', icon: 'pi pi-fw pi-play', routerLink: ['/students'] },
+                    { label: 'Plantillas', icon: 'pi pi-fw pi-file-import', routerLink: ['/students'] },
                 ]
             },
             {

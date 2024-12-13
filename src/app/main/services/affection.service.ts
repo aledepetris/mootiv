@@ -37,5 +37,4 @@ export class AffectionsService {
         return this.http.delete(`${this.baseUrl + this.basePath}/${id}`);
     }
 
-
 }

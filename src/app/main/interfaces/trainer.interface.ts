@@ -1,11 +1,14 @@
+import { Student } from "./student.interface";
+
 export interface Trainer {
-    id?:               string;
+    id?:               number;
     alt_img?:         string;
     name:           string;
     lastName:         string;
     email:            string;
     dni:              string;
     telephone:        string;
-    students:         string;
+    students:         Student[];
     active:           string;
+    birthdate:        string;
 }

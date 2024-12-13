@@ -1,0 +1,132 @@
+<div class="grid">
+  <!-- Columna Izquierda -->
+  <div class="col-12 md:col-6">
+    <div class="card p-fluid">
+      <h5>Información Básica</h5>
+
+      <!-- DNI -->
+      <div class="field">
+        <label for="dni">DNI</label>
+        <input
+          pInputText
+          id="dni"
+          type="number"
+          placeholder="Ingrese su DNI"
+          [(ngModel)]="trainerForm.dni"
+          name="dni"
+        />
+      </div>
+
+      <!-- Nombre y Apellido -->
+      <div class="p-formgrid grid">
+        <div class="field col">
+          <label for="name">Nombre</label>
+          <input
+            pInputText
+            id="name"
+            type="text"
+            placeholder="Ingrese su nombre"
+            [(ngModel)]="trainerForm.name"
+            name="name"
+          />
+        </div>
+        <div class="field col">
+          <label for="lastName">Apellido</label>
+          <input
+            pInputText
+            id="lastName"
+            type="text"
+            placeholder="Ingrese su apellido"
+            [(ngModel)]="trainerForm.lastName"
+            name="lastName"
+          />
+        </div>
+      </div>
+
+      <!-- Correo Electrónico -->
+      <div class="field">
+        <label for="email">Correo Electrónico</label>
+        <input
+          pInputText
+          id="email"
+          type="email"
+          placeholder="Ingrese su correo electrónico"
+          [(ngModel)]="trainerForm.email"
+          name="email"
+        />
+      </div>
+    </div>
+  </div>
+
+  <!-- Columna Derecha -->
+  <div class="col-12 md:col-6">
+    <div class="card p-fluid">
+      <h5>Información Adicional</h5>
+
+      <!-- Teléfono -->
+      <div class="field grid">
+        <label for="telephone" class="col-12 mb-2 md:col-3 md:mb-0">Teléfono</label>
+        <div class="col-12 md:col-9">
+          <input
+            pInputText
+            id="telephone"
+            type="text"
+            placeholder="Ingrese su teléfono"
+            [(ngModel)]="trainerForm.telephone"
+            name="telephone"
+          />
+        </div>
+      </div>
+
+      <!-- Fecha de Nacimiento -->
+      <div class="field">
+        <label for="birthdate">Fecha de Nacimiento</label>
+        <p-calendar
+          id="birthdate"
+          [showIcon]="true"
+          placeholder="Seleccione su fecha de nacimiento"
+          [(ngModel)]="trainerForm.birthdate"
+          name="birthdate"
+        ></p-calendar>
+      </div>
+
+      <!-- IDs de Estudiantes -->
+      <div class="field">
+        <label for="idsStudents">Estudiantes sin profesores asignados:</label>
+        <p-multiSelect
+          id="idsStudents"
+          [options]="studentOptions"
+          [(ngModel)]="selectedStudents"
+          placeholder="Seleccione los estudiantes"
+          name="idsStudents"
+          [disabled]="isEditMode"
+        ></p-multiSelect>
+      </div>
+
+      <!-- Activo -->
+      <div class="field-checkbox">
+        <p-checkbox
+          id="active"
+          binary="true"
+          [(ngModel)]="trainerForm.active"
+          name="active"
+        ></p-checkbox>
+        <label for="active">¿Activo?</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botón Enviar -->
+  <div class="col-12">
+    <div class="card">
+      <button
+        pButton
+        type="button"
+        label="Enviar"
+        icon="pi pi-check"
+        class="p-button-success w-full"
+        (click)="onSubmit()"
+      ></button>
+    </div>
+  </div>
+</div>

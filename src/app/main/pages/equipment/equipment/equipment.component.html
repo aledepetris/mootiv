@@ -1,0 +1,44 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card p-fluid flex align-items-center" style="width: 100%;">
+
+            <!-- Sección de Vista Previa -->
+            <div class="flex justify-content-center align-items-center" style="flex: 0.5;">
+                <img [src]="previewImage" alt="Imagen del equipamiento" class="circular-image"
+                    (error)="onImageError()" />
+            </div>
+
+            <!-- Sección de Formulario -->
+            <div class="flex-1 p-1">
+                <h5 class="mb-3">{{ isEditMode ? 'Editar Equipamiento' : 'Nuevo Equipamiento' }}</h5>
+                <br>
+                <!-- Nombre -->
+                <div class="field mb-3">
+                    <label for="name">Nombre</label>
+                    <input pInputText id="name" type="text" placeholder="Ingrese el nombre"
+                        [(ngModel)]="equipmentForm.name" name="name" />
+                </div>
+
+                <!-- Descripción -->
+                <div class="field mb-5">
+                    <label for="description">Descripción</label>
+                    <textarea pInputTextarea id="description" rows="3" placeholder="Ingrese la descripción"
+                        [(ngModel)]="equipmentForm.description" name="description"></textarea>
+                </div>
+
+                <!-- URL de Imagen -->
+                <div class="field mb-3">
+                    <label for="alt_image">Enlace de Imagen</label>
+                    <input pInputText id="alt_image" type="text" placeholder="Ingrese el enlace de la imagen"
+                        [(ngModel)]="equipmentForm.alt_img" name="alt_image" (input)="onAltImageChange($event)" />
+                </div>
+
+                <!-- Botón Guardar -->
+                <div class="flex justify-content-end mt-3">
+                    <button pButton type="button" label="{{ isEditMode ? 'Actualizar' : 'Guardar' }}"
+                        class="p-button-success" (click)="onSubmit()"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

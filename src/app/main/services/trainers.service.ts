@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Trainer } from '../interfaces/trainer.interface';
-import { TrainerRequest } from '../interfaces/TrainerRequest.interface';
+import { TrainerRequest } from '../interfaces/trainer.request.interface';
 
 @Injectable({providedIn: 'root'})
 export class TrainersService {

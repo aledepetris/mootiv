@@ -6,12 +6,12 @@ import { TrainerComponent } from './trainer/trainer.component';
 const routes: Routes = [];
 
 @NgModule({
-  imports: [RouterModule.forChild([
-    { path: '', component: TrainerListComponent },
-    { path: 'new', component: TrainerComponent},
-    { path: ':id', component: TrainerComponent },
-    { path: '**', redirectTo: '' }
-])],
-  exports: [RouterModule]
+    imports: [RouterModule.forChild([
+        { path: '', component: TrainerListComponent },
+        { path: 'new', component: TrainerComponent },
+        { path: ':id', component: TrainerComponent },
+        { path: '**', redirectTo: '' }
+    ])],
+    exports: [RouterModule]
 })
 export class TrainersRoutingModule { }

@@ -6,9 +6,9 @@ import { TrainersService } from 'src/app/main/services/trainers.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-trainer-list',
-  templateUrl: './trainer-list.component.html',
-  styleUrl: './trainer-list.component.scss'
+    selector: 'app-trainer-list',
+    templateUrl: './trainer-list.component.html',
+    styleUrl: './trainer-list.component.scss'
 })
 export class TrainerListComponent implements OnInit {
 
@@ -24,7 +24,7 @@ export class TrainerListComponent implements OnInit {
 
     ngOnInit() {
         this.trainerService.getTrainers()
-            .subscribe( trainers => {
+            .subscribe(trainers => {
                 this.trainers = trainers;
             })
 
@@ -46,34 +46,35 @@ export class TrainerListComponent implements OnInit {
         }
     }
 
-    onFilter(dv: DataView, event: Event) {
-        dv.filter((event.target as HTMLInputElement).value);
+    onFilter(dv: any, event: Event): void {
+        const filterValue = (event.target as HTMLInputElement).value.toLowerCase();
+        dv.filter(filterValue, 'fullName', 'contains');
     }
 
     confirmDelete(trainerId: string): void {
         Swal.fire({
-          title: '¿Estás seguro?',
-          text: 'Esta acción eliminará el entrenador de manera permanente.',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonText: 'Sí, eliminar',
-          cancelButtonText: 'Cancelar',
-          confirmButtonColor: '#d33',
-          cancelButtonColor: '#3085d6',
+            title: '¿Estás seguro?',
+            text: 'Esta acción eliminará el entrenador de manera permanente.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar',
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
         }).then((result) => {
-          if (result.isConfirmed) {
-            this.trainerService.deleteTrainer(trainerId).subscribe({
-              next: () => {
-                Swal.fire('¡Eliminado!', 'El entrenador ha sido eliminado correctamente.', 'success');
-                this.trainers = this.trainers.filter(trainer => trainer.id !== +trainerId);
-            },
-              error: (error) => {
-                Swal.fire('Error', 'No se pudo eliminar el entrenador. Intenta nuevamente.', 'error');
-                console.error('Error al eliminar:', error);
-              },
-            });
-          }
+            if (result.isConfirmed) {
+                this.trainerService.deleteTrainer(trainerId).subscribe({
+                    next: () => {
+                        Swal.fire('¡Eliminado!', 'El entrenador ha sido eliminado correctamente.', 'success');
+                        this.trainers = this.trainers.filter(trainer => trainer.id !== +trainerId);
+                    },
+                    error: (error) => {
+                        Swal.fire('Error', 'No se pudo eliminar el entrenador. Intenta nuevamente.', 'error');
+                        console.error('Error al eliminar:', error);
+                    },
+                });
+            }
         });
-      }
+    }
 
 }

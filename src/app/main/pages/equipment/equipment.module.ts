@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { TrainerListComponent } from './trainer-list/trainer-list.component';
+import { EquipmentListComponent } from './equipment-list/equipment-list.component';
 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -11,8 +11,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
 import { RatingModule } from 'primeng/rating';
 import { ButtonModule } from 'primeng/button';
-import { TrainersRoutingModule } from './trainers-routing.module';
-import { TrainerImagePipe } from './trainer-image.pipe';
+import { EquipmentsRoutingModule } from './equipment-routing.module';
+import { EquipmentImagePipe } from './equipment-image.pipe';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { CalendarModule } from 'primeng/calendar';
 import { ChipsModule } from 'primeng/chips';
@@ -34,18 +34,18 @@ import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { KnobModule } from 'primeng/knob';
 import { ChipModule } from 'primeng/chip';
-import { TrainerComponent } from './trainer/trainer.component';
+import { EquipmentComponent } from './equipment/equipment.component';
 
 @NgModule({
     declarations: [
-        TrainerListComponent,
-        TrainerComponent,
-        TrainerImagePipe
+        EquipmentListComponent,
+        EquipmentComponent,
+        EquipmentImagePipe
     ],
     imports: [
         CommonModule,
         FormsModule,
-        TrainersRoutingModule,
+        EquipmentsRoutingModule,
         DataViewModule,
         PickListModule,
         OrderListModule,
@@ -76,4 +76,4 @@ import { TrainerComponent } from './trainer/trainer.component';
         InputGroupAddonModule
     ]
 })
-export class TrainersModule { }
+export class EquipmentsModule { }

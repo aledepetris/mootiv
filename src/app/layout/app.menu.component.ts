@@ -31,15 +31,15 @@ export class AppMenuComponent implements OnInit {
         items: [
           { label: 'Affecciones', icon: 'pi pi-fw pi-home', routerLink: ['/affections'] },
           { label: 'Ejercicios', icon: 'pi pi-fw pi-home', routerLink: ['/exercises'] },
-          { label: 'Tipos Ejercicios', icon: 'pi pi-fw pi-home', routerLink: ['/exerciseTypes'] },
+          { label: 'Tipos Ejercicios', icon: 'pi pi-fw pi-home', routerLink: ['/exercisetypes'] },
           { label: 'Objetivos', icon: 'pi pi-fw pi-home', routerLink: ['/goals'] },
-          { label: 'Equipamiento', icon: 'pi pi-fw pi-home', routerLink: ['/equipment'] },
+          { label: 'Equipamiento', icon: 'pi pi-fw pi-home', routerLink: ['/equipments'] },
         ]
       },
       {
         label: 'Alumnos',
         items: [
-          { label: 'Alumnos', icon: 'pi pi-fw pi-users', routerLink: ['/alumns'] },
+          { label: 'Alumnos', icon: 'pi pi-fw pi-users', routerLink: ['/students'] },
         ]
       }
     ];

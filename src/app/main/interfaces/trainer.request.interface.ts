@@ -6,5 +6,5 @@ export interface TrainerRequest {
     telephone: string;
     birthdate: Date | null;
     active: boolean;
-    students: number[];
+    idsStudents: number[];
   }

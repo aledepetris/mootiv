@@ -8,7 +8,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     subscription!: Subscription;
 
-    constructor() {}
+    constructor() { }
 
     ngOnInit() {
     }

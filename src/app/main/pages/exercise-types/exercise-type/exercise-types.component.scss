@@ -1,0 +1,36 @@
+.preview-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.circular-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    margin-right: 1rem;
+}
+
+.card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.5rem;
+}
+
+.field {
+    width: 100%;
+}
+
+.field label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    display: block;
+}

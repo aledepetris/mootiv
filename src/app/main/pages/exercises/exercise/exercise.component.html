@@ -54,19 +54,20 @@
 
             </div>
         </div>
+        <div class="card p-fluid flex align-items-center" style="width: 100%;">
 
-        <!-- PickList para Equipamientos -->
-        <div class="field mt-2">
-            <label for="equipment" class="mb-3">Asociar Equipamiento</label>
-            <p-pickList [source]="availableEquipments" [target]="associatedEquipments" sourceHeader="Disponibles"
-                targetHeader="Asociados" [dragdrop]="true" [responsive]="true" [sourceStyle]="{ 'height': '250px' }"
-                [targetStyle]="{ 'height': '250px' }">
-                <ng-template let-equipment pTemplate="item">
-                    <div>{{ equipment.name }}</div>
-                </ng-template>
-            </p-pickList>
+            <!-- PickList para Equipamientos -->
+            <div class="field mt-2">
+                <label for="equipment" class="mb-3">Asociar Equipamiento</label>
+                <p-pickList [source]="availableEquipments" [target]="associatedEquipments" sourceHeader="Disponibles"
+                    targetHeader="Asociados" [dragdrop]="true" [responsive]="true" [sourceStyle]="{ 'height': '250px' }"
+                    [targetStyle]="{ 'height': '250px' }">
+                    <ng-template let-equipment pTemplate="item">
+                        <div>{{ equipment.name }}</div>
+                    </ng-template>
+                </p-pickList>
+            </div>
         </div>
-
         <div class="field">
             <label>Músculos Afectados</label>
             <p-tree [value]="musclesTree" selectionMode="checkbox" [(selection)]="treeSelectedNodes"

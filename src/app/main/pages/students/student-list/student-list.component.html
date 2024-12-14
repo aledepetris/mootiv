@@ -38,6 +38,9 @@
                                 class="flex flex-row md:flex-column justify-content-between w-full md:w-auto align-items-center md:align-items-end mt-5 md:mt-0">
                                 <p-button [routerLink]="['/students', student.id]" icon="pi pi-pencil" label="Editar"
                                     styleClass="mb-2 p-button-sm"></p-button>
+                                <p-button icon="pi pi-book" styleClass="p-button-sm p-button-warning"
+                                    label="Administrar" [routerLink]="['/students-view', student.id]">
+                                </p-button>
                             </div>
                         </div>
                     </div>
@@ -64,9 +67,14 @@
                                     <div class="text-2xl font-bold">{{ student.lastName }}</div>
                                     <div class="mb-3">{{ student.name }}</div>
                                 </div>
-                                <div class="flex justify-content-center">
-                                    <p-button icon="pi pi-pencil" styleClass="p-button-sm" label="Editar"
-                                        [routerLink]="['/students', student.id]"></p-button>
+                                <div class="flex justify-content-between">
+                                    <div>
+                                        <p-button icon="pi pi-pencil" styleClass="p-button-sm" label="Editar"
+                                            [routerLink]="['/students', student.id]"></p-button>
+                                    </div>
+                                    <p-button icon="pi pi-book" styleClass="p-button-sm p-button-warning"
+                                        label="Administrar" [routerLink]="['/students-view', student.id]">
+                                    </p-button>
                                 </div>
                             </div>
                         </div>

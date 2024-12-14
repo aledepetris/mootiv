@@ -19,7 +19,7 @@ export class MusclesService {
         )
     }
 
-    getMuscleById(id: string): Observable<Muscle | undefined> {
+    getMuscleById(id: number): Observable<Muscle | undefined> {
         return this.http.get<Muscle>(
             `${this.baseUrl + this.basePath}/${id}`
         )
@@ -33,7 +33,7 @@ export class MusclesService {
         return this.http.put(`${this.baseUrl + this.basePath}/${id}`, muscle);
     }
 
-    deleteMuscle(id: string): Observable<any> {
+    deleteMuscle(id: number): Observable<any> {
         return this.http.delete(`${this.baseUrl + this.basePath}/${id}`);
     }
 

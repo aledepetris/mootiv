@@ -1,37 +1,52 @@
 <div class="grid">
     <div class="col-12">
-        <div class="card p-fluid">
-            <div class="field">
-                <label>Músculos</label>
-                <p-tree [value]="musclesTree">
-                    <ng-template let-node pTemplate="default">
-                        <span>{{ node.data.name }}</span>
-                        <div class="actions ml-auto">
-                            <!--button pButton icon="pi pi-plus" class="p-button-sm p-button-outlined mr-2"
-                                (click)="onCreateNode(node)">
-                            <button>
-                            <button pButton icon="pi pi-pencil" class="p-button-sm p-button-outlined mr-2"
-                                (click)="onEditNode(node)">
-                            </button>
-                            <button pButton icon="pi pi-trash" class="p-button-sm p-button-danger"
-                                (click)="onDeleteNode(node)">
-                            </button-->
-                        </div>
-                    </ng-template>
-                </p-tree>
+        <div class="card p-fluid flex align-items-center" style="width: 100%;">
+            <div class="flex-1 p-1">
+
+                <!-- Título -->
+                <h5>{{ isEditMode ? 'Editar Músculo' : 'Nuevo Músculo' }}</h5>
+                <br />
+
+                <!-- Nombre -->
+                <div class="field">
+                    <label for="name">Nombre</label>
+                    <input pInputText id="name" type="text" placeholder="Ingrese el nombre"
+                        [(ngModel)]="muscleForm.name" name="name" required />
+                </div>
+
+                <!-- Combo Selección Única (Padre) -->
+                <div class="field mt-3">
+                    <label for="parentMuscle">Seleccionar padre (opcional)</label>
+                    <p-dropdown [options]="parentMuscles" [(ngModel)]="muscleForm.idParentMuscle" name="parentMuscleId"
+                        optionLabel="name" placeholder="Seleccione un padre"></p-dropdown>
+                </div>
+
+                <!-- Checkbox Es Músculo Agrupador -->
+                <div class="field mt-3">
+                    <p-checkbox [(ngModel)]="isGroup" name="isGroup" binary="true" inputId="isGroup"
+                        [disabled]="!isEditMode && hasAssociatedMuscles" (onChange)="onGroupChange()"></p-checkbox>
+                    <label for="isGroup">¿Es músculo agrupador?</label>
+                </div>
+
+                <!-- PickList (si Es Músculo Agrupador) -->
+                <div class="field mt-2" *ngIf="isGroup">
+                    <h5>Asociar Músculos</h5>
+                    <p-pickList [source]="musclesToPick" [target]="musclesAssociated" sourceHeader="Disponibles"
+                        targetHeader="Asociados" [dragdrop]="true" [responsive]="true"
+                        [sourceStyle]="{ 'height': '250px' }" [targetStyle]="{ 'height': '250px' }">
+                        <ng-template let-muscle pTemplate="item">
+                            <div>{{ muscle.name }}</div>
+                        </ng-template>
+                    </p-pickList>
+                </div>
+
+                <!-- Botón Guardar -->
+                <div class="card text-center mt-4">
+                    <button pButton type="button" label="{{ isEditMode ? 'Actualizar' : 'Guardar' }}"
+                        class="p-button-success w-full" (click)="onSubmit()"></button>
+                </div>
+
             </div>
         </div>
     </div>
-
-    <p-dialog [(visible)]="displayModal" [modal]="true" [style]="{width: '30vw'}" [breakpoints]="{'960px': '75vw'}">
-        <ng-template pTemplate="header">{{ isEditMode ? 'Editar Músculo' : 'Crear Músculo' }}</ng-template>
-        <div class="field">
-            <label for="muscleName">Nombre</label>
-            <input pInputText id="muscleName" [(ngModel)]="muscleForm.name" class="w-full" />
-        </div>
-        <ng-template pTemplate="footer">
-            <button pButton icon="pi pi-check" label="Guardar" class="p-button-success" (click)="onSaveNode()"></button>
-            <button pButton icon="pi pi-times" label="Cancelar" class="p-button-outlined" (click)="onCancel()"></button>
-        </ng-template>
-    </p-dialog>
 </div>

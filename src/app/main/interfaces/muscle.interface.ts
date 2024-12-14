@@ -4,5 +4,5 @@ export interface Muscle {
     alt_img?: string;
     name: string;
     muscles: Muscle[];
-    exercises?: string[];
+    idsExercises?: string[];
 }

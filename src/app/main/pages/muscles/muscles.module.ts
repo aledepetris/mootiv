@@ -36,10 +36,12 @@ import { MuscleComponent } from './muscle/muscle.component';
 import { TreeModule } from 'primeng/tree';
 import { TreeTableModule } from 'primeng/treetable';
 import { DialogModule } from 'primeng/dialog';
+import { MuscleListComponent } from './muscle-list/muscle-list.component';
 
 @NgModule({
     declarations: [
         MuscleComponent,
+        MuscleListComponent,
         MuscleImagePipe
     ],
     imports: [

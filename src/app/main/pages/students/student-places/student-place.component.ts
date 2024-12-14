@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Student } from 'src/app/main/interfaces/student.interface';
+import { DataView } from 'primeng/dataview';
 import { DatePipe } from '@angular/common'; // Importa DatePipe
 import { StudentsService } from 'src/app/main/services/students.service';
 import Swal from 'sweetalert2';
+import { SelectItem } from 'primeng/api';
+import { StudentPlaceService } from '../../../services/student.places.service';
+import { Place } from 'src/app/main/interfaces/place.interface';
 
 @Component({
     selector: 'app-student-condition',
@@ -14,9 +18,16 @@ import Swal from 'sweetalert2';
 })
 export class StudentPlaceComponent implements OnInit {
     student: Student;
+    sortOptions: SelectItem[] = [];
+    sortOrder: number = 0;
+    sortField: string = '';
+    places: Place[] = [];
+    display: boolean = false;
+    selectedPlace: any;
 
     constructor(
         private studentsService: StudentsService,
+        private studentPlaceService: StudentPlaceService,
         private activatedRoute: ActivatedRoute,
         private router: Router
     ) { }
@@ -55,6 +66,8 @@ export class StudentPlaceComponent implements OnInit {
             this.studentsService.getStudentById(studentId).subscribe({
                 next: (data) => {
                     this.student = data;
+                    this.loadPlaces();
+
                 },
                 error: (error) => {
                     console.error('Error al cargar estudiante:', error);
@@ -69,9 +82,53 @@ export class StudentPlaceComponent implements OnInit {
         }
     }
 
+    loadPlaces(): void {
+        this.studentPlaceService.getPlaces(+this.student.id).subscribe({
+            next: (data) => {
+                this.places = data;
+            },
+            error: (err) => {
+                console.error('Error al cargar las condiciones:', err);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'No se pudieron cargar las condiciones. Intente nuevamente más tarde.',
+                    confirmButtonText: 'Aceptar',
+                });
+            },
+        });
+    }
+
+    onSortChange(event: any) {
+        const value = event.value;
+
+        if (value.indexOf('!') === 0) {
+            this.sortOrder = -1;
+            this.sortField = value.substring(1, value.length);
+        } else {
+            this.sortOrder = 1;
+            this.sortField = value;
+        }
+    }
+
+    onFilter(dv: DataView, event: Event) {
+        dv.filter((event.target as HTMLInputElement).value);
+    }
+
     navigateTo(page: string): void {
         let path = `/${page}/${this.student.id}`;
         console.log(path)
         this.router.navigate([path]);
     }
+
+    showEquipments(place: Place): void {
+        if (place && place.equipments && place.equipments.length > 0) {
+            this.selectedPlace = place;
+            this.display = true; // Mostrar el diálogo solo cuando haya datos
+        } else {
+            this.selectedPlace = null; // Asegurarse de que no hay datos previos
+            Swal.fire('Sin equipo', 'Este lugar no tiene equipos asociados.', 'info');
+        }
+    }
+
 }

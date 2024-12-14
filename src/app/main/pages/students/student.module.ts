@@ -97,7 +97,8 @@ import { ChartModule } from 'primeng/chart';
         ProgressBarModule,
         ToastModule,
         DialogModule,
-        ChartModule
+        ChartModule,
+        DataViewModule
     ]
 })
 export class StudentsModule { }

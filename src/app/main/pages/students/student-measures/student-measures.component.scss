@@ -72,38 +72,6 @@
     }
 }
 
-.card-background {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 8px;
-    filter: brightness(0.7);
-    transition: filter 0.3s ease-in-out;
-}
-
-.card-overlay {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-    font-weight: bold;
-    text-align: center;
-    font-size: 1.2rem;
-}
-
-.card {
-    cursor: pointer;
-    transition: transform 0.3s ease;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.card:hover {
-    transform: scale(1.05);
-}
-
 .shadow-text {
     text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
     font-size: 1.5rem;
@@ -156,4 +124,44 @@ p-button {
 .menu-item button:hover {
     transform: scale(1.05);
     /* Efecto de zoom */
+}
+
+.customer-badge {
+    padding: 0.3rem 0.6rem;
+    border-radius: 0.25rem;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #fff;
+    text-transform: capitalize;
+}
+
+.status-BAJO_PESO {
+    background-color: #ff6b6b;
+    /* Rojo */
+}
+
+.status-NORMAL {
+    background-color: #4caf50;
+    /* Verde */
+}
+
+.status-SOBREPESO {
+    background-color: #ffc107;
+    /* Amarillo */
+}
+
+.status-OBESIDAD {
+    background-color: #f44336;
+    /* Rojo intenso */
+}
+
+td,
+th {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.swal2-container {
+    z-index: 2000 !important;
+    /* Más alto que el modal */
 }

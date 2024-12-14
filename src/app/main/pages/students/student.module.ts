@@ -40,6 +40,12 @@ import { StudentConditionComponent } from './student-condition/student-condition
 import { StudentPlaceComponent } from './student-places/student-place.component';
 import { StudentMeasureComponent } from './student-measures/student-measures.component';
 import { StudentPlanComponent } from './student-plan/student-plan.component';
+import { TableModule } from 'primeng/table';
+import { RippleModule } from 'primeng/ripple';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { ToastModule } from 'primeng/toast';
+import { DialogModule } from 'primeng/dialog';
+import { ChartModule } from 'primeng/chart';
 
 @NgModule({
     declarations: [
@@ -85,7 +91,13 @@ import { StudentPlanComponent } from './student-plan/student-plan.component';
         SelectButtonModule,
         CheckboxModule,
         InputGroupModule,
-        InputGroupAddonModule
+        InputGroupAddonModule,
+        TableModule,
+        RippleModule,
+        ProgressBarModule,
+        ToastModule,
+        DialogModule,
+        ChartModule
     ]
 })
 export class StudentsModule { }

@@ -40,10 +40,195 @@
             <button pButton type="button" [icon]="item.icon" label="{{ item.title }}" class="p-button-text"></button>
         </div>
     </div>
-
     <hr class="custom-divider" />
-    <div class="flex align-items-center gap-3 student-header my-5">
-        <h3>Medidas</h3>
+
+    <div class="grid">
+        <!-- Gráfico de dona -->
+        <div class="col-12 md:col-6">
+            <div class="card">
+                <h5>Pesaje en los meses</h5>
+                <p-chart type="line" [data]="lineData" [options]="lineOptions"></p-chart>
+            </div>
+        </div>
+
+        <!-- Gráfico de radar -->
+        <div class="col-12 md:col-6">
+            <div class="card flex flex-column align-items-center">
+                <h5 class="text-left w-full">Radar de medidas</h5>
+                <p-chart type="radar" [data]="radarData" [options]="radarOptions"></p-chart>
+            </div>
+        </div>
     </div>
 
+
+    <div class="grid">
+        <div class="col-12">
+            <div class="card">
+                <div class="flex justify-content-between align-items-center mb-3">
+                    <h5>Listado de medidas</h5>
+                    <button pButton label="Agregar Nueva Medida" class="p-button-outlined p-button-success"
+                        icon="pi pi-plus" (click)="openNew()"></button>
+                </div>
+                <p-table #dt1 [value]="measures" dataKey="id" [rows]="10" [loading]="loading" [rowHover]="true"
+                    styleClass="p-datatable-gridlines" [paginator]="true"
+                    [globalFilterFields]="['startDate','bmiStatus']" responsiveLayout="scroll">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="min-width: 12rem" [sortable]="true">
+                                Fecha
+                            </th>
+                            <th style="min-width: 8rem" [sortable]="true">
+                                Altura (cm)
+                            </th>
+                            <th style="min-width: 8rem" [sortable]="true">
+                                Peso (kg)
+                            </th>
+                            <th style="min-width: 8rem" [sortable]="true">
+                                IMC
+                            </th>
+                            <th style="min-width: 12rem" [sortable]="true">
+                                Estado IMC
+                            </th>
+                            <th style="min-width: 10rem">Acciones</th>
+                        </tr>
+                    </ng-template>
+
+                    <ng-template pTemplate="body" let-measure>
+                        <tr>
+                            <td>{{ measure.startDate | date: 'dd/MM/yyyy' }}</td>
+                            <td>{{ measure.height }}</td>
+                            <td>{{ measure.weight }}</td>
+                            <td>{{ measure.bmi | number: '1.2-2' }}</td>
+                            <td>
+                                <span [class]="'customer-badge status-' + getBMIStatusClass(measure.bmi)">
+                                    {{ measure.bmiStatus }}
+                                </span>
+                            </td>
+                            <td class="align-items-center">
+                                <button pButton icon="pi pi-eye" class="p-button-sm p-button-info mr-2"
+                                    (click)="viewMeasure(measure)">
+                                </button>
+                                <button pButton icon="pi pi-pencil" class="p-button-sm p-button-warning mr-2"
+                                    (click)="editMeasure(measure)">
+                                </button>
+                                <button pButton icon="pi pi-trash" class="p-button-sm p-button-danger"
+                                    (click)="confirmDelete(measure.id)">
+                                </button>
+                            </td>
+                        </tr>
+                    </ng-template>
+
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="6">No hay medidas disponibles.</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+        <!-- Modal para agregar nueva medida -->
+        <p-dialog [(visible)]="measureDialog" [style]="{width: '450px'}" [modal]="true"
+            header="{{ editMode ? 'Editar Medida' : 'Nueva Medida' }}" [dismissableMask]="true" class="p-fluid">
+            <ng-template pTemplate="content">
+                <div *ngIf="selectedMeasure">
+                    <div class="field">
+                        <label for="startDate">Fecha</label>
+                        <input type="date" pInputText id="startDate" [(ngModel)]="selectedMeasure.startDate" required>
+                    </div>
+                    <div class="field">
+                        <label for="height">Altura (cm)</label>
+                        <input type="number" pInputText id="height" [(ngModel)]="selectedMeasure.height" required>
+                    </div>
+                    <div class="field">
+                        <label for="weight">Peso (kg)</label>
+                        <input type="number" pInputText id="weight" [(ngModel)]="selectedMeasure.weight" required>
+                    </div>
+                    <div class="field">
+                        <label for="shoulder">Hombro (cm)</label>
+                        <input type="number" pInputText id="shoulder" [(ngModel)]="selectedMeasure.shoulder" required>
+                    </div>
+                    <div class="field">
+                        <label for="chest">Pecho (cm)</label>
+                        <input type="number" pInputText id="chest" [(ngModel)]="selectedMeasure.chest" required>
+                    </div>
+                    <div class="field">
+                        <label for="arm">Brazo (cm)</label>
+                        <input type="number" pInputText id="arm" [(ngModel)]="selectedMeasure.arm" required>
+                    </div>
+                    <div class="field">
+                        <label for="waist">Cintura (cm)</label>
+                        <input type="number" pInputText id="waist" [(ngModel)]="selectedMeasure.waist" required>
+                    </div>
+                    <div class="field">
+                        <label for="hip">Cadera (cm)</label>
+                        <input type="number" pInputText id="hip" [(ngModel)]="selectedMeasure.hip" required>
+                    </div>
+                    <div class="field">
+                        <label for="leg">Pierna (cm)</label>
+                        <input type="number" pInputText id="leg" [(ngModel)]="selectedMeasure.leg" required>
+                    </div>
+                </div>
+            </ng-template>
+
+            <ng-template pTemplate="footer">
+                <button pButton label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="hideDialog()">
+                </button>
+                <button pButton label="Guardar" icon="pi pi-check" class="p-button-text" (click)="saveMeasure()">
+                </button>
+            </ng-template>
+        </p-dialog>
+
+
+        <p-dialog [(visible)]="viewDialog" [style]="{width: '450px'}" header="Detalle de la Medida" [modal]="true"
+            [closable]="true" [dismissableMask]="true" class="p-fluid">
+            <ng-template pTemplate="content">
+                <div *ngIf="selectedMeasure">
+                    <div class="field">
+                        <label for="startDate">Fecha</label>
+                        <input type="text" pInputText id="startDate"
+                            [value]="selectedMeasure.startDate | date: 'dd/MM/yyyy'" readonly>
+                    </div>
+                    <div class="field">
+                        <label for="height">Altura (cm)</label>
+                        <input type="text" pInputText id="height" [value]="selectedMeasure.height" readonly>
+                    </div>
+                    <div class="field">
+                        <label for="weight">Peso (kg)</label>
+                        <input type="text" pInputText id="weight" [value]="selectedMeasure.weight" readonly>
+                    </div>
+                    <div class="field">
+                        <label for="shoulder">Hombro (cm)</label>
+                        <input type="text" pInputText id="shoulder" [value]="selectedMeasure.shoulder" readonly>
+                    </div>
+                    <div class="field">
+                        <label for="chest">Pecho (cm)</label>
+                        <input type="text" pInputText id="chest" [value]="selectedMeasure.chest" readonly>
+                    </div>
+                    <div class="field">
+                        <label for="arm">Brazo (cm)</label>
+                        <input type="text" pInputText id="arm" [value]="selectedMeasure.arm" readonly>
+                    </div>
+                    <div class="field">
+                        <label for="waist">Cintura (cm)</label>
+                        <input type="text" pInputText id="waist" [value]="selectedMeasure.waist" readonly>
+                    </div>
+                    <div class="field">
+                        <label for="hip">Cadera (cm)</label>
+                        <input type="text" pInputText id="hip" [value]="selectedMeasure.hip" readonly>
+                    </div>
+                    <div class="field">
+                        <label for="leg">Pierna (cm)</label>
+                        <input type="text" pInputText id="leg" [value]="selectedMeasure.leg" readonly>
+                    </div>
+                </div>
+            </ng-template>
+
+            <ng-template pTemplate="footer">
+                <button pButton label="Cerrar" icon="pi pi-times" class="p-button-text" (click)="closeViewDialog()">
+                </button>
+            </ng-template>
+        </p-dialog>
+
+
+    </div>
 </div>

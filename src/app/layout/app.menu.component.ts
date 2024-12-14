@@ -27,17 +27,6 @@ export class AppMenuComponent implements OnInit {
                 ]
             },
             {
-                label: 'Backoffice',
-                items: [
-                    { label: 'Affecciones', icon: 'pi pi-fw pi-heart', routerLink: ['/affections'] },
-                    { label: 'Equipamiento', icon: 'pi pi-fw pi-cog', routerLink: ['/equipments'] },
-                    { label: 'Musculos', icon: 'pi pi-fw pi-bolt', routerLink: ['/muscles'] },
-                    { label: 'Objetivos', icon: 'pi pi-fw pi-star', routerLink: ['/goals'] },
-                    { label: 'Tipos Ejercicios', icon: 'pi pi-fw pi-sliders-h', routerLink: ['/exercisetypes'] },
-                    { label: 'Tipos Entrenamientos', icon: 'pi pi-fw pi-wrench', routerLink: ['/trainingtypes'] },
-                ]
-            },
-            {
                 label: 'Ejercitación',
                 items: [
                     { label: 'Ejercicios', icon: 'pi pi-fw pi-play', routerLink: ['/exercises'] },
@@ -49,7 +38,18 @@ export class AppMenuComponent implements OnInit {
                 items: [
                     { label: 'Alumnos', icon: 'pi pi-fw pi-users', routerLink: ['/students'] },
                 ]
-            }
+            },
+            {
+                label: 'Backoffice',
+                items: [
+                    { label: 'Affecciones', icon: 'pi pi-fw pi-heart', routerLink: ['/affections'] },
+                    { label: 'Equipamiento', icon: 'pi pi-fw pi-cog', routerLink: ['/equipments'] },
+                    { label: 'Musculos', icon: 'pi pi-fw pi-bolt', routerLink: ['/muscles'] },
+                    { label: 'Objetivos', icon: 'pi pi-fw pi-star', routerLink: ['/goals'] },
+                    { label: 'Tipos Ejercicios', icon: 'pi pi-fw pi-sliders-h', routerLink: ['/exercisetypes'] },
+                    { label: 'Tipos Entrenamientos', icon: 'pi pi-fw pi-wrench', routerLink: ['/trainingtypes'] },
+                ]
+            },
         ];
     }
 

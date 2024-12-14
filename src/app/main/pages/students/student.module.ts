@@ -36,12 +36,22 @@ import { KnobModule } from 'primeng/knob';
 import { ChipModule } from 'primeng/chip';
 import { StudentComponent } from './student/student.component';
 import { StudentViewComponent } from './student-dashboard/student-view.component';
+import { StudentConditionComponent } from './student-condition/student-condition.component';
+import { StudentPlaceComponent } from './student-places/student-place.component';
+import { StudentMeasureComponent } from './student-measures/student-measures.component';
+import { StudentPlanComponent } from './student-plan/student-plan.component';
 
 @NgModule({
     declarations: [
         StudentListComponent,
         StudentComponent,
         StudentViewComponent,
+        StudentConditionComponent,
+        StudentPlaceComponent,
+        StudentMeasureComponent,
+        StudentConditionComponent,
+        StudentPlanComponent,
+        StudentPlaceComponent,
         StudentImagePipe
     ],
     imports: [

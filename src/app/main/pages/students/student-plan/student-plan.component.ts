@@ -1,20 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SelectItem } from 'primeng/api';
-import { DataView } from 'primeng/dataview';
 import { Student } from 'src/app/main/interfaces/student.interface';
 import { DatePipe } from '@angular/common'; // Importa DatePipe
 import { StudentsService } from 'src/app/main/services/students.service';
 import Swal from 'sweetalert2';
 
 @Component({
-    selector: 'app-student-view',
-    templateUrl: './student-view.component.html',
-    styleUrls: ['./student-view.component.scss'],
-    providers: [DatePipe], // Agrega DatePipe como proveedor
+    selector: 'app-student-condition',
+    templateUrl: './student-plan.component.html',
+    styleUrls: ['./student-plan.component.scss'],
+    providers: [DatePipe],
 
 })
-export class StudentViewComponent implements OnInit {
+export class StudentPlanComponent implements OnInit {
     student: Student;
 
     constructor(
@@ -23,26 +21,31 @@ export class StudentViewComponent implements OnInit {
         private router: Router
     ) { }
 
-    cards = [
+    menuItems = [
+        {
+            title: 'Dashboard Alumno',
+            route: 'students/view',
+            icon: 'pi pi-home'
+        },
         {
             title: 'Plan de Entrenamiento',
-            image: 'assets/images/training-plan.jpg',
-            route: '/students/plan',
+            route: 'students/plan',
+            icon: 'pi pi-calendar'
         },
         {
-            title: 'Historia Clínica',
-            image: 'assets/images/clinical-history.jpg',
-            route: '/students/condition',
+            title: 'Revisar Historia Clínica',
+            route: 'students/condition',
+            icon: 'pi pi-book'
         },
         {
-            title: 'Medidas',
-            image: 'assets/images/measurements.jpg',
-            route: '/students/measure',
+            title: 'Medidas Antropométricas',
+            route: 'students/measure',
+            icon: 'pi pi-chart-bar'
         },
         {
             title: 'Lugar de Entrenamiento',
-            image: 'assets/images/training-location.jpg',
-            route: '/students/location',
+            route: 'students/location',
+            icon: 'pi pi-map'
         },
     ];
 

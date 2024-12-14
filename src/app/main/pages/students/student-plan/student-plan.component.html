@@ -1,0 +1,49 @@
+<div class="col-12">
+
+    <div class="flex align-items-center gap-3 student-header">
+        <!-- Foto del Estudiante -->
+        <div class="student-photo mx-5">
+            <img [src]="student | studentImage" [alt]="student.name" class="rounded-circle shadow-2" />
+        </div>
+
+        <!-- Datos del Estudiante -->
+        <div class="student-info flex-1">
+            <h2 class="student-name">{{ student?.name }} {{ student?.lastName }}</h2>
+            <p class="student-details">
+                <strong>Email:</strong> {{ student?.email }} <br />
+                <strong>DNI:</strong> {{ student?.dni || 'No disponible' }} <br />
+                <strong>Teléfono:</strong> {{ student?.telephone }} <br />
+                <strong>Fecha de Nacimiento:</strong> {{ student?.birthdate | date: 'longDate' }} <br />
+                <strong>Fecha de Inscripción:</strong> {{ student?.startDate | date: 'longDate' }} <br />
+            </p>
+        </div>
+
+        <!-- Columna con Badge y Botón -->
+        <div class="flex flex-column align-items-center gap-2">
+            <!-- Badge Activo/Inactivo -->
+            <span [class]="student.active ? 'product-badge status-instock' : 'product-badge status-outofstock'">
+                {{ student.active ? 'ACTIVO' : 'INACTIVO' }}
+            </span>
+
+            <!-- Botón Editar -->
+            <p-button [routerLink]="['/students', student.id]" icon="pi pi-pencil" label="Editar"
+                styleClass="mb-2 p-button-sm">
+            </p-button>
+        </div>
+    </div>
+
+    <hr class="custom-divider" />
+
+    <!-- Menú de Navegación -->
+    <div class="menu-container solid-menu">
+        <div *ngFor="let item of menuItems" class="menu-item" (click)="navigateTo(item.route)">
+            <button pButton type="button" [icon]="item.icon" label="{{ item.title }}" class="p-button-text"></button>
+        </div>
+    </div>
+
+    <hr class="custom-divider" />
+    <div class="flex align-items-center gap-3 student-header my-5">
+        <h3>Plan de entrenamiento</h3>
+    </div>
+
+</div>

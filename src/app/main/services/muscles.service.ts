@@ -29,7 +29,7 @@ export class MusclesService {
         return this.http.post<Muscle>(`${this.baseUrl + this.basePath}`, muscle);
     }
 
-    updateMuscle(id: string, muscle: Muscle): Observable<any> {
+    updateMuscle(id: number, muscle: Muscle): Observable<any> {
         return this.http.put(`${this.baseUrl + this.basePath}/${id}`, muscle);
     }
 

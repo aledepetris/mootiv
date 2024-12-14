@@ -16,6 +16,7 @@ import { AppLayoutComponent } from "./layout/app.layout.component";
                     { path: 'exercisetypes', loadChildren: () => import('./main/pages/exercise-types/exercise-types.module').then(m => m.ExerciseTypesModule) },
                     { path: 'trainingtypes', loadChildren: () => import('./main/pages/training-types/training-types.module').then(m => m.TrainingTypesModule) },
                     { path: 'goals', loadChildren: () => import('./main/pages/goals/goals.module').then(m => m.GoalsModule) },
+                    { path: 'muscles', loadChildren: () => import('./main/pages/muscles/muscles.module').then(m => m.MusclesModule) },
 
 
                     { path: 'uikit', loadChildren: () => import('./demo/components/uikit/uikit.module').then(m => m.UIkitModule) },

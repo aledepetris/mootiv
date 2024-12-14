@@ -13,8 +13,8 @@
                 <strong>Email:</strong> {{ student?.email }} <br />
                 <strong>DNI:</strong> {{ student?.dni || 'No disponible' }} <br />
                 <strong>Teléfono:</strong> {{ student?.telephone }} <br />
-                <strong>Fecha de Nacimiento:</strong> {{ student?.birthdate | date: 'longDate' }} <br />
-                <strong>Fecha de Inscripción:</strong> {{ student?.startDate | date: 'longDate' }} <br />
+                <strong>Fecha de Nacimiento:</strong> {{ student?.birthdate | date: 'dd/MM/yyyy' }} <br />
+                <strong>Fecha de Inscripción:</strong> {{ student?.startDate | date: 'dd/MM/yyyy' }} <br />
             </p>
         </div>
 

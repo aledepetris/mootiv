@@ -60,50 +60,6 @@
     }
 }
 
-.clickable-card {
-    position: relative;
-    cursor: pointer;
-    overflow: hidden;
-    border-radius: 8px;
-    transition: transform 0.3s ease-in-out;
-
-    &:hover {
-        transform: scale(1.05);
-    }
-}
-
-.card-background {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 8px;
-    filter: brightness(0.7);
-    transition: filter 0.3s ease-in-out;
-}
-
-.card-overlay {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-    font-weight: bold;
-    text-align: center;
-    font-size: 1.2rem;
-}
-
-.card {
-    cursor: pointer;
-    transition: transform 0.3s ease;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.card:hover {
-    transform: scale(1.05);
-}
-
 .shadow-text {
     text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
     font-size: 1.5rem;
@@ -156,4 +112,62 @@ p-button {
 .menu-item button:hover {
     transform: scale(1.05);
     /* Efecto de zoom */
+}
+
+.badge-severity-low {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.badge-severity-moderate {
+    background-color: #fff3cd;
+    color: #856404;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.badge-severity-high {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.badge-status-active {
+    background-color: #c3e6cb;
+    color: #155724;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.badge-status-inactive {
+    background-color: #f5c6cb;
+    color: #721c24;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.badge-status-resolved {
+    background-color: #bee5eb;
+    color: #0c5460;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+td,
+th {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.leftleft {
+    text-align: left;
 }

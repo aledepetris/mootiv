@@ -40,8 +40,8 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'Ejercitación',
                 items: [
-                    { label: 'Ejercicios', icon: 'pi pi-fw pi-play', routerLink: ['/students'] },
-                    { label: 'Plantillas', icon: 'pi pi-fw pi-file-import', routerLink: ['/students'] },
+                    { label: 'Ejercicios', icon: 'pi pi-fw pi-play', routerLink: ['/exercises'] },
+                    { label: 'Plantillas', icon: 'pi pi-fw pi-file-import', routerLink: ['/templates'] },
                 ]
             },
             {

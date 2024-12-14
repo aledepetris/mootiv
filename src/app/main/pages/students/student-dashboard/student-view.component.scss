@@ -114,3 +114,11 @@
     font-size: 1.5rem;
     text-align: center;
 }
+
+.product-badge {
+    margin-bottom: 5rem; // Espaciado adicional entre badge y botón
+}
+
+p-button {
+    width: 100%; // Asegurar que el botón ocupe todo el ancho de la columna
+}

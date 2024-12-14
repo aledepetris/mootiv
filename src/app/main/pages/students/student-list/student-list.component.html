@@ -39,7 +39,7 @@
                                 <p-button [routerLink]="['/students', student.id]" icon="pi pi-pencil" label="Editar"
                                     styleClass="mb-2 p-button-sm"></p-button>
                                 <p-button icon="pi pi-book" styleClass="p-button-sm p-button-warning"
-                                    label="Administrar" [routerLink]="['/students-view', student.id]">
+                                    label="Administrar" [routerLink]="['view', student.id]">
                                 </p-button>
                             </div>
                         </div>
@@ -67,15 +67,18 @@
                                     <div class="text-2xl font-bold">{{ student.lastName }}</div>
                                     <div class="mb-3">{{ student.name }}</div>
                                 </div>
-                                <div class="flex justify-content-between">
-                                    <div>
-                                        <p-button icon="pi pi-pencil" styleClass="p-button-sm" label="Editar"
-                                            [routerLink]="['/students', student.id]"></p-button>
-                                    </div>
-                                    <p-button icon="pi pi-book" styleClass="p-button-sm p-button-warning"
-                                        label="Administrar" [routerLink]="['/students-view', student.id]">
+                                <div class="flex flex-wrap gap-2 justify-content-center">
+                                    <!-- Botón Editar -->
+                                    <p-button [routerLink]="['/students', student.id]" icon="pi pi-pencil"
+                                        label="Editar" styleClass="p-button-sm responsive-button">
+                                    </p-button>
+
+                                    <!-- Botón Administrar -->
+                                    <p-button [routerLink]="['view', student.id]" icon="pi pi-book" label="Administrar"
+                                        styleClass="p-button-sm p-button-warning responsive-button">
                                     </p-button>
                                 </div>
+
                             </div>
                         </div>
                     </div>

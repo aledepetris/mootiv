@@ -1,0 +1,40 @@
+<div class="col-12">
+
+    <!-- Header con Foto y Datos -->
+    <div class="flex align-items-center gap-3 student-header">
+        <!-- Foto del Estudiante -->
+        <div class="student-photo mx-5">
+            <img [src]="student | studentImage" [alt]="student.name" class="rounded-circle shadow-2" />
+        </div>
+
+        <!-- Datos del Estudiante -->
+        <div class="student-info flex-1">
+            <h2 class="student-name">{{ student?.name }} {{ student?.lastName }}</h2>
+            <p class="student-details">
+                <strong>Email:</strong> {{ student?.email }} <br />
+                <strong>DNI:</strong> {{ student?.dni || 'No disponible' }} <br />
+                <strong>Teléfono:</strong> {{ student?.telephone }} <br />
+                <strong>Fecha de Nacimiento:</strong> {{ student?.birthdate | date: 'longDate' }} <br />
+                <strong>Fecha de Inscripción:</strong> {{ student?.startDate | date: 'longDate' }} <br />
+            </p>
+        </div>
+
+        <!-- Badge Activo/Inactivo -->
+        <div class="text-right mb-2 badge-container">
+            <span [class]="student.active ? 'product-badge status-instock' : 'product-badge status-outofstock'">
+                {{ student.active ? 'ACTIVO' : 'INACTIVO' }}
+            </span>
+        </div>
+    </div>
+
+    <div class="grid mt-4">
+        <div class="col-12 md:col-6 lg:col-6" *ngFor="let card of cards">
+            <div class="card clickable-card p-4 flex align-items-center justify-content-center"
+                [style]="{ 'height': '200px', 'background-image': 'url(' + card.image + ')', 'background-size': 'cover', 'background-position': 'center' }"
+                (click)="navigateTo(card.route)">
+                <h3 class="text-white shadow-text">{{ card.title }}</h3>
+            </div>
+        </div>
+    </div>
+
+</div>

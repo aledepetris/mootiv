@@ -35,11 +35,13 @@ import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { KnobModule } from 'primeng/knob';
 import { ChipModule } from 'primeng/chip';
 import { StudentComponent } from './student/student.component';
+import { StudentViewComponent } from './student-dashboard/student-view.component';
 
 @NgModule({
     declarations: [
         StudentListComponent,
         StudentComponent,
+        StudentViewComponent,
         StudentImagePipe
     ],
     imports: [

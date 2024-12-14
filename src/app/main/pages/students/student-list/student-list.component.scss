@@ -1,0 +1,13 @@
+@media (max-width: 1290px) {
+    .responsive-button .p-button-label {
+        display: none;
+        /* Oculta el texto del botón */
+    }
+
+    .responsive-button {
+        justify-content: center;
+        /* Centra el ícono */
+        width: auto;
+        /* Ajusta el ancho automáticamente */
+    }
+}

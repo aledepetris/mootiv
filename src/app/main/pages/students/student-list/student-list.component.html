@@ -67,7 +67,7 @@
                                     <div class="text-2xl font-bold">{{ student.lastName }}</div>
                                     <div class="mb-3">{{ student.name }}</div>
                                 </div>
-                                <div class="flex flex-wrap gap-2 justify-content-between">
+                                <div class="flex flex-column align-items-center gap-2">
                                     <!-- Botón Editar -->
                                     <p-button [routerLink]="['/students', student.id]" icon="pi pi-pencil"
                                         label="Editar" styleClass="p-button-sm responsive-button">
@@ -78,7 +78,6 @@
                                         styleClass="p-button-sm p-button-warning responsive-button">
                                     </p-button>
                                 </div>
-
                             </div>
                         </div>
                     </div>

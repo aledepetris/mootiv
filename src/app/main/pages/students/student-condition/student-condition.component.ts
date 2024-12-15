@@ -126,7 +126,6 @@ export class StudentConditionComponent implements OnInit {
 
     navigateTo(page: string): void {
         let path = `/${page}/${this.student.id}`;
-        console.log(path)
         this.router.navigate([path]);
     }
 

@@ -9,6 +9,7 @@ import { StudentPlaceComponent } from './student-places/student-place.component'
 import { StudentMeasureComponent } from './student-measures/student-measures.component';
 import { StudentPlaceFormComponent } from './student-place-form/student-place-form.component';
 import { StudentCycleComponent } from './student-cycle-form/student-cycle.component';
+import { StudentCycleViewComponent } from './student-cycle-view/student-cycle-view.component';
 
 const routes: Routes = [];
 
@@ -26,6 +27,8 @@ const routes: Routes = [];
         { path: 'plan/:id', component: StudentPlanComponent },
         { path: 'plan/:idS/cycle', component: StudentCycleComponent },
         { path: 'plan/:idS/cycle/:idC', component: StudentCycleComponent },
+        { path: 'plan/:idS/cycle/:idC/view', component: StudentCycleViewComponent },
+
         { path: '**', redirectTo: '' }
     ])],
     exports: [RouterModule]

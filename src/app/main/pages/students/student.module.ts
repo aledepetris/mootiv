@@ -49,6 +49,8 @@ import { ChartModule } from 'primeng/chart';
 import { StudentPlaceFormComponent } from './student-place-form/student-place-form.component';
 import { StudentCycleComponent } from './student-cycle-form/student-cycle.component';
 import { TooltipModule } from 'primeng/tooltip';
+import { StudentCycleViewComponent } from './student-cycle-view/student-cycle-view.component';
+import { StudentHeaderComponent } from './header/header-student.component';
 
 @NgModule({
     declarations: [
@@ -63,7 +65,12 @@ import { TooltipModule } from 'primeng/tooltip';
         StudentPlanComponent,
         StudentPlaceComponent,
         StudentCycleComponent,
+        StudentCycleViewComponent,
+        StudentHeaderComponent,
         StudentImagePipe
+    ],
+    exports: [
+        StudentHeaderComponent
     ],
     imports: [
         CommonModule,

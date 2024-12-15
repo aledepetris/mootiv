@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Cycle } from '../interfaces/cycle.interface';
+import { CycleDetail } from '../interfaces/cycle.detail.interface';
 
 @Injectable({ providedIn: 'root' })
 export class StudentCycleService {
@@ -48,6 +49,12 @@ export class StudentCycleService {
     updateCycleStatus(idStudent: number, idCycle: number, status: string): Observable<any> {
         return this.http.put(
             `${this.baseUrl + this.rootPath}/${idStudent}${this.basePath}/${idCycle}/${status}`, null
+        );
+    }
+
+    getCycleDetailById(idStudent: number, idCycle: number): Observable<CycleDetail> {
+        return this.http.get<CycleDetail>(
+            `${this.baseUrl + this.rootPath}/${idStudent}${this.basePath}/${idCycle}/detail`
         );
     }
 }

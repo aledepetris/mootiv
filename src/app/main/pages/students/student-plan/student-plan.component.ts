@@ -148,7 +148,9 @@ export class StudentPlanComponent implements OnInit {
     }
 
     viewDetails(cycleId: number): void {
-        this.router.navigate([`/cycles/details/${cycleId}`]); // Cambia la ruta según tu configuración
+        let path = `/students/plan/${this.student.id}/cycle/${cycleId}/view/`
+        console.log(path)
+        this.router.navigate([path]);
     }
 
 }

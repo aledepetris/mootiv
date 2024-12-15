@@ -1,0 +1,103 @@
+.student-photo img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.student-info h2 {
+    margin: 0;
+    color: #333;
+}
+
+.student-info p {
+    margin: 0;
+    line-height: 1.5;
+}
+
+.student-info {
+    color: white;
+
+    .student-name {
+        color: white;
+        margin: 0;
+        font-size: 1.8rem;
+    }
+
+    .student-details {
+        margin-top: 1rem;
+        line-height: 2;
+        font-size: 1.1rem;
+    }
+}
+
+.shadow-text {
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+p-dialog .p-3 {
+    scrollbar-width: thin;
+    scrollbar-color: #888 #f4f4f4;
+}
+
+p-dialog .p-3::-webkit-scrollbar {
+    width: 6px;
+}
+
+p-dialog .p-3::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+p-dialog .p-3::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.product-badge {
+    margin-bottom: 5rem;
+}
+
+p-button {
+    width: 100%;
+}
+
+.custom-divider {
+    border: none;
+    border-top: 2px solid #ccc;
+    margin: 1rem 0;
+    width: 100%;
+}
+
+.menu-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.menu-item {
+    flex: 1;
+    /* Los botones ocupan el mismo ancho */
+}
+
+.menu-item button {
+    font-size: 0.85rem;
+    padding: 0.75rem 1rem;
+    /* Botones más grandes para mejor interacción */
+    border-radius: 6px;
+    color: white;
+    /* Texto en blanco */
+    /* Fondo oscuro del botón */
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    /* Asegura que el botón ocupe el ancho de su contenedor */
+}
+
+.menu-item button:hover {
+    transform: scale(1.05);
+    /* Efecto de zoom */
+}

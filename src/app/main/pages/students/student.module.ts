@@ -46,6 +46,7 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { ToastModule } from 'primeng/toast';
 import { DialogModule } from 'primeng/dialog';
 import { ChartModule } from 'primeng/chart';
+import { StudentPlaceFormComponent } from './student-place-form/student-place-form.component';
 
 @NgModule({
     declarations: [
@@ -54,6 +55,7 @@ import { ChartModule } from 'primeng/chart';
         StudentViewComponent,
         StudentConditionComponent,
         StudentPlaceComponent,
+        StudentPlaceFormComponent,
         StudentMeasureComponent,
         StudentConditionComponent,
         StudentPlanComponent,

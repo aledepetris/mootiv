@@ -47,6 +47,8 @@ import { ToastModule } from 'primeng/toast';
 import { DialogModule } from 'primeng/dialog';
 import { ChartModule } from 'primeng/chart';
 import { StudentPlaceFormComponent } from './student-place-form/student-place-form.component';
+import { StudentCycleComponent } from './student-cycle-form/student-cycle.component';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
     declarations: [
@@ -60,6 +62,7 @@ import { StudentPlaceFormComponent } from './student-place-form/student-place-fo
         StudentConditionComponent,
         StudentPlanComponent,
         StudentPlaceComponent,
+        StudentCycleComponent,
         StudentImagePipe
     ],
     imports: [
@@ -100,7 +103,8 @@ import { StudentPlaceFormComponent } from './student-place-form/student-place-fo
         ToastModule,
         DialogModule,
         ChartModule,
-        DataViewModule
+        DataViewModule,
+        TooltipModule
     ]
 })
 export class StudentsModule { }

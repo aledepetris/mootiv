@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { TrainingType } from '../interfaces/training-type.interface';
+import { map } from 'rxjs/operators';
 
 
 @Injectable({ providedIn: 'root' })
@@ -37,5 +38,9 @@ export class TrainingTypesService {
         return this.http.delete(`${this.baseUrl + this.basePath}/${id}`);
     }
 
-
+    getTrainingTypesByIds(ids: number[]): Observable<any[]> {
+        return this.http.get<any[]>(`${this.baseUrl + this.basePath}`).pipe(
+            map((types) => types.filter((type) => ids.includes(type.id)))
+        );
+    }
 }

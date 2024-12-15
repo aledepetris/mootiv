@@ -82,11 +82,21 @@
                         </ng-container>
                     </td>
                     <td style="text-align: center;">
-                        <p-button icon="pi pi-pencil" styleClass="p-button-sm p-button-warning mr-2"
-                            (click)="editCycle(cycle.id)"></p-button>
+                        <!-- Botón para Navegar a otra página (siempre visible) -->
+                        <p-button icon="pi pi-book" styleClass="p-button-sm p-button-info mr-2"
+                            (click)="viewDetails(cycle.id)" pTooltip="Administrar Ciclo"
+                            tooltipPosition="top"></p-button>
+                        <!-- Botón Editar (solo para BORRADOR) -->
+                        <ng-container *ngIf="cycle.status === 'BORRADOR'">
+                            <p-button icon="pi pi-pencil" styleClass="p-button-sm p-button-warning mr-2"
+                                (click)="editCycle(cycle.id)"></p-button>
+                        </ng-container>
+
+                        <!-- Botón Eliminar -->
                         <p-button icon="pi pi-trash" styleClass="p-button-sm p-button-danger"
                             (click)="confirmDelete(cycle.id)"></p-button>
                     </td>
+
                 </tr>
             </ng-template>
         </p-table>

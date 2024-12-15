@@ -8,6 +8,7 @@ import { StudentConditionComponent } from './student-condition/student-condition
 import { StudentPlaceComponent } from './student-places/student-place.component';
 import { StudentMeasureComponent } from './student-measures/student-measures.component';
 import { StudentPlaceFormComponent } from './student-place-form/student-place-form.component';
+import { StudentCycleComponent } from './student-cycle-form/student-cycle.component';
 
 const routes: Routes = [];
 
@@ -23,7 +24,8 @@ const routes: Routes = [];
         { path: 'location/:idS/form', component: StudentPlaceFormComponent },
         { path: 'measure/:id', component: StudentMeasureComponent },
         { path: 'plan/:id', component: StudentPlanComponent },
-
+        { path: 'plan/:idS/cycle', component: StudentCycleComponent },
+        { path: 'plan/:idS/cycle/:idC', component: StudentCycleComponent },
         { path: '**', redirectTo: '' }
     ])],
     exports: [RouterModule]

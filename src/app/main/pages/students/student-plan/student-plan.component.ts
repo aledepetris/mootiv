@@ -73,7 +73,7 @@ export class StudentPlanComponent implements OnInit {
     }
 
     openNewCycle(): void {
-        this.router.navigate([`/students/plan/${this.student.id}/cycle/new`]);
+        this.router.navigate([`/students/plan/${this.student.id}/cycle`]);
     }
 
     editCycle(cycleId: number): void {
@@ -113,11 +113,11 @@ export class StudentPlanComponent implements OnInit {
                 this.cicles = this.cicles.filter(cycle => cycle.id !== cycleId);
             },
             error: (err) => {
-                console.error('Error al eliminar el ciclo:', err);
+                const errorMessage = err?.error?.error?.[0]?.errorMessage || null;
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
-                    text: 'No se pudo eliminar el ciclo. Intente nuevamente.',
+                    text: errorMessage || 'No se pudo eliminar el ciclo. Intente nuevamente.',
                     confirmButtonText: 'Aceptar',
                 });
             },
@@ -136,8 +136,7 @@ export class StudentPlanComponent implements OnInit {
                 this.loadCycles(); // Recargar los ciclos para reflejar los cambios
             },
             error: (err) => {
-                const errorMessage =
-                    err?.error?.error?.[0]?.errorMessage || 'Hubo un problema al actualizar el estado.';
+                const errorMessage = err?.error?.error?.[0]?.errorMessage || 'Hubo un problema al actualizar el estado.';
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
@@ -146,6 +145,10 @@ export class StudentPlanComponent implements OnInit {
                 });
             },
         });
+    }
+
+    viewDetails(cycleId: number): void {
+        this.router.navigate([`/cycles/details/${cycleId}`]); // Cambia la ruta según tu configuración
     }
 
 }

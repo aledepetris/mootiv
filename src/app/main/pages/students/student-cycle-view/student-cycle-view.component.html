@@ -77,18 +77,13 @@
 
                                     <!-- Acciones adicionales solo si el día no está finalizado -->
                                     <div *ngIf="!day.finishDate" class="actions-section flex gap-2 align-items-center">
+                                        <h5 pt-2>Plantillas: </h5>
                                         <!-- Combo Box para seleccionar plantilla -->
                                         <p-dropdown [options]="templates" [(ngModel)]="selectedTemplate"
                                             optionLabel="name" placeholder="Seleccionar Plantilla" [filter]="true"
                                             filterPlaceholder="Buscar Plantilla"
                                             (onChange)="onTemplateSelected($event.value)">
                                         </p-dropdown>
-
-
-                                        <!-- Botón para cargar desde plantilla -->
-                                        <button pButton type="button" icon="pi pi-upload"
-                                            class="p-button-rounded p-button-text mr-5" title="Cargar desde Plantilla">
-                                        </button>
 
                                         <!-- Botón para agregar ejercicio -->
                                         <button pButton type="button" icon="pi pi-plus"
@@ -149,7 +144,7 @@
                                 </p-table>
 
                                 <!-- Botón Guardar Todo solo si el día no está finalizado -->
-                                <div *ngIf="!day.finishDate" class="exercises-footer flex justify-content-end mt-3">
+                                <div *ngIf="!day.finishDate" class="exercises-footer flex justify-content-end mt-5">
                                     <button pButton type="button" label="Guardar Todo" icon="pi pi-save"
                                         class="p-button-success" (click)="saveDay(day)">
                                     </button>

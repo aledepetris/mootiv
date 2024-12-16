@@ -51,6 +51,9 @@ import { StudentCycleComponent } from './student-cycle-form/student-cycle.compon
 import { TooltipModule } from 'primeng/tooltip';
 import { StudentCycleViewComponent } from './student-cycle-view/student-cycle-view.component';
 import { StudentHeaderComponent } from './header/header-student.component';
+import { TabViewModule } from 'primeng/tabview';
+import { AccordionModule } from 'primeng/accordion';
+import { BadgeModule } from 'primeng/badge';
 
 @NgModule({
     declarations: [
@@ -111,7 +114,10 @@ import { StudentHeaderComponent } from './header/header-student.component';
         DialogModule,
         ChartModule,
         DataViewModule,
-        TooltipModule
+        TooltipModule,
+        AccordionModule,
+        TabViewModule,
+        BadgeModule,
     ]
 })
 export class StudentsModule { }

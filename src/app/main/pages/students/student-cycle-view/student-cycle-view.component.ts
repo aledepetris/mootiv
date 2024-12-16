@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 import { StudentCycleService } from 'src/app/main/services/student.cycles.service';
 import { GoalsService } from '../../../services/goal.service';
 import { TrainingTypesService } from 'src/app/main/services/training-type.service';
-import { CycleDetail } from 'src/app/main/interfaces/cycle.detail.interface';
+import { CycleDetail, ExerciseDetail, ExerciseRoutine, TrainingDay, TrainingWeek } from 'src/app/main/interfaces/cycle.detail.interface';
 
 @Component({
     selector: 'app-student-cycle',
@@ -17,6 +17,13 @@ export class StudentCycleViewComponent implements OnInit {
 
     student: Student;
     cycle: CycleDetail;
+    selectedDay: TrainingDay;
+    selectedExercise: ExerciseRoutine;
+
+    displayModal: boolean = false; // Visibilidad del modal
+    isEditMode: boolean = false;   // Indica si se está editando un ejercicio
+    newExercise: ExerciseRoutine = null; // Ejercicio que se está agregando o editando
+    availableExercises: ExerciseDetail[] = []; // Lista de ejercicios disponibles
 
     constructor(
         private studentsService: StudentsService,
@@ -27,17 +34,19 @@ export class StudentCycleViewComponent implements OnInit {
         private router: Router
     ) { }
 
-    menuItems = [
-        { title: 'Dashboard Alumno', route: 'students/view', icon: 'pi pi-home' },
-        { title: 'Plan de Entrenamiento', route: 'students/plan', icon: 'pi pi-calendar' },
-        { title: 'Revisar Historia Clínica', route: 'students/condition', icon: 'pi pi-book' },
-        { title: 'Medidas Antropométricas', route: 'students/measure', icon: 'pi pi-chart-bar' },
-        { title: 'Lugar de Entrenamiento', route: 'students/location', icon: 'pi pi-map' },
-    ];
-
     navigateTo(page: string): void {
         let path = `/${page}/${this.student.id}`;
         this.router.navigate([path]);
+    }
+
+    viewNotes(exercise: ExerciseRoutine): void {
+        const notes = exercise?.notes || 'Sin notas disponibles.';
+        Swal.fire({
+            title: 'Notas del Ejercicio',
+            text: notes,
+            icon: 'info',
+            confirmButtonText: 'Cerrar'
+        });
     }
 
     ngOnInit(): void {
@@ -51,6 +60,7 @@ export class StudentCycleViewComponent implements OnInit {
                     if (cycleId) {
                         this.loadCycle(cycleId);
                     }
+                    this.loadAvailableExercises();
                 },
                 error: () => {
                     Swal.fire({
@@ -80,18 +90,208 @@ export class StudentCycleViewComponent implements OnInit {
     }
 
     loadCycle(cycleId: number): void {
-        console.log("entro a loadCycle")
         this.studentCycleService.getCycleDetailById(+this.student.id, cycleId).subscribe({
             next: (data) => {
                 this.cycle = data;
+
+                // Asegurar que `trainingWeeks` existe y ordenar por `id`
+                this.cycle.trainingWeeks = (data.trainingWeeks || [])
+                    .map(week => ({
+                        ...week,
+                        days: (week.days || [])
+                            .map(day => ({
+                                ...day,
+                                exercises: (day.exercises || [])
+                                    .map(exercise => ({
+                                        ...exercise,
+                                        exercise: exercise.exercise || {
+                                            id: null,
+                                            name: '',
+                                            description: '',
+                                            alt_img: '',
+                                            forTime: false,
+                                            total: false,
+                                        }
+                                    })
+                                    )
+                            }))
+                            .sort((a, b) => (a.id || 0) - (b.id || 0)) // Ordenar los días por `id`
+                    }))
+                    .sort((a, b) => (a.id || 0) - (b.id || 0)); // Ordenar las semanas por `id`
             },
             error: (error) => {
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
-                    text: 'No se pudo cargar el estudiante.',
+                    text: 'No se pudo cargar el ciclo.',
                 }).then(() => this.router.navigate(['/students']));
             },
         });
     }
+
+
+    addExercise(day: TrainingDay): void {
+        this.isEditMode = false;
+        this.selectedDay = day; // Día al que se añadirá el ejercicio
+        this.newExercise = {
+            id: null,
+            exercise: null,
+            sets: 1,
+            repetitions: 10,
+            weight: 0,
+            rest: 60,
+            notes: ''
+        };
+
+        // Cargar los ejercicios disponibles antes de abrir el modal
+        this.loadAvailableExercises(() => {
+            this.displayModal = true; // Mostrar el modal solo después de cargar los datos
+        });
+    }
+
+    editExercise(day: TrainingDay, exercise: ExerciseRoutine): void {
+        this.isEditMode = true;
+        this.selectedDay = day; // Día actual
+        this.newExercise = { ...exercise }; // Copia profunda para evitar mutaciones
+        this.displayModal = true;
+    }
+
+    closeModal(): void {
+        this.displayModal = false;
+        this.newExercise = null;
+    }
+
+    confirmAddExercise(): void {
+        if (!this.newExercise.exercise) {
+            Swal.fire('Error', 'Debe seleccionar un ejercicio.', 'error');
+            return;
+        }
+
+        if (this.isEditMode) {
+            // Editar el ejercicio existente
+            const index = this.selectedDay.exercises.findIndex(e => e.id === this.newExercise.id);
+            if (index !== -1) {
+                this.selectedDay.exercises[index] = { ...this.newExercise };
+            }
+        } else {
+            // Agregar nuevo ejercicio
+            this.selectedDay.exercises.push(this.newExercise);
+        }
+
+        this.displayModal = false;
+        Swal.fire('Éxito', `Ejercicio ${this.isEditMode ? 'editado' : 'agregado'} correctamente. Recuerda que todos los cambios se guardarán al hacer clic en "Guardar Todo".`, 'success');
+    }
+
+    // Cargar los ejercicios disponibles desde el backend
+    loadAvailableExercises(callback?: () => void): void {
+        this.studentCycleService.getAvailableExercises(+this.student.id, this.cycle.id).subscribe({
+            next: (data) => {
+                this.availableExercises = data;
+                if (callback) {
+                    callback(); // Ejecutar el callback si está definido
+                }
+            },
+            error: (err) => {
+                console.error('Error cargando ejercicios:', err);
+                Swal.fire('Error', 'No se pudieron cargar los ejercicios disponibles.', 'error');
+            }
+        });
+    }
+
+    saveDay(day: TrainingDay): void {
+        // Transformar los ejercicios al formato esperado por el backend
+        const exercisesPayload = day.exercises.map(exercise => ({
+            id: exercise.id || null,
+            notes: exercise.notes || '',
+            repetitions: exercise.repetitions,
+            rest: exercise.rest,
+            sets: exercise.sets,
+            weight: exercise.weight,
+            idExercise: exercise.exercise?.id
+        }));
+
+        // Llamar al servicio con el payload correcto
+        this.studentCycleService.saveDayExercises(+this.student.id, day.id, { exercises: exercisesPayload }).subscribe({
+            next: () => {
+                Swal.fire('Éxito', 'Todos los ejercicios del día se han guardado correctamente.', 'success');
+            },
+            error: () => {
+                Swal.fire('Error', 'No se pudieron guardar los ejercicios del día.', 'error');
+            }
+        });
+    }
+
+    deleteExercise(day: TrainingDay, exercise: ExerciseRoutine): void {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: 'Este ejercicio será eliminado de la lista, pero los cambios se guardarán al hacer clic en "Guardar Todo".',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Eliminar del arreglo local
+                const index = day.exercises.indexOf(exercise);
+                if (index > -1) {
+                    day.exercises.splice(index, 1);
+                    Swal.fire('Eliminado', 'El ejercicio ha sido eliminado de la lista localmente.', 'success');
+                }
+            }
+        });
+    }
+
+    finishDay(day: TrainingDay): void {
+        if (!this.student || !day) {
+            Swal.fire('Error', 'No se pudo determinar el estudiante o el día.', 'error');
+            return;
+        }
+
+        // Llamar al servicio para finalizar el día
+        this.studentCycleService.finishDay(+this.student.id, day.id).subscribe({
+            next: () => {
+                // Actualizar localmente la fecha de finalización
+                day.finishDate = new Date(); // Asigna la fecha actual
+                Swal.fire('Éxito', 'El día ha sido marcado como finalizado.', 'success');
+            },
+            error: () => {
+                Swal.fire('Error', 'No se pudo finalizar el día. Intente nuevamente.', 'error');
+            }
+        });
+    }
+
+    getWeekRange(startDate: Date, daysToAdd: number = 7): string {
+        if (!startDate) {
+            return 'Sin fecha';
+        }
+
+        const start = new Date(startDate);
+        const end = new Date(startDate);
+        end.setDate(end.getDate() + daysToAdd);
+
+        // Formatear las fechas (dd-MM-yy)
+        const format = (date: Date): string =>
+            date.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: '2-digit' });
+
+        return ` ${format(start)}  al   ${format(end)} `;
+    }
+
+    advanceWeekStatus(week: TrainingWeek, newStatus: string): void {
+        if (!week || !newStatus) {
+            return;
+        }
+        // Llamar al servicio para actualizar el estado de la semana
+        this.studentCycleService.updateWeekStatus(+this.student.id, week.id, newStatus).subscribe({
+            next: () => {
+                week.status = newStatus; // Actualizar el estado localmente
+                Swal.fire('Éxito', `La semana ha sido actualizada a ${newStatus}.`, 'success');
+            },
+            error: () => {
+                Swal.fire('Error', 'No se pudo actualizar el estado de la semana. Intente nuevamente.', 'error');
+            }
+        });
+    }
+
 }

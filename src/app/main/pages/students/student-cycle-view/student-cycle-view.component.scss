@@ -80,3 +80,203 @@ p-button {
 .menu-item button:hover {
     transform: scale(1.05);
 }
+
+.exercises-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .title-section {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        /* Espaciado mínimo entre título y botón de descargar */
+    }
+
+    .actions-section {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        /* Espaciado ajustado entre el combo y los botones */
+
+        p-dropdown {
+            width: 200px;
+            /* Ajusta el ancho del combo para mantener consistencia */
+        }
+    }
+
+    h5 {
+        margin: 0;
+        /* Quitar márgenes extra del título */
+    }
+
+    .p-button-rounded {
+        width: 2rem;
+        /* Tamaño compacto de los botones redondos */
+        height: 2rem;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .p-button-text {
+        border: none;
+        box-shadow: none;
+    }
+}
+
+.exercises-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
+}
+
+td,
+th {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.leftleft {
+    text-align: left;
+}
+
+.p-dialog .p-fluid {
+    .formgrid {
+        gap: 1rem;
+        /* Espaciado entre campos */
+    }
+
+    .field {
+        margin-bottom: 1rem;
+        /* Espaciado entre grupos de campos */
+    }
+
+    label {
+        font-weight: bold;
+        /* Hacer las etiquetas más visibles */
+    }
+
+    input,
+    textarea {
+        width: 100%;
+        /* Asegurar que los campos ocupen todo el espacio disponible */
+    }
+}
+
+.p-dialog .p-button-primary {
+    background-color: #4caf50;
+    /* Color más amigable para el botón "Guardar" */
+    border-color: #4caf50;
+}
+
+.p-dialog .p-button-text {
+    color: #f44336;
+    /* Color para el botón "Cancelar" */
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    font-weight: bold;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.5rem;
+    color: #fff;
+
+    &.bg-success {
+        background-color: #28a745;
+        /* Color verde para finalizado */
+    }
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-radius: 0.5rem;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.badge-draft {
+    background-color: #f0ad4e;
+    /* Naranja */
+    color: #fff;
+}
+
+.badge-pending {
+    background-color: #5bc0de;
+    /* Azul */
+    color: #fff;
+}
+
+.badge-in-progress {
+    background-color: #0275d8;
+    /* Azul oscuro */
+    color: #fff;
+}
+
+.badge-postponed {
+    background-color: #f7b924;
+    /* Amarillo */
+    color: #fff;
+}
+
+.badge-cancelled {
+    background-color: #d9534f;
+    /* Rojo */
+    color: #fff;
+}
+
+.badge-completed {
+    background-color: #5cb85c;
+    /* Verde */
+    color: #fff;
+}
+
+.status-section {
+    display: flex;
+    justify-content: space-between;
+    /* Distribuir espacio entre izquierda y derecha */
+    align-items: center;
+    /* Alinear verticalmente */
+    gap: 1rem;
+    /* Espacio entre elementos */
+
+    .status-details {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        /* Espacio entre el estado y el botón */
+    }
+
+    .weekbadge {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        border-radius: 0.5rem;
+        text-align: center;
+    }
+
+    .week-dates {
+        margin: 0;
+        font-size: 1rem;
+        white-space: nowrap;
+    }
+}
+
+.p-button-sm {
+    height: auto;
+    line-height: 1;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    border-radius: 0.25rem;
+}

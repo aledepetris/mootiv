@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Cycle } from '../interfaces/cycle.interface';
-import { CycleDetail } from '../interfaces/cycle.detail.interface';
+import { CycleDetail, ExerciseDetail, ExerciseRoutine } from '../interfaces/cycle.detail.interface';
 
 @Injectable({ providedIn: 'root' })
 export class StudentCycleService {
@@ -55,6 +55,30 @@ export class StudentCycleService {
     getCycleDetailById(idStudent: number, idCycle: number): Observable<CycleDetail> {
         return this.http.get<CycleDetail>(
             `${this.baseUrl + this.rootPath}/${idStudent}${this.basePath}/${idCycle}/detail`
+        );
+    }
+
+    getAvailableExercises(idStudent: number, idCycle: number): Observable<ExerciseDetail[]> {
+        return this.http.get<ExerciseDetail[]>(
+            `${this.baseUrl + this.rootPath}/${idStudent}${this.basePath}/${idCycle}/exercise`
+        );
+    }
+
+    saveDayExercises(idStudent: number, idDay: number, payload: { exercises: any[] }): Observable<any> {
+        return this.http.put(
+            `${this.baseUrl + this.rootPath}/${idStudent}/day/${idDay}`,
+            payload // Cambiado para aceptar un objeto con la clave "exercises"
+        );
+    }
+
+    finishDay(idStudent: number, idDay: number): Observable<any> {
+        return this.http.put(
+            `${this.baseUrl + this.rootPath}/${idStudent}/day/${idDay}/finish`, null);
+    }
+
+    updateWeekStatus(idStudent: number, idWeek: number, status: string): Observable<any> {
+        return this.http.put(
+            `${this.baseUrl + this.rootPath}/${idStudent}/week/${idWeek}/${status}`, null
         );
     }
 }

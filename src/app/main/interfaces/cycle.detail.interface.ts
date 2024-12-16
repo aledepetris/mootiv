@@ -31,7 +31,7 @@ export interface ExerciseRoutine {
     repetitions: number,
     weight: number,
     rest: number,
-    notes: number,
+    notes?: string,
 }
 
 export interface ExerciseDetail {
@@ -39,6 +39,6 @@ export interface ExerciseDetail {
     name: string,
     description: string,
     alt_img: string,
-    isForTime: boolean,
-    isTotal: boolean,
+    forTime: boolean,
+    total: boolean,
 }

@@ -19,6 +19,7 @@ import { AppLayoutComponent } from "./layout/app.layout.component";
                     { path: 'muscles', loadChildren: () => import('./main/pages/muscles/muscles.module').then(m => m.MusclesModule) },
                     { path: 'exercises', loadChildren: () => import('./main/pages/exercises/exercise.module').then(m => m.ExerciseModule) },
                     { path: 'students', loadChildren: () => import('./main/pages/students/student.module').then(m => m.StudentsModule) },
+                    { path: 'templates', loadChildren: () => import('./main/pages/templates/template.module').then(m => m.TemplatesModule) },
 
 
                     { path: 'uikit', loadChildren: () => import('./demo/components/uikit/uikit.module').then(m => m.UIkitModule) },

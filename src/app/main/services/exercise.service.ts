@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Exercise } from '../interfaces/exercise.interface';
+import { Template } from '../interfaces/template.interface';
 
 
 @Injectable({ providedIn: 'root' })
@@ -35,6 +36,32 @@ export class ExercisesService {
 
     deleteExercise(id: number): Observable<any> {
         return this.http.delete(`${this.baseUrl + this.basePath}/${id}`);
+    }
+
+    // Templates
+
+    getExercisesTemplate(): Observable<Template[]> {
+        return this.http.get<Template[]>(
+            `${this.baseUrl + this.basePath}/templates`
+        )
+    }
+
+    getExerciseTemplateById(id: number): Observable<Template | undefined> {
+        return this.http.get<Template>(
+            `${this.baseUrl + this.basePath}/templates/${id}`
+        )
+    }
+
+    postExerciseTemplate(exercise: Template): Observable<Template> {
+        return this.http.post<Template>(`${this.baseUrl + this.basePath}/templates`, exercise);
+    }
+
+    updateExerciseTemplate(id: number, exercise: Template): Observable<any> {
+        return this.http.put(`${this.baseUrl + this.basePath}/templates/${id}`, exercise);
+    }
+
+    deleteExerciseTemplate(id: number): Observable<any> {
+        return this.http.delete(`${this.baseUrl + this.basePath}/templates/${id}`);
     }
 
 }

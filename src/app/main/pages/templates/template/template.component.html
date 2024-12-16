@@ -1,0 +1,128 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card p-fluid">
+            <h5>{{ isEditMode ? 'Editar Template' : 'Nuevo Template' }}</h5>
+
+            <!-- Nombre -->
+            <div class="field">
+                <label for="name">Nombre</label>
+                <input pInputText id="name" [(ngModel)]="templateForm.name"
+                    placeholder="Ingrese el nombre del template" />
+            </div>
+
+            <!-- Descripción -->
+            <div class="field">
+                <label for="description">Descripción</label>
+                <textarea pInputTextarea id="description" rows="3" [(ngModel)]="templateForm.description"
+                    placeholder="Ingrese la descripción"></textarea>
+            </div>
+
+            <!-- Tabla de ejercicios -->
+            <div class="exercises-container">
+                <div class="exercises-header flex align-items-center justify-content-between mb-2">
+                    <div class="title-section flex align-items-center gap-2">
+                        <h5 class="m-0 me-2">Ejercicios Asociados</h5>
+                    </div>
+                    <div class="actions-section flex gap-2 align-items-center">
+                        <button pButton type="button" icon="pi pi-plus" class="p-button-rounded p-button-outlined ml-5"
+                            title="Agregar Ejercicio" (click)="addExercise()"></button>
+                    </div>
+                </div>
+
+                <p-table [value]="templateForm.exercises" class="exercise-table" responsiveLayout="scroll">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Ejercicio</th>
+                            <th></th>
+                            <th>Series</th>
+                            <th>Repeticiones</th>
+                            <th>Peso (kg)</th>
+                            <th>Descanso (seg)</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-exercise>
+                        <tr>
+                            <td>{{ exercise.exercise?.name || 'Sin nombre' }}</td>
+                            <td>
+                                <p-badge [value]="!exercise.exercise?.total ? 'TOTAL' : 'LADO'"
+                                    [severity]="exercise.exercise?.total ? 'info' : 'warning'"></p-badge>
+                            </td>
+                            <td>{{ exercise.sets }}</td>
+                            <td>{{ exercise.repetitions }}</td>
+                            <td>{{ exercise.weight }}</td>
+                            <td>{{ exercise.rest }}</td>
+                            <td>
+                                <button pButton type="button" icon="pi pi-book"
+                                    class="p-button-rounded p-button-text p-button-secondary"
+                                    (click)="viewNotes(exercise)">
+                                </button>
+                                <button pButton type="button" icon="pi pi-pencil"
+                                    class="p-button-rounded p-button-text p-button-warning"
+                                    (click)="editExercise(exercise)">
+                                </button>
+                                <button pButton type="button" icon="pi pi-trash"
+                                    class="p-button-rounded p-button-text p-button-danger"
+                                    (click)="deleteExercise(exercise)">
+                                </button>
+                            </td>
+
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+
+            <button pButton label="{{ isEditMode ? 'Actualizar' : 'Guardar' }}" class="p-button-success mt-3"
+                (click)="onSubmit()" [disabled]="!templateForm.exercises || templateForm.exercises.length === 0">
+            </button>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<p-dialog [(visible)]="displayExerciseModal" [header]="isExerciseEditMode ? 'Editar Ejercicio' : 'Nuevo Ejercicio'"
+    [style]="{ width: '50vw' }" [modal]="true">
+    <ng-template pTemplate="content">
+        <div class="p-fluid">
+            <div class="field">
+                <label for="exercise">Ejercicio</label>
+                <p-dropdown id="exercise" [options]="availableExercises" [(ngModel)]="newExercise.exercise"
+                    optionLabel="name" placeholder="Seleccionar Ejercicio" [filter]="false"
+                    filterPlaceholder="Buscar Ejercicio">
+                </p-dropdown>
+
+            </div>
+            <div class="field grid">
+                <div class="col-6">
+                    <label for="sets">Series</label>
+                    <input id="sets" type="number" pInputText [(ngModel)]="newExercise.sets" min="1" />
+                </div>
+                <div class="col-6">
+                    <label for="repetitions">Repeticiones</label>
+                    <input id="repetitions" type="number" pInputText [(ngModel)]="newExercise.repetitions" min="1" />
+                </div>
+            </div>
+            <div class="field grid">
+                <div class="col-6">
+                    <label for="weight">Peso (kg)</label>
+                    <input id="weight" type="number" pInputText [(ngModel)]="newExercise.weight" min="0" />
+                </div>
+                <div class="col-6">
+                    <label for="rest">Descanso (seg)</label>
+                    <input id="rest" type="number" pInputText [(ngModel)]="newExercise.rest" min="0" />
+                </div>
+            </div>
+            <div class="field">
+                <label for="notes">Notas</label>
+                <textarea id="notes" pInputTextarea [(ngModel)]="newExercise.notes"></textarea>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <button pButton label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="closeModal()"></button>
+        <button pButton label="Guardar" icon="pi pi-check" class="p-button-primary" (click)="confirmAddExercise()"
+            [disabled]="!newExercise.exercise"></button>
+    </ng-template>
+</p-dialog>

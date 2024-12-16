@@ -193,7 +193,9 @@ export class StudentCycleViewComponent implements OnInit {
     loadAvailableExercises(callback?: () => void): void {
         this.studentCycleService.getAvailableExercises(+this.student.id, this.cycle.id).subscribe({
             next: (data) => {
-                this.availableExercises = data;
+                // Ordenar por nombre
+                this.availableExercises = data.sort((a, b) => a.name.localeCompare(b.name));
+
                 if (callback) {
                     callback(); // Ejecutar el callback si está definido
                 }
@@ -204,6 +206,7 @@ export class StudentCycleViewComponent implements OnInit {
             }
         });
     }
+
 
     saveDay(day: TrainingDay): void {
         // Transformar los ejercicios al formato esperado por el backend

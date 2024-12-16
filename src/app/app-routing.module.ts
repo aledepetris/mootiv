@@ -2,12 +2,15 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { NotfoundComponent } from './demo/components/notfound/notfound.component';
 import { AppLayoutComponent } from "./layout/app.layout.component";
+import { AuthGuard } from './main/guards/auth.guard';
 
 @NgModule({
     imports: [
         RouterModule.forRoot([
             {
-                path: '', component: AppLayoutComponent,
+                path: '',
+                component: AppLayoutComponent,
+                canActivate: [AuthGuard],
                 children: [
                     { path: '', loadChildren: () => import('./main/pages/dashboard/dashboard.module').then(m => m.DashboardModule) },
                     { path: 'trainers', loadChildren: () => import('./main/pages/trainers/trainers.module').then(m => m.TrainersModule) },
@@ -20,14 +23,7 @@ import { AppLayoutComponent } from "./layout/app.layout.component";
                     { path: 'exercises', loadChildren: () => import('./main/pages/exercises/exercise.module').then(m => m.ExerciseModule) },
                     { path: 'students', loadChildren: () => import('./main/pages/students/student.module').then(m => m.StudentsModule) },
                     { path: 'templates', loadChildren: () => import('./main/pages/templates/template.module').then(m => m.TemplatesModule) },
-
-
-                    { path: 'uikit', loadChildren: () => import('./demo/components/uikit/uikit.module').then(m => m.UIkitModule) },
-                    { path: 'utilities', loadChildren: () => import('./demo/components/utilities/utilities.module').then(m => m.UtilitiesModule) },
-                    { path: 'documentation', loadChildren: () => import('./demo/components/documentation/documentation.module').then(m => m.DocumentationModule) },
-                    { path: 'blocks', loadChildren: () => import('./demo/components/primeblocks/primeblocks.module').then(m => m.PrimeBlocksModule) },
-                    { path: 'pages', loadChildren: () => import('./demo/components/pages/pages.module').then(m => m.PagesModule) }
-                ]
+                ],
             },
             { path: 'auth', loadChildren: () => import('./demo/components/auth/auth.module').then(m => m.AuthModule) },
             { path: 'notfound', component: NotfoundComponent },

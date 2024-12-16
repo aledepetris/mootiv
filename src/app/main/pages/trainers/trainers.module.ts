@@ -21,7 +21,6 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { CascadeSelectModule } from 'primeng/cascadeselect';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { InputTextareaModule } from 'primeng/inputtextarea';
-import { InputDemoRoutingModule } from 'src/app/demo/components/uikit/input/inputdemo-routing.module';
 import { ColorPickerModule } from 'primeng/colorpicker';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { SliderModule } from 'primeng/slider';
@@ -61,7 +60,6 @@ import { TrainerComponent } from './trainer/trainer.component';
         CascadeSelectModule,
         MultiSelectModule,
         InputTextareaModule,
-        InputDemoRoutingModule,
         ColorPickerModule,
         ToggleButtonModule,
         SliderModule,

@@ -1,0 +1,40 @@
+.layout-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+.layout-topbar-menu {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.layout-topbar-menu button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+}
+
+.layout-topbar-menu .pi {
+    font-size: 1.2rem;
+    margin-right: 0.5rem;
+}
+
+.layout-topbar-menu {
+    margin-left: auto;
+}
+
+.layout-topbar-menu button {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+}
+
+.layout-topbar-menu button:hover {
+    background: var(--surface-hover);
+}

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { LayoutService } from 'src/app/layout/service/app.layout.service';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/main/services/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
     selector: 'app-login',
@@ -14,10 +16,17 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
     `]
 })
 export class LoginComponent {
+    email: string = '';
+    password: string = '';
 
-    valCheck: string[] = ['remember'];
+    constructor(private authService: AuthService, private router: Router) { }
 
-    password!: string;
-
-    constructor(public layoutService: LayoutService) { }
+    login(): void {
+        if (this.authService.login(this.email, this.password)) {
+            Swal.fire('¡Éxito!', 'Inicio de sesión correcto.', 'success');
+            this.router.navigate(['/']); // Redirige al dashboard
+        } else {
+            Swal.fire('Error', 'Credenciales incorrectas.', 'error');
+        }
+    }
 }

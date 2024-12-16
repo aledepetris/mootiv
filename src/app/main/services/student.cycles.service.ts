@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Cycle } from '../interfaces/cycle.interface';
 import { CycleDetail, ExerciseDetail, ExerciseRoutine } from '../interfaces/cycle.detail.interface';
+import { Template } from '../interfaces/template.interface';
 
 @Injectable({ providedIn: 'root' })
 export class StudentCycleService {
@@ -81,4 +82,16 @@ export class StudentCycleService {
             `${this.baseUrl + this.rootPath}/${idStudent}/week/${idWeek}/${status}`, null
         );
     }
+
+    getFileForWeek(idStudent: number, cycleId: number, weekId: number, fileType: 'pdf' | 'csv'): Observable<string> {
+        return this.http.get<string>(
+            `${this.baseUrl + this.rootPath}/${idStudent}/cycle/${cycleId}/week/${weekId}/export/${fileType}`,
+            { responseType: 'text' as 'json' } // Indica que esperas una respuesta en texto (Base64)
+        );
+    }
+
+    getTemplates(): Observable<Template[]> {
+        return this.http.get<Template[]>(`${this.baseUrl}/exercise/templates`);
+    }
+
 }

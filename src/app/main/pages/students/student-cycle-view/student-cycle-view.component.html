@@ -11,13 +11,13 @@
                         <div class="status-details flex align-items-center gap-3">
                             <h4 class="pt-3">Estado:</h4>
                             <span class="weekbadge" [ngClass]="{
-                    'badge-draft': week.status === 'BORRADOR',
-                    'badge-pending': week.status === 'PENDIENTE',
-                    'badge-in-progress': week.status === 'EN_PROGRESO',
-                    'badge-postponed': week.status === 'POSPUESTA',
-                    'badge-cancelled': week.status === 'CANCELEDA',
-                    'badge-completed': week.status === 'COMPLETEDA'
-                }">
+            'badge-draft': week.status === 'BORRADOR',
+            'badge-pending': week.status === 'PENDIENTE',
+            'badge-in-progress': week.status === 'EN_PROGRESO',
+            'badge-postponed': week.status === 'POSPUESTA',
+            'badge-cancelled': week.status === 'CANCELEDA',
+            'badge-completed': week.status === 'COMPLETEDA'
+        }">
                                 {{ week.status }}
                             </span>
 
@@ -28,18 +28,33 @@
                                     (click)="advanceWeekStatus(week, 'PENDIENTE')" title="Avanzar a PENDIENTE">
                                 </p-button>
                             </ng-container>
-
                         </div>
 
-                        <!-- Derecha: Fechas -->
-                        <h5 class="week-dates">{{ getWeekRange(week.startDate) }}</h5>
+                        <!-- Derecha: Fechas y botones de descarga -->
+                        <div class="dates-and-actions flex align-items-center gap-2">
+                            <h5 class="mr-5 week-dates">{{ getWeekRange(week.startDate) }}</h5>
+
+                            <h5 class="ml-5 week-dates">Descarga la rutina:</h5>
+                            <!-- Botón PDF -->
+                            <button pButton type="button" icon="pi pi-file-pdf"
+                                class="p-button-rounded p-button-danger p-button-text" title="Descargar PDF"
+                                (click)="downloadFile(week.id, 'pdf')">
+                            </button>
+
+                            <!-- Botón CSV -->
+                            <button pButton type="button" icon="pi pi-file-excel"
+                                class="p-button-rounded p-button-success p-button-text" title="Descargar CSV"
+                                (click)="downloadFile(week.id, 'csv')">
+                            </button>
+                        </div>
                     </div>
                 </div>
 
 
                 <div class="days-container">
                     <p-accordion>
-                        <p-accordionTab *ngFor="let day of week.days; let j = index" [header]="'Día ' + (j + 1)">
+                        <p-accordionTab *ngFor="let day of week.days; let j = index" [header]="'Día ' + (j + 1)"
+                            (click)="selectDay(day)">
                             <div class="exercises-container">
                                 <div class="exercises-header flex align-items-center justify-content-between mb-2">
                                     <div class="title-section flex align-items-center gap-2">
@@ -58,18 +73,17 @@
                                             <span class="badge bg-success">FINALIZADO</span>
                                         </ng-template>
 
-                                        <!-- Botón para descargar la rutina (solo si el día no está finalizado) -->
-                                        <button *ngIf="!day.finishDate" pButton type="button" icon="pi pi-download"
-                                            class="p-button-rounded p-button-text" title="Descargar Rutina">
-                                        </button>
                                     </div>
 
                                     <!-- Acciones adicionales solo si el día no está finalizado -->
                                     <div *ngIf="!day.finishDate" class="actions-section flex gap-2 align-items-center">
                                         <!-- Combo Box para seleccionar plantilla -->
                                         <p-dropdown [options]="templates" [(ngModel)]="selectedTemplate"
-                                            placeholder="Seleccionar Plantilla">
+                                            optionLabel="name" placeholder="Seleccionar Plantilla" [filter]="true"
+                                            filterPlaceholder="Buscar Plantilla"
+                                            (onChange)="onTemplateSelected($event.value)">
                                         </p-dropdown>
+
 
                                         <!-- Botón para cargar desde plantilla -->
                                         <button pButton type="button" icon="pi pi-upload"
@@ -93,7 +107,7 @@
                                             <th>Series</th>
                                             <th>Repeticiones</th>
                                             <th>Peso (kg)</th>
-                                            <th>Descanso (min)</th>
+                                            <th>Descanso (seg)</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </ng-template>

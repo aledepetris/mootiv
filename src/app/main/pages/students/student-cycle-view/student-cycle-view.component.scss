@@ -280,3 +280,23 @@ th {
     font-size: 0.75rem;
     border-radius: 0.25rem;
 }
+
+.dates-and-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    .week-dates {
+        margin: 0;
+        font-size: 1rem;
+        white-space: nowrap;
+        /* Evitar saltos de línea */
+    }
+
+    button {
+        height: 2rem;
+        /* Asegura que los botones sean compactos */
+        width: 2rem;
+        /* Igual altura y anchura para los botones redondeados */
+    }
+}

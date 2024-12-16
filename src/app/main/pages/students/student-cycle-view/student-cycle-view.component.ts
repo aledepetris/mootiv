@@ -7,6 +7,7 @@ import { StudentCycleService } from 'src/app/main/services/student.cycles.servic
 import { GoalsService } from '../../../services/goal.service';
 import { TrainingTypesService } from 'src/app/main/services/training-type.service';
 import { CycleDetail, ExerciseDetail, ExerciseRoutine, TrainingDay, TrainingWeek } from 'src/app/main/interfaces/cycle.detail.interface';
+import { Template } from 'src/app/main/interfaces/template.interface';
 
 @Component({
     selector: 'app-student-cycle',
@@ -14,6 +15,9 @@ import { CycleDetail, ExerciseDetail, ExerciseRoutine, TrainingDay, TrainingWeek
     styleUrls: ['./student-cycle-view.component.scss'],
 })
 export class StudentCycleViewComponent implements OnInit {
+
+    templates: Template[] = [];
+    selectedTemplate: Template | null = null;
 
     student: Student;
     cycle: CycleDetail;
@@ -54,6 +58,9 @@ export class StudentCycleViewComponent implements OnInit {
         const cycleId = this.activatedRoute.snapshot.params['idC'];
 
         if (studentId) {
+            console.log('Llamando a loadTemplates'); // Log adicional
+            this.loadTemplates(); // Carga las plantillas disponibles
+
             this.studentsService.getStudentById(studentId.toString()).subscribe({
                 next: (data) => {
                     this.student = data;
@@ -292,6 +299,73 @@ export class StudentCycleViewComponent implements OnInit {
                 Swal.fire('Error', 'No se pudo actualizar el estado de la semana. Intente nuevamente.', 'error');
             }
         });
+    }
+
+    downloadFile(weekId: number, fileType: 'pdf' | 'csv'): void {
+        this.studentCycleService.getFileForWeek(+this.student.id, this.cycle.id, weekId, fileType).subscribe({
+            next: (base64Data) => {
+                // Convierte el Base64 en un archivo descargable
+                const contentType = fileType === 'pdf' ? 'application/pdf' : 'text/csv';
+                const fileExtension = fileType === 'pdf' ? '.pdf' : '.csv';
+
+                const byteCharacters = atob(base64Data); // Decodificar Base64
+                const byteNumbers = Array.from(byteCharacters, char => char.charCodeAt(0));
+                const byteArray = new Uint8Array(byteNumbers);
+
+                const blob = new Blob([byteArray], { type: contentType });
+                const url = window.URL.createObjectURL(blob);
+
+                // Crear el enlace de descarga
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `Semana_${weekId}${fileExtension}`;
+                link.click();
+
+                // Limpiar la URL
+                window.URL.revokeObjectURL(url);
+            },
+            error: (err) => {
+                console.error('Error descargando el archivo:', err);
+                Swal.fire('Error', 'No se pudo descargar el archivo.', 'error');
+            }
+        });
+    }
+
+    loadTemplates(): void {
+        console.log('loadTemplates ejecutado'); // Verifica si el método se llama
+        this.studentCycleService.getTemplates().subscribe({
+            next: (data) => {
+                this.templates = data; // Verificar que los datos sean un arreglo
+                console.log('Templates cargados:', this.templates); // Verifica si los datos llegan
+            },
+            error: (err) => {
+                console.error('Error al cargar los templates:', err);
+                Swal.fire('Error', 'No se pudieron cargar los templates disponibles.', 'error');
+            }
+        });
+    }
+
+
+
+    selectDay(day: TrainingDay): void {
+        this.selectedDay = day;
+    }
+
+    onTemplateSelected(template: Template): void {
+        if (!template || !this.selectedDay) {
+            Swal.fire('Error', 'No se seleccionó ningún día o plantilla.', 'error');
+            return;
+        }
+
+        // Concatenar los ejercicios del template con los ejercicios existentes en el día
+        const newExercises = template.exercises.map(exercise => ({
+            ...exercise,
+            id: null // Aseguramos que el ID sea null porque no debe venir
+        }));
+
+        this.selectedDay.exercises = [...this.selectedDay.exercises, ...newExercises];
+
+        Swal.fire('Éxito', 'Se agregaron los ejercicios del template al día seleccionado.', 'success');
     }
 
 }

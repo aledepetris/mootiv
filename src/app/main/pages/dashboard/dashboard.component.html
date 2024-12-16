@@ -1,0 +1,105 @@
+<div class="grid">
+
+    <!-- Fila 1: Profesores (100%) -->
+    <div class="col-12">
+        <div class="card card-with-bg cursor-pointer" style="background-image: url('assets/images/trainers-bg.jpg');"
+            (click)="navigateTo('/trainers')">
+            <div class="card-overlay">
+                <h5 class="font-bold text-2xl">Profesores</h5>
+                <p>Gestiona la información de los entrenadores.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fila 2: Ejercicios y Plantillas (50% cada una) -->
+    <div class="col-12 md:col-6">
+        <div class="card card-with-bg cursor-pointer" style="background-image: url('assets/images/exercises-bg.jpg');"
+            (click)="navigateTo('/exercises')">
+            <div class="card-overlay">
+                <h5 class="font-bold">Ejercicios</h5>
+                <p>Administra los ejercicios disponibles.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 md:col-6">
+        <div class="card card-with-bg cursor-pointer" style="background-image: url('assets/images/templates-bg.jpg');"
+            (click)="navigateTo('/templates')">
+            <div class="card-overlay">
+                <h5 class="font-bold">Plantillas</h5>
+                <p>Crea y organiza plantillas de ejercicios.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fila 3: Alumnos (100%) -->
+    <div class="col-12">
+        <div class="card card-with-bg cursor-pointer" style="background-image: url('assets/images/students-bg.jpg');"
+            (click)="navigateTo('/students')">
+            <div class="card-overlay">
+                <h5 class="font-bold text-2xl">Alumnos</h5>
+                <p>Gestiona la información de los alumnos.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fila 4: Afecciones, Equipamientos y Músculos -->
+    <div class="col-12 md:col-4">
+        <div class="card card-with-bg cursor-pointer" style="background-image: url('assets/images/affections-bg.jpg');"
+            (click)="navigateTo('/affections')">
+            <div class="card-overlay">
+                <h5 class="font-bold">Afecciones</h5>
+                <p>Administra las afecciones físicas.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 md:col-4">
+        <div class="card card-with-bg cursor-pointer" style="background-image: url('assets/images/equipment-bg.jpg');"
+            (click)="navigateTo('/equipments')">
+            <div class="card-overlay">
+                <h5 class="font-bold">Equipamiento</h5>
+                <p>Gestiona los equipos de entrenamiento.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 md:col-4">
+        <div class="card card-with-bg cursor-pointer" style="background-image: url('assets/images/muscles-bg.jpg');"
+            (click)="navigateTo('/muscles')">
+            <div class="card-overlay">
+                <h5 class="font-bold">Músculos</h5>
+                <p>Organiza y administra los músculos.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fila 5: Objetivos, Tipos Ejercicios y Tipos Entrenamientos -->
+    <div class="col-12 md:col-4">
+        <div class="card card-with-bg cursor-pointer" style="background-image: url('assets/images/goals-bg.jpg');"
+            (click)="navigateTo('/goals')">
+            <div class="card-overlay">
+                <h5 class="font-bold">Objetivos</h5>
+                <p>Administra los objetivos de entrenamiento.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 md:col-4">
+        <div class="card card-with-bg cursor-pointer"
+            style="background-image: url('assets/images/exercise-types-bg.jpg');"
+            (click)="navigateTo('/exercisetypes')">
+            <div class="card-overlay">
+                <h5 class="font-bold">Tipos Ejercicios</h5>
+                <p>Define y organiza tipos de ejercicios.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 md:col-4">
+        <div class="card card-with-bg cursor-pointer"
+            style="background-image: url('assets/images/training-types-bg.jpg');"
+            (click)="navigateTo('/trainingtypes')">
+            <div class="card-overlay">
+                <h5 class="font-bold">Tipos Entrenamientos</h5>
+                <p>Gestiona las modalidades de entrenamiento.</p>
+            </div>
+        </div>
+    </div>
+
+</div>

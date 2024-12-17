@@ -1,25 +1,36 @@
+import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { NotfoundComponent } from './demo/components/notfound/notfound.component';
 import { AppLayoutComponent } from "./layout/app.layout.component";
-import { TrainerModule } from './main/pages/trainer/trainers.module';
-
-const routes: Routes = [];
+import { AuthGuard } from './main/guards/auth.guard';
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot([
-      {
-        path: '', component: AppLayoutComponent,
-        children: [
-          { path: '', loadChildren: () => import('./main/pages/dashboard/dashboard.module').then(m => m.DashboardModule) },
-          { path: 'alumns', loadChildren: () => import('./main/pages/alumns/alumns.module').then(m => m.AlumnsModule) },
-          { path: 'trainers', loadChildren: () => import('./main/pages/trainer/trainers.module').then(m => m.TrainerModule) }
-
-        ]
-      },
-    ], { scrollPositionRestoration: 'enabled', anchorScrolling: 'enabled', onSameUrlNavigation: 'reload' })
-  ],
-  exports: [RouterModule]
+    imports: [
+        RouterModule.forRoot([
+            {
+                path: '',
+                component: AppLayoutComponent,
+                canActivate: [AuthGuard],
+                children: [
+                    { path: '', loadChildren: () => import('./main/pages/dashboard/dashboard.module').then(m => m.DashboardModule) },
+                    { path: 'trainers', loadChildren: () => import('./main/pages/trainers/trainers.module').then(m => m.TrainersModule) },
+                    { path: 'equipments', loadChildren: () => import('./main/pages/equipment/equipment.module').then(m => m.EquipmentsModule) },
+                    { path: 'affections', loadChildren: () => import('./main/pages/affections/affection.module').then(m => m.AffectionsModule) },
+                    { path: 'exercisetypes', loadChildren: () => import('./main/pages/exercise-types/exercise-types.module').then(m => m.ExerciseTypesModule) },
+                    { path: 'trainingtypes', loadChildren: () => import('./main/pages/training-types/training-types.module').then(m => m.TrainingTypesModule) },
+                    { path: 'goals', loadChildren: () => import('./main/pages/goals/goals.module').then(m => m.GoalsModule) },
+                    { path: 'muscles', loadChildren: () => import('./main/pages/muscles/muscles.module').then(m => m.MusclesModule) },
+                    { path: 'exercises', loadChildren: () => import('./main/pages/exercises/exercise.module').then(m => m.ExerciseModule) },
+                    { path: 'students', loadChildren: () => import('./main/pages/students/student.module').then(m => m.StudentsModule) },
+                    { path: 'templates', loadChildren: () => import('./main/pages/templates/template.module').then(m => m.TemplatesModule) },
+                ],
+            },
+            { path: 'auth', loadChildren: () => import('./demo/components/auth/auth.module').then(m => m.AuthModule) },
+            { path: 'notfound', component: NotfoundComponent },
+            { path: '**', redirectTo: '/notfound' },
+        ], { scrollPositionRestoration: 'enabled', anchorScrolling: 'enabled', onSameUrlNavigation: 'reload' })
+    ],
+    exports: [RouterModule]
 })
 export class AppRoutingModule {
 }

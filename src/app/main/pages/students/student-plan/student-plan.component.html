@@ -1,0 +1,73 @@
+<div class="col-12">
+    <header-student [student]="student" (navigate)="navigateTo($event)"></header-student>
+
+    <div class="card">
+        <div class="flex justify-content-between align-items-center mb-3">
+            <h5>Listado de Ciclos de Entrenamiento</h5>
+            <button pButton label="Agregar Nuevo Ciclo" class="p-button-outlined p-button-success" icon="pi pi-plus"
+                (click)="openNewCycle()"></button>
+        </div>
+        <p-table [value]="cicles" [paginator]="true" [rows]="10" [resizableColumns]="true" class="p-datatable-sm"
+            [loading]="loading">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pResizableColumn style="text-align: center;">Fecha Inicio</th>
+                    <th pResizableColumn style="text-align: center;">Fecha Fin</th>
+                    <th pResizableColumn style="text-align: center;">Estado</th>
+                    <th pResizableColumn style="text-align: center;">Acciones</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-cycle>
+                <tr>
+                    <td style="text-align: center;">{{ cycle.startDate | date: 'dd/MM/yyyy' }}</td>
+                    <td style="text-align: center;">
+                        {{ cycle.endDate ? (cycle.endDate | date: 'dd/MM/yyyy') : 'En curso' }}
+                    </td>
+                    <td style="text-align: center;">
+                        <!-- Badge para el estado -->
+                        <span class="badge" [ngClass]="{
+                    'badge-draft': cycle.status === 'BORRADOR',
+                    'badge-pending': cycle.status === 'PENDIENTE',
+                    'badge-in-progress': cycle.status === 'EN_PROGRESO',
+                    'badge-cancelled': cycle.status === 'CANCELADO',
+                    'badge-completed': cycle.status === 'COMPLETADO'
+                }">
+                            {{ cycle.status }}
+                        </span>
+
+                        <!-- Botón con flecha (solo para BORRADOR) -->
+                        <ng-container *ngIf="cycle.status === 'BORRADOR'">
+                            <p-button icon="pi pi-arrow-right" styleClass="p-button-sm p-button-success ml-2"
+                                (click)="updateCycleStatus(cycle.id, 'PENDIENTE')" pTooltip="Avanzar estado"
+                                tooltipPosition="top"></p-button>
+                        </ng-container>
+
+                        <!-- Botón con cruz (para BORRADOR, PENDIENTE, y EN_PROGRESO) -->
+                        <ng-container
+                            *ngIf="cycle.status === 'BORRADOR' || cycle.status === 'PENDIENTE' || cycle.status === 'EN_PROGRESO'">
+                            <p-button icon="pi pi-times" styleClass="p-button-sm p-button-danger ml-2"
+                                (click)="updateCycleStatus(cycle.id, 'CANCELADO')" pTooltip="Cancelar Ciclo"
+                                tooltipPosition="top"></p-button>
+                        </ng-container>
+                    </td>
+                    <td style="text-align: center;">
+                        <!-- Botón para Navegar a otra página (siempre visible) -->
+                        <p-button icon="pi pi-book" styleClass="p-button-sm p-button-info mr-2"
+                            (click)="viewDetails(cycle.id)" pTooltip="Administrar Ciclo"
+                            tooltipPosition="top"></p-button>
+                        <!-- Botón Editar (solo para BORRADOR) -->
+                        <ng-container *ngIf="cycle.status === 'BORRADOR'">
+                            <p-button icon="pi pi-pencil" styleClass="p-button-sm p-button-warning mr-2"
+                                (click)="editCycle(cycle.id)"></p-button>
+                        </ng-container>
+
+                        <!-- Botón Eliminar -->
+                        <p-button icon="pi pi-trash" styleClass="p-button-sm p-button-danger"
+                            (click)="confirmDelete(cycle.id)"></p-button>
+                    </td>
+
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>

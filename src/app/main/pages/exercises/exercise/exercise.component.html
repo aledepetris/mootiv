@@ -1,0 +1,88 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card p-fluid flex align-items-center" style="width: 100%;">
+            <!-- Sección de Vista Previa -->
+            <div class="flex justify-content-center align-items-center" style="flex: 0.5;">
+                <img [src]="previewImage" alt="Imagen del equipamiento" class="circular-image"
+                    (error)="onImageError()" />
+            </div>
+            <div class="flex-1 p-1">
+                <!-- Título -->
+                <h5>{{ isEditMode ? 'Editar Ejercicio' : 'Nuevo Ejercicio' }}</h5>
+                <br />
+
+                <!-- Campo Nombre -->
+                <div class="field">
+                    <label for="name">Nombre</label>
+                    <input pInputText id="name" type="text" placeholder="Ingrese el nombre"
+                        [(ngModel)]="exerciseForm.name" name="name" />
+                </div>
+
+                <!-- Campo Descripción -->
+                <div class="field">
+                    <label for="description">Descripción</label>
+                    <textarea pInputTextarea id="description" rows="3" placeholder="Ingrese la descripción"
+                        [(ngModel)]="exerciseForm.description" name="description"></textarea>
+                </div>
+
+                <!-- URL de Imagen -->
+                <div class="field mb-3">
+                    <label for="alt_image">Enlace de Imagen</label>
+                    <input pInputText id="alt_image" type="text" placeholder="Ingrese el enlace de la imagen"
+                        [(ngModel)]="exerciseForm.alt_img" name="alt_image" (input)="onAltImageChange($event)" />
+                </div>
+
+                <!-- Checkboxes -->
+                <div class="field-checkbox my-3">
+                    <p-checkbox [(ngModel)]="exerciseForm.forTime" binary="true" inputId="forTime"></p-checkbox>
+                    <label for="forTime">Es por tiempo</label>
+                </div>
+
+                <div class="field-checkbox my-4">
+                    <p-checkbox [(ngModel)]="exerciseForm.total" binary="true" inputId="total"></p-checkbox>
+                    <label for="total">Es por lado / extremidad</label>
+                </div>
+
+                <!-- MultiSelect para Tipos de Ejercicio -->
+                <div class="field">
+                    <label for="exerciseType">Tipos de Ejercicio</label>
+                    <p-multiSelect id="exerciseType" class="w-full" [options]="exerciseTypes"
+                        [(ngModel)]="exerciseForm.idsExercisesType" optionLabel="name"
+                        placeholder="Seleccione tipos de ejercicio">
+                    </p-multiSelect>
+                </div>
+
+            </div>
+        </div>
+        <div class="card p-fluid flex align-items-center" style="width: 100%;">
+
+            <!-- PickList para Equipamientos -->
+            <div class="field mt-2">
+                <label for="equipment" class="mb-3">Asociar Equipamiento</label>
+                <p-pickList [source]="availableEquipments" [target]="associatedEquipments" sourceHeader="Disponibles"
+                    targetHeader="Asociados" [dragdrop]="true" [responsive]="true" [sourceStyle]="{ 'height': '250px' }"
+                    [targetStyle]="{ 'height': '250px' }">
+                    <ng-template let-equipment pTemplate="item">
+                        <div>{{ equipment.name }}</div>
+                    </ng-template>
+                </p-pickList>
+            </div>
+        </div>
+        <div class="field">
+            <label>Músculos Afectados</label>
+            <p-tree [value]="musclesTree" selectionMode="checkbox" [(selection)]="treeSelectedNodes"
+                (selectionChange)="onTreeSelectionChange($event)">
+                <ng-template let-node pTemplate="default">
+                    <span>{{ node.data.name }}</span>
+                </ng-template>
+            </p-tree>
+
+        </div>
+
+        <!-- Botón Guardar -->
+        <div class="card text-center mt-4">
+            <button pButton type="button" label="{{ isEditMode ? 'Actualizar' : 'Guardar' }}"
+                class="p-button-success w-full" (click)="onSubmit()"></button>
+        </div>
+    </div>
+</div>

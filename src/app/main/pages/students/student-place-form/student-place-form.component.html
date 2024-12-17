@@ -1,0 +1,37 @@
+<div class="col-12">
+    <header-student [student]="student" (navigate)="navigateTo($event)"></header-student>
+
+
+    <!-- Formulario Lugar -->
+    <div class="card p-fluid">
+        <div>
+            <h3>{{ isEditMode ? 'Editar Lugar de Entrenamiento' : 'Nuevo Lugar de Entrenamiento' }}</h3>
+        </div>
+
+        <!-- Campo Nombre -->
+        <div class="field mt-4">
+            <label for="name">Nombre del Lugar</label>
+            <input pInputText id="name" type="text" placeholder="Ingrese el nombre" [(ngModel)]="placeForm.name" />
+        </div>
+
+        <!-- PickList de Equipos -->
+        <div class="field mt-4">
+            <label for="equipment" class="mb-3">Equipamiento Asociado</label>
+            <p-pickList [source]="availableEquipments" [target]="associatedEquipments" sourceHeader="Disponibles"
+                targetHeader="Asociados" [dragdrop]="true" [responsive]="true" [sourceStyle]="{ 'height': '250px' }"
+                [targetStyle]="{ 'height': '250px' }">
+                <ng-template let-equipment pTemplate="item">
+                    <div>{{ equipment.name }}</div>
+                </ng-template>
+            </p-pickList>
+
+        </div>
+
+        <div class="card text-center mt-4">
+            <button pButton type="button" label="{{ isEditMode ? 'Actualizar' : 'Guardar' }}"
+                class="p-button-success w-full" (click)="savePlace()"></button>
+        </div>
+
+    </div>
+
+</div>

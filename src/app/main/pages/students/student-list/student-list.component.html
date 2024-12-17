@@ -1,0 +1,88 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card">
+            <h5>Estudiantes</h5>
+            <p-dataView #dv [value]="students" [paginator]="true" [rows]="9" filterBy="name" [sortField]="sortField"
+                [sortOrder]="sortOrder" layout="grid">
+                <ng-template pTemplate="header">
+                    <div class="flex flex-column md:flex-row md:justify-content-between gap-2">
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input type="search" pInputText placeholder="Nombre" (input)="onFilter(dv, $event)" />
+                        </span>
+                        <button pButton type="button" label="Nuevo estudiante" [routerLink]="['/students/new']"
+                            icon="pi pi-plus" class="mr-2"></button>
+                        <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+                    </div>
+                </ng-template>
+
+                <!-- Lista -->
+                <ng-template let-students pTemplate="listItem">
+                    <div class="col-12" *ngFor="let student of students">
+                        <div class="flex flex-column md:flex-row align-items-center p-3 w-full">
+                            <img [src]="student | studentImage" [alt]="student.name"
+                                class="my-4 md:my-0 w-9 md:w-10rem shadow-2 mr-5" />
+                            <div class="flex-1 flex flex-column align-items-center text-center md:text-left">
+                                <div class="font-bold text-2xl">{{ student.name }} {{ student.lastName }}</div>
+                                <br />
+                                <span
+                                    [class]="student.active ? 'product-badge status-instock' : 'product-badge status-outofstock'">
+                                    {{ student.active ? 'ACTIVO' : 'INACTIVO' }}
+                                </span>
+                                <div class="flex align-items-center mt-2">
+                                    <i class="pi pi-phone mr-2"></i>
+                                    <span class="font-semibold">{{ student.telephone }}</span>
+                                </div>
+                            </div>
+                            <div
+                                class="flex flex-row md:flex-column justify-content-between w-full md:w-auto align-items-center md:align-items-end mt-5 md:mt-0">
+                                <p-button [routerLink]="['/students', student.id]" icon="pi pi-pencil" label="Editar"
+                                    styleClass="mb-2 p-button-sm"></p-button>
+                                <p-button icon="pi pi-book" styleClass="p-button-sm p-button-warning"
+                                    label="Administrar" [routerLink]="['view', student.id]">
+                                </p-button>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+
+                <!-- Cuadrícula -->
+                <ng-template let-students pTemplate="gridItem">
+                    <div class="grid grid-nogutter">
+                        <div class="col-12 md:col-4" *ngFor="let student of students">
+                            <div class="card m-3 border-1 surface-border">
+                                <div class="flex flex-wrap gap-2 align-items-center justify-content-between mb-2">
+                                    <div class="flex align-items-center">
+                                        <i class="pi pi-phone mr-2"></i>
+                                        <span class="font-semibold">{{ student.telephone }}</span>
+                                    </div>
+                                    <span
+                                        [class]="student.active ? 'product-badge status-instock' : 'product-badge status-outofstock'">
+                                        {{ student.active ? 'ACTIVO' : 'INACTIVO' }}
+                                    </span>
+                                </div>
+                                <div class="flex flex-column align-items-center text-center mb-3">
+                                    <img [src]="student | studentImage" [alt]="student.name"
+                                        class="w-9 shadow-2 my-3 mx-0" />
+                                    <div class="text-2xl font-bold">{{ student.lastName }}</div>
+                                    <div class="mb-3">{{ student.name }}</div>
+                                </div>
+                                <div class="flex flex-column align-items-center gap-2">
+                                    <!-- Botón Editar -->
+                                    <p-button [routerLink]="['/students', student.id]" icon="pi pi-pencil"
+                                        label="Editar" styleClass="p-button-sm responsive-button">
+                                    </p-button>
+
+                                    <!-- Botón Administrar -->
+                                    <p-button [routerLink]="['view', student.id]" icon="pi pi-book" label="Administrar"
+                                        styleClass="p-button-sm p-button-warning responsive-button">
+                                    </p-button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </p-dataView>
+        </div>
+    </div>
+</div>

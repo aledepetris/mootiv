@@ -1,4 +1,4 @@
 export const environment = {
-  production: true,
-  baseUrl: 'http://produccion.domain'
-};
+    production: true,
+    baseUrl: 'http://localhost:8090/bff/v1'
+  };

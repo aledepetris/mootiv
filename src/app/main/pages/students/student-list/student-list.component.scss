@@ -1,0 +1,20 @@
+@media (max-width: 1290px) {
+    .responsive-button .p-button-label {
+        display: none;
+        /* Oculta el texto del botón */
+    }
+
+    .button-fixed-width {
+        width: 150px;
+        /* Ajusta este valor según tu diseño */
+        text-align: center;
+        /* Centra el contenido del botón */
+    }
+
+    .button-group {
+        width: 100%;
+        /* Asegura que el contenedor ocupe el ancho completo */
+        max-width: 200px;
+        /* Opcional: límite máximo del ancho de los botones */
+    }
+}

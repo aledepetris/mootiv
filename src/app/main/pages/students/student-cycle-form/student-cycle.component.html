@@ -1,0 +1,56 @@
+<div class="col-12">
+    <header-student [student]="student" (navigate)="navigateTo($event)"></header-student>
+
+    <!-- Formulario del Ciclo -->
+    <div class="col-12">
+        <div class="card p-fluid">
+            <h5>{{ cicleId ? 'Editar Ciclo' : 'Nuevo Ciclo' }}</h5>
+
+            <!-- Fecha de Inicio -->
+            <div class="field">
+                <label for="startDate">Fecha de Inicio</label>
+                <p-calendar id="startDate" [showIcon]="true" placeholder="Seleccione la fecha de inicio"
+                    [(ngModel)]="cycleForm.startDate" name="startDate"></p-calendar>
+            </div>
+
+            <!-- Objetivo -->
+            <div class="field">
+                <label for="goal">Objetivo</label>
+                <p-dropdown id="goal" [options]="goals" [(ngModel)]="selectedGoal" optionLabel="name"
+                    placeholder="Seleccione un objetivo" (onChange)="onGoalChange($event)"></p-dropdown>
+            </div>
+
+            <!-- Días de Entrenamiento -->
+            <div class="field" *ngIf="availableDays.length > 0">
+                <label for="daysPerWeek">Días por Semana</label>
+                <p-dropdown id="daysPerWeek" [options]="availableDays" [(ngModel)]="selectedDay"
+                    placeholder="Seleccione días por semana" (onChange)="onDayChange($event)"></p-dropdown>
+            </div>
+
+            <!-- Tipo de Entrenamiento -->
+            <div class="field" *ngIf="availableTrainingTypes.length > 0">
+                <label for="trainingType">Tipo de Entrenamiento</label>
+                <p-dropdown id="trainingType" [options]="availableTrainingTypes" [(ngModel)]="selectedTrainingType"
+                    placeholder="Seleccione tipo de entrenamiento"></p-dropdown>
+            </div>
+
+            <div class="field">
+                <label for="weeks">Cantidad de Semanas</label>
+                <input pInputText id="weeks" type="number" placeholder="Ingrese la cantidad de semanas"
+                    [(ngModel)]="cycleForm.weeks" name="weeks" (input)="validateWeeks()" />
+                <small *ngIf="cycleForm.weeks < 0" class="p-error">La cantidad de semanas no puede ser negativa.</small>
+            </div>
+
+            <!-- Estado -->
+            <div class="field">
+                <label for="status">Estado</label>
+                <input pInputText id="status" [(ngModel)]="cycleForm.status" name="status" readonly />
+            </div>
+
+            <!-- Botón Guardar -->
+            <button pButton type="button" label="Guardar" icon="pi pi-check" class="p-button-success"
+                [disabled]="!isFormValid()" (click)="onSubmit()"></button>
+
+        </div>
+    </div>
+</div>

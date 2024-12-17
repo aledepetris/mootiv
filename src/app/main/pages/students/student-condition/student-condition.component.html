@@ -1,0 +1,114 @@
+<div class="col-12">
+    <header-student [student]="student" (navigate)="navigateTo($event)"></header-student>
+
+    <hr class="custom-divider" />
+    <div class="flex align-items-center gap-3 student-header my-2">
+        <h3>Historia Clínica</h3>
+    </div>
+    <div class="card">
+        <div class="flex justify-content-between align-items-center mb-3">
+            <h5>Listado de condiciones médicas</h5>
+            <button pButton label="Agregar Nueva Medida" class="p-button-outlined p-button-success" icon="pi pi-plus"
+                (click)="openNewCondition()">
+            </button>
+        </div>
+        <p-table [value]="conditions" [paginator]="true" [rows]="10" [resizableColumns]="true" class="p-datatable-sm"
+            [loading]="loading">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pResizableColumn>Afección</th>
+                    <th pResizableColumn>Fecha de Diagnóstico</th>
+                    <th pResizableColumn>Severidad</th>
+                    <th pResizableColumn>Estado</th>
+                    <th pResizableColumn>Notas</th>
+                    <th pResizableColumn>Acciones</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-condition>
+                <tr>
+                    <td>{{ condition.afeccion }}</td>
+                    <td>{{ condition.diagnosisDate | date: 'dd/MM/yyyy' }}</td>
+                    <td>
+                        <span [ngClass]="{
+                    'badge-severity-low': condition.severity === 'BAJA',
+                    'badge-severity-moderate': condition.severity === 'MODERADA',
+                    'badge-severity-high': condition.severity === 'SEVERA'
+                }">
+                            {{ condition.severity }}
+                        </span>
+                    </td>
+                    <td>
+                        <span [ngClass]="{
+                    'badge-status-active': condition.currentStatus === 'ACTIVA',
+                    'badge-status-inactive': condition.currentStatus === 'INACTIVA',
+                    'badge-status-resolved': condition.currentStatus === 'RESUELTA'
+                }">
+                            {{ condition.currentStatus }}
+                        </span>
+                    </td>
+                    <td>
+                        <button *ngIf="condition.notes" pButton icon="pi pi-eye" class="p-button-sm p-button-text"
+                            (click)="showNotes(condition.notes)">
+                        </button>
+                        <span *ngIf="!condition.notes">Sin notas</span>
+                    </td>
+                    <td>
+                        <p-button icon="pi pi-pencil" styleClass="p-button-sm p-button-warning mr-2"
+                            (click)="editCondition(condition.id)"></p-button>
+                        <p-button icon="pi pi-trash" styleClass="p-button-sm p-button-danger"
+                            (click)="confirmDelete(condition.id)"></p-button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+
+    </div>
+
+    <p-dialog [(visible)]="notesDialogVisible" header="Notas" [modal]="true" [style]="{width: '30vw'}"
+        [breakpoints]="{'960px': '75vw'}">
+        <p>{{ currentNote }}</p>
+        <ng-template pTemplate="footer">
+            <button pButton type="button" label="Cerrar" icon="pi pi-times" class="p-button-text"
+                (click)="closeNotesDialog()"></button>
+        </ng-template>
+    </p-dialog>
+
+    <p-dialog [(visible)]="conditionDialogVisible" [header]="isEditMode ? 'Editar Condición' : 'Nueva Condición'"
+        [style]="{ width: '50vw' }" [modal]="true" class="p-fluid">
+        <ng-template pTemplate="content">
+            <div class="field">
+                <label for="diagnosisDate">Fecha</label>
+                <input type="date" pInputText id="diagnosisDate" [(ngModel)]="currentCondition.diagnosisDate" required>
+            </div>
+
+            <div class="field">
+                <label for="severity">Severidad</label>
+                <p-dropdown id="severity" [options]="severities" [(ngModel)]="currentCondition.severity"
+                    placeholder="Seleccione una severidad"></p-dropdown>
+            </div>
+            <div class="field">
+                <label for="currentStatus">Estado Actual</label>
+                <p-dropdown id="currentStatus" [options]="statuses" [(ngModel)]="currentCondition.currentStatus"
+                    placeholder="Seleccione un estado"></p-dropdown>
+            </div>
+            <div class="field">
+                <label for="idAffection">Afección</label>
+                <p-dropdown id="idAffection" [options]="affections" [(ngModel)]="currentCondition.idAffection"
+                    placeholder="Seleccione una afección"></p-dropdown>
+            </div>
+            <div class="field">
+                <label for="notes">Notas</label>
+                <textarea id="notes" rows="3" [(ngModel)]="currentCondition.notes" pInputTextarea></textarea>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="footer">
+            <button pButton type="button" label="Cancelar" icon="pi pi-times" class="p-button-text"
+                (click)="hideConditionDialog()"></button>
+            <button pButton type="button" label="Guardar" icon="pi pi-check" class="p-button-primary"
+                (click)="saveCondition()" [disabled]="!currentCondition.diagnosisDate || !currentCondition.severity
+                    || !currentCondition.currentStatus || !currentCondition.idAffection"></button>
+        </ng-template>
+    </p-dialog>
+
+
+</div>

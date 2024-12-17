@@ -1,0 +1,40 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card">
+            <h5>Equipamientos</h5>
+            <p-dataView #dv [value]="equipments" [paginator]="true" [rows]="20" filterBy="name" [sortField]="sortField"
+                [sortOrder]="sortOrder" layout="list">
+                <ng-template pTemplate="header">
+                    <div class="flex flex-column md:flex-row md:justify-content-between gap-2">
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input type="search" pInputText placeholder="Nombre" (input)="onFilter(dv, $event)">
+                        </span>
+                        <button pButton type="button" label="Nuevo equipamiento" [routerLink]="['/equipments/new']"
+                            icon="pi pi-plus" class="mr-2"></button>
+                    </div>
+                </ng-template>
+
+                <ng-template let-equipments pTemplate="listItem">
+                    <div class="col-12" *ngFor="let equipment of equipments">
+                        <div class="flex flex-row align-items-center p-2 w-full">
+                            <img [src]="equipment | equipmmentImage" [alt]="equipment.name" class="small-image mr-3" />
+                            <div class="flex-1 flex flex-column text-left">
+                                <div class="font-bold text-md">{{equipment.name}}</div>
+                                <br>
+                                <div class="text-sm text-secondary">{{equipment.description}}</div>
+                            </div>
+                            <div class="flex align-items-center ml-auto">
+                                <p-button [routerLink]="['/equipments', equipment.id]" icon="pi pi-pencil"
+                                    styleClass="p-button-sm mr-2"></p-button>
+                                <p-button icon="pi pi-trash" styleClass="p-button-danger p-button-sm"
+                                    (click)="confirmDelete(equipment.id)">
+                                </p-button>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </p-dataView>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+<div class="surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
+    <div class="flex flex-column align-items-center justify-content-center">
+        <!-- Logo -->
+        <a #topbarmenu class="layout-topbar-logo my-5" routerLink="">
+            <img src="assets/layout/images/logo-white.svg" alt="logo">
+        </a>
+        <!-- Fondo y tarjeta central -->
+        <div
+            style="border-radius:56px; padding:0.3rem; background: linear-gradient(180deg, rgba(33, 150, 243, 0.4) 10%, rgba(33, 150, 243, 0) 30%);">
+            <div class="w-full surface-card py-8 px-5 sm:px-8 flex flex-column align-items-center"
+                style="border-radius:53px">
+
+                <!-- Código de error y mensaje -->
+                <span class="text-blue-500 font-bold text-3xl">404</span>
+                <h1 class="text-900 font-bold text-3xl lg:text-5xl mb-2">Página no encontrada</h1>
+                <div class="text-600 mb-5">Lo sentimos, la página que buscas no existe o fue eliminada.</div>
+
+                <!-- Botón para volver al inicio -->
+                <button class="p-button p-button-rounded p-button-primary" [routerLink]="['/']">
+                    <i class="pi pi-home mr-2"></i>
+                    Volver al Inicio
+                </button>
+
+                <!-- Enlaces útiles -->
+                <div class="w-full mt-5">
+                    <h5 class="text-900 mb-3">Explora nuestras secciones:</h5>
+                    <a [routerLink]="['/students']"
+                        class="w-full flex align-items-center py-3 border-300 border-bottom-1">
+                        <span class="flex justify-content-center align-items-center bg-blue-400 border-round"
+                            style="height:3.5rem; width:3.5rem;">
+                            <i class="pi pi-users text-50 text-2xl"></i>
+                        </span>
+                        <span class="ml-4 flex flex-column">
+                            <span class="text-900 lg:text-lg font-medium mb-0">Administrar Alumnos</span>
+                            <span class="text-600">Gestiona la lista de alumnos y su información.</span>
+                        </span>
+                    </a>
+                    <a [routerLink]="['/exercises']"
+                        class="w-full flex align-items-center py-3 border-300 border-bottom-1">
+                        <span class="flex justify-content-center align-items-center bg-green-400 border-round"
+                            style="height:3.5rem; width:3.5rem;">
+                            <i class="pi pi-database text-50 text-2xl"></i>
+                        </span>
+                        <span class="ml-4 flex flex-column">
+                            <span class="text-900 lg:text-lg font-medium mb-0">Ejercicios</span>
+                            <span class="text-600">Consulta y administra la base de ejercicios.</span>
+                        </span>
+                    </a>
+                    <a [routerLink]="['/templates']" class="w-full flex align-items-center py-3">
+                        <span class="flex justify-content-center align-items-center bg-orange-400 border-round"
+                            style="height:3.5rem; width:3.5rem;">
+                            <i class="pi pi-file text-50 text-2xl"></i>
+                        </span>
+                        <span class="ml-4 flex flex-column">
+                            <span class="text-900 lg:text-lg font-medium mb-0">Plantillas</span>
+                            <span class="text-600">Crea y edita plantillas de entrenamiento.</span>
+                        </span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

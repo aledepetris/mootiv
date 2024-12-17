@@ -1,0 +1,207 @@
+<div class="col-12">
+    <header-student [student]="student" (navigate)="navigateTo($event)"> </header-student>
+
+    <div class="card">
+        <h3>Detalle del Ciclo</h3>
+        <p-tabView *ngIf="cycle?.trainingWeeks?.length > 0" orientation="top">
+            <p-tabPanel *ngFor="let week of cycle?.trainingWeeks; let i = index" [header]="'Semana ' + (i + 1)">
+                <div class="week-info mb-3">
+                    <div class="status-section flex align-items-center justify-content-between">
+                        <!-- Izquierda: Estado y Botón -->
+                        <div class="status-details flex align-items-center gap-3">
+                            <h4 class="pt-3">Estado:</h4>
+                            <span class="weekbadge" [ngClass]="{
+            'badge-draft': week.status === 'BORRADOR',
+            'badge-pending': week.status === 'PENDIENTE',
+            'badge-in-progress': week.status === 'EN_PROGRESO',
+            'badge-postponed': week.status === 'POSPUESTA',
+            'badge-cancelled': week.status === 'CANCELEDA',
+            'badge-completed': week.status === 'COMPLETEDA'
+        }">
+                                {{ week.status }}
+                            </span>
+
+                            <!-- Botón para avanzar estado a PENDIENTE (solo si está en BORRADOR) -->
+                            <ng-container *ngIf="week.status === 'BORRADOR'">
+                                <p-button icon="pi pi-arrow-right"
+                                    styleClass="p-button-sm p-button-success compact-button"
+                                    (click)="advanceWeekStatus(week, 'PENDIENTE')" title="Avanzar a PENDIENTE">
+                                </p-button>
+                            </ng-container>
+                        </div>
+
+                        <!-- Derecha: Fechas y botones de descarga -->
+                        <div class="dates-and-actions flex align-items-center gap-2">
+                            <h5 class="mr-5 week-dates">{{ getWeekRange(week.startDate) }}</h5>
+
+                            <h5 class="ml-5 week-dates">Descarga la rutina:</h5>
+                            <!-- Botón PDF -->
+                            <button pButton type="button" icon="pi pi-file-pdf"
+                                class="p-button-rounded p-button-danger p-button-text" title="Descargar PDF"
+                                (click)="downloadFile(week.id, 'pdf')">
+                            </button>
+
+                            <!-- Botón CSV -->
+                            <button pButton type="button" icon="pi pi-file-excel"
+                                class="p-button-rounded p-button-success p-button-text" title="Descargar CSV"
+                                (click)="downloadFile(week.id, 'csv')">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="days-container">
+                    <p-accordion>
+                        <p-accordionTab *ngFor="let day of week.days; let j = index" [header]="'Día ' + (j + 1)"
+                            (click)="selectDay(day)">
+                            <div class="exercises-container">
+                                <div class="exercises-header flex align-items-center justify-content-between mb-2">
+                                    <div class="title-section flex align-items-center gap-2">
+                                        <h5 class="m-0 me-2">Ejercicios del Día</h5>
+
+                                        <!-- Mostrar botón o badge según el estado del día -->
+                                        <ng-container *ngIf="!day.finishDate; else finishedBadge">
+                                            <!-- Botón para marcar como finalizado -->
+                                            <button pButton type="button" icon="pi pi-check"
+                                                class="p-button-rounded p-button-success p-button-text"
+                                                title="Marcar como finalizado" (click)="finishDay(day)">
+                                            </button>
+                                        </ng-container>
+                                        <ng-template #finishedBadge>
+                                            <!-- Badge para indicar que el día está finalizado -->
+                                            <span class="badge bg-success">FINALIZADO</span>
+                                        </ng-template>
+
+                                    </div>
+
+                                    <!-- Acciones adicionales solo si el día no está finalizado -->
+                                    <div *ngIf="!day.finishDate" class="actions-section flex gap-2 align-items-center">
+                                        <h5 pt-2>Plantillas: </h5>
+                                        <!-- Combo Box para seleccionar plantilla -->
+                                        <p-dropdown [options]="templates" [(ngModel)]="selectedTemplate"
+                                            optionLabel="name" placeholder="Seleccionar Plantilla" [filter]="true"
+                                            filterPlaceholder="Buscar Plantilla"
+                                            (onChange)="onTemplateSelected($event.value)">
+                                        </p-dropdown>
+
+                                        <!-- Botón para agregar ejercicio -->
+                                        <button pButton type="button" icon="pi pi-plus"
+                                            class="p-button-rounded p-button-outlined ml-5" title="Agregar Ejercicio"
+                                            (click)="addExercise(day)">
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Tabla de ejercicios -->
+                                <p-table [value]="day?.exercises" class="exercise-table" responsiveLayout="scroll">
+                                    <ng-template pTemplate="header">
+                                        <tr>
+                                            <th>Ejercicio</th>
+                                            <th></th> <!-- Nueva columna para el badge -->
+                                            <th>Series</th>
+                                            <th>Repeticiones</th>
+                                            <th>Peso (kg)</th>
+                                            <th>Descanso (seg)</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="body" let-exercise>
+                                        <tr>
+                                            <!-- Información del ejercicio -->
+                                            <td>{{ exercise?.exercise?.name || 'Sin nombre' }}</td>
+                                            <td>
+                                                <p-badge [value]="!exercise?.exercise?.total ? 'TOTAL' : 'LADO'"
+                                                    [severity]="exercise?.exercise?.total ? 'info' : 'warning'">
+                                                </p-badge>
+                                            </td>
+                                            <td>{{ exercise?.sets || 0 }}</td>
+                                            <td>
+                                                {{ exercise?.repetitions || 0 }} {{ exercise?.exercise?.forTime ? 'seg.'
+                                                : '' }}
+                                            </td>
+                                            <td>{{ exercise?.weight || 0 }}</td>
+                                            <td>{{ exercise?.rest || 0 }}</td>
+                                            <td>
+                                                <!-- Botones de acción solo si el día no está finalizado -->
+                                                <ng-container *ngIf="!day.finishDate">
+                                                    <button pButton type="button" icon="pi pi-book"
+                                                        class="p-button-rounded p-button-text p-button-secondary"
+                                                        (click)="viewNotes(exercise)">
+                                                    </button>
+                                                    <button pButton type="button" icon="pi pi-pencil"
+                                                        class="p-button-rounded p-button-text p-button-warning"
+                                                        (click)="editExercise(day, exercise)">
+                                                    </button>
+                                                    <button pButton type="button" icon="pi pi-trash"
+                                                        class="p-button-rounded p-button-text p-button-danger"
+                                                        (click)="deleteExercise(day, exercise)">
+                                                    </button>
+                                                </ng-container>
+                                            </td>
+                                        </tr>
+                                    </ng-template>
+                                </p-table>
+
+                                <!-- Botón Guardar Todo solo si el día no está finalizado -->
+                                <div *ngIf="!day.finishDate" class="exercises-footer flex justify-content-end mt-5">
+                                    <button pButton type="button" label="Guardar Todo" icon="pi pi-save"
+                                        class="p-button-success" (click)="saveDay(day)">
+                                    </button>
+                                </div>
+                            </div>
+                        </p-accordionTab>
+                    </p-accordion>
+                </div>
+            </p-tabPanel>
+        </p-tabView>
+    </div>
+</div>
+
+<p-dialog [(visible)]="displayModal" [header]="isEditMode ? 'Editar Ejercicio' : 'Nuevo Ejercicio'"
+    [style]="{ width: '50vw' }" [modal]="true" class="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="p-fluid formgrid grid">
+            <!-- Combo Box para seleccionar el Ejercicio -->
+            <div class="field col-12">
+                <label for="exercise">Ejercicio</label>
+                <p-dropdown id="exercise" [options]="availableExercises" [(ngModel)]="newExercise.exercise"
+                    optionLabel="name" placeholder="Seleccionar Ejercicio" [filter]="false"
+                    filterPlaceholder="Buscar Ejercicio">
+                </p-dropdown>
+            </div>
+
+            <!-- Series y Repeticiones -->
+            <div class="field col-6">
+                <label for="sets">Series</label>
+                <input id="sets" type="number" pInputText [(ngModel)]="newExercise.sets" min="1" />
+            </div>
+            <div class="field col-6">
+                <label for="repetitions">Repeticiones</label>
+                <input id="repetitions" type="number" pInputText [(ngModel)]="newExercise.repetitions" min="1" />
+            </div>
+
+            <!-- Peso y Descanso -->
+            <div class="field col-6">
+                <label for="weight">Peso (kg)</label>
+                <input id="weight" type="number" pInputText [(ngModel)]="newExercise.weight" min="0" />
+            </div>
+            <div class="field col-6">
+                <label for="rest">Descanso (seg)</label>
+                <input id="rest" type="number" pInputText [(ngModel)]="newExercise.rest" min="0" />
+            </div>
+
+            <!-- Notas -->
+            <div class="field col-12">
+                <label for="notes">Notas</label>
+                <textarea id="notes" pInputTextarea [(ngModel)]="newExercise.notes" rows="3"></textarea>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <button pButton type="button" label="Cancelar" icon="pi pi-times" class="p-button-text"
+            (click)="closeModal()"></button>
+        <button pButton type="button" label="Guardar" icon="pi pi-check" class="p-button-primary"
+            (click)="confirmAddExercise()" [disabled]="!newExercise.exercise"></button>
+    </ng-template>
+</p-dialog>

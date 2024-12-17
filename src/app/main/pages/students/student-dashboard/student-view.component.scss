@@ -1,0 +1,126 @@
+.student-photo img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.student-info h2 {
+    margin: 0;
+    color: #333;
+}
+
+.student-info p {
+    margin: 0;
+    line-height: 1.5;
+}
+
+.card.clickable-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+.card.clickable-card img.card-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    filter: brightness(0.7);
+}
+
+.card.clickable-card .card-content {
+    position: relative;
+    z-index: 1;
+    font-weight: bold;
+}
+
+.student-info {
+    color: white;
+
+    .student-name {
+        color: white;
+        margin: 0;
+        font-size: 1.8rem;
+    }
+
+    .student-details {
+        margin-top: 1rem;
+        line-height: 2;
+        font-size: 1.1rem;
+    }
+}
+
+.clickable-card {
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 8px;
+    transition: transform 0.3s ease-in-out;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+}
+
+.card-background {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    filter: brightness(0.7);
+    transition: filter 0.3s ease-in-out;
+}
+
+.card-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.card {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.shadow-text {
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.product-badge {
+    margin-bottom: 5rem;
+}
+
+p-button {
+    width: 100%;
+}
+
+.custom-divider {
+    border: none;
+    border-top: 2px solid #ccc;
+    margin: 1.5rem 0;
+    width: 100%;
+}

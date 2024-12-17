@@ -1,0 +1,42 @@
+<div class="grid">
+    <div class="col-12">
+
+        <div class="card p-fluid flex align-items-center" style="width: 100%;">
+            <div class="flex-1 p-1">
+
+                <h5>{{ isEditMode ? 'Editar Tipo de Entrenamiento' : 'Nuevo Tipo de Entrenamiento' }}</h5>
+                <br />
+                <!-- Nombre -->
+                <div class="field">
+                    <label for="name">Nombre</label>
+                    <input pInputText id="name" type="text" placeholder="Ingrese el nombre"
+                        [(ngModel)]="trainingTypeForm.name" name="name" />
+                </div>
+
+                <!-- Descripción -->
+                <div class="field">
+                    <label for="description">Descripción</label>
+                    <textarea pInputTextarea id="description" rows="3" placeholder="Ingrese la descripción"
+                        [(ngModel)]="trainingTypeForm.description" name="description"></textarea>
+                </div>
+
+                <div class="field">
+                    <!-- PickList -->
+                    <h5>Asociar Tipos de Ejercicio</h5>
+                    <p-pickList [source]="availableExerciseTypes" [target]="associatedExerciseTypes"
+                        sourceHeader="Disponibles" targetHeader="Asociados" [dragdrop]="true" [responsive]="true"
+                        [sourceStyle]="{ 'height': '250px' }" [targetStyle]="{ 'height': '250px' }">
+                        <ng-template let-exercise pTemplate="item">
+                            <div>{{ exercise.name }}</div>
+                        </ng-template>
+                    </p-pickList>
+                </div>
+
+
+                <!-- Botón Guardar -->
+                <div class="card text-center">
+                    <button pButton type="button" label="{{ isEditMode ? 'Actualizar' : 'Guardar' }}"
+                        class="p-button-success w-full" (click)="onSubmit()"></button>
+                </div>
+            </div>
+        </div>

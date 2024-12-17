@@ -1,0 +1,88 @@
+.surface-card {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.text-900 {
+    color: #1f2937;
+}
+
+.text-600 {
+    color: #6b7280;
+}
+
+.bg-blue-400 {
+    background-color: #3b82f6;
+}
+
+.bg-green-400 {
+    background-color: #22c55e;
+}
+
+.bg-orange-400 {
+    background-color: #fb923c;
+}
+
+a {
+    text-decoration: none;
+
+    &:hover {
+        background-color: #f3f4f6;
+        border-radius: 8px;
+        transition: 0.3s;
+    }
+}
+
+a {
+    color: #007bff;
+    /* Color inicial */
+    text-decoration: none;
+    /* Elimina el subrayado */
+    transition: color 0.3s ease;
+    /* Transición suave */
+}
+
+a:hover {
+    color: #0056b3;
+    /* Color más oscuro o visible al hacer hover */
+    text-decoration: underline;
+    /* Opcional: subrayar al hacer hover */
+}
+
+button {
+    color: #ffffff;
+    /* Color inicial del texto */
+    background-color: #007bff;
+    /* Color de fondo */
+    border: none;
+    padding: 0.75rem 1.5rem;
+    /* Espaciado interno */
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+    /* Fondo más oscuro en hover */
+    color: #ffffff;
+    /* Asegurar que el texto sea blanco */
+}
+
+.p-button {
+    color: #ffffff;
+    /* Texto blanco */
+    background-color: #007bff;
+    /* Color primario */
+    border: none;
+}
+
+.p-button:hover {
+    background-color: #0056b3;
+    /* Fondo en hover */
+    color: #ffffff;
+    /* Asegura que el texto siga siendo blanco */
+}
+
+.p-button i {
+    color: inherit;
+    /* El ícono hereda el color del botón */
+}

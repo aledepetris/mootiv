@@ -1,20 +1,21 @@
 import { NgModule } from '@angular/core';
+import { LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+import { AppLayoutModule } from './layout/app.layout.module';
+import { NotfoundComponent } from './demo/components/notfound/notfound.component';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { AppLayoutModule } from './layout/app.layout.module';
-
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    AppLayoutModule,
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [AppComponent, NotfoundComponent],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        AppLayoutModule,
+    ],
+    providers: [
+        { provide: LocationStrategy, useClass: PathLocationStrategy },
+    ],
+    bootstrap: [AppComponent],
 })
 export class AppModule { }

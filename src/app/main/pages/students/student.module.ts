@@ -1,0 +1,121 @@
+import { NgModule } from '@angular/core';
+
+import { StudentListComponent } from './student-list/student-list.component';
+
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { DataViewModule } from 'primeng/dataview';
+import { PickListModule } from 'primeng/picklist';
+import { OrderListModule } from 'primeng/orderlist';
+import { InputTextModule } from 'primeng/inputtext';
+import { DropdownModule } from 'primeng/dropdown';
+import { RatingModule } from 'primeng/rating';
+import { ButtonModule } from 'primeng/button';
+import { StudentsRoutingModule } from './student-routing.module';
+import { StudentImagePipe } from './student-image.pipe';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { CalendarModule } from 'primeng/calendar';
+import { ChipsModule } from 'primeng/chips';
+import { InputMaskModule } from 'primeng/inputmask';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { CascadeSelectModule } from 'primeng/cascadeselect';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { ColorPickerModule } from 'primeng/colorpicker';
+import { ToggleButtonModule } from 'primeng/togglebutton';
+import { SliderModule } from 'primeng/slider';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { CheckboxModule } from 'primeng/checkbox';
+import { ListboxModule } from 'primeng/listbox';
+import { InputGroupModule } from 'primeng/inputgroup';
+import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
+import { KnobModule } from 'primeng/knob';
+import { ChipModule } from 'primeng/chip';
+import { StudentComponent } from './student/student.component';
+import { StudentViewComponent } from './student-dashboard/student-view.component';
+import { StudentConditionComponent } from './student-condition/student-condition.component';
+import { StudentPlaceComponent } from './student-places/student-place.component';
+import { StudentMeasureComponent } from './student-measures/student-measures.component';
+import { StudentPlanComponent } from './student-plan/student-plan.component';
+import { TableModule } from 'primeng/table';
+import { RippleModule } from 'primeng/ripple';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { ToastModule } from 'primeng/toast';
+import { DialogModule } from 'primeng/dialog';
+import { ChartModule } from 'primeng/chart';
+import { StudentPlaceFormComponent } from './student-place-form/student-place-form.component';
+import { StudentCycleComponent } from './student-cycle-form/student-cycle.component';
+import { TooltipModule } from 'primeng/tooltip';
+import { StudentCycleViewComponent } from './student-cycle-view/student-cycle-view.component';
+import { StudentHeaderComponent } from './header/header-student.component';
+import { TabViewModule } from 'primeng/tabview';
+import { AccordionModule } from 'primeng/accordion';
+import { BadgeModule } from 'primeng/badge';
+
+@NgModule({
+    declarations: [
+        StudentListComponent,
+        StudentComponent,
+        StudentViewComponent,
+        StudentConditionComponent,
+        StudentPlaceComponent,
+        StudentPlaceFormComponent,
+        StudentMeasureComponent,
+        StudentConditionComponent,
+        StudentPlanComponent,
+        StudentPlaceComponent,
+        StudentCycleComponent,
+        StudentCycleViewComponent,
+        StudentHeaderComponent,
+        StudentImagePipe
+    ],
+    exports: [
+        StudentHeaderComponent
+    ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        StudentsRoutingModule,
+        DataViewModule,
+        PickListModule,
+        OrderListModule,
+        InputTextModule,
+        DropdownModule,
+        RatingModule,
+        ButtonModule,
+        AutoCompleteModule,
+        CalendarModule,
+        ChipsModule,
+        InputMaskModule,
+        InputNumberModule,
+        CascadeSelectModule,
+        MultiSelectModule,
+        InputTextareaModule,
+        ColorPickerModule,
+        ToggleButtonModule,
+        SliderModule,
+        RadioButtonModule,
+        ChipModule,
+        KnobModule,
+        InputSwitchModule,
+        ListboxModule,
+        SelectButtonModule,
+        CheckboxModule,
+        InputGroupModule,
+        InputGroupAddonModule,
+        TableModule,
+        RippleModule,
+        ProgressBarModule,
+        ToastModule,
+        DialogModule,
+        ChartModule,
+        DataViewModule,
+        TooltipModule,
+        AccordionModule,
+        TabViewModule,
+        BadgeModule,
+    ]
+})
+export class StudentsModule { }

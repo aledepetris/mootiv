@@ -1,0 +1,52 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card p-fluid flex align-items-center" style="width: 100%;">
+            <div class="flex-1 p-1">
+
+                <!-- Título -->
+                <h5>{{ isEditMode ? 'Editar Músculo' : 'Nuevo Músculo' }}</h5>
+                <br />
+
+                <!-- Nombre -->
+                <div class="field">
+                    <label for="name">Nombre</label>
+                    <input pInputText id="name" type="text" placeholder="Ingrese el nombre"
+                        [(ngModel)]="muscleForm.name" name="name" required />
+                </div>
+
+                <!-- Combo Selección Única (Padre) -->
+                <div class="field mt-3">
+                    <label for="parentMuscle">Seleccionar padre (opcional)</label>
+                    <p-dropdown [options]="parentMuscles" [(ngModel)]="muscleForm.idParentMuscle" name="parentMuscleId"
+                        optionLabel="name" placeholder="Seleccione un padre"></p-dropdown>
+                </div>
+
+                <!-- Checkbox Es Músculo Agrupador -->
+                <div class="field mt-3">
+                    <p-checkbox [(ngModel)]="isGroup" name="isGroup" binary="true" inputId="isGroup"
+                        [disabled]="!isEditMode && hasAssociatedMuscles" (onChange)="onGroupChange()"></p-checkbox>
+                    <label for="isGroup">¿Es músculo agrupador?</label>
+                </div>
+
+                <!-- PickList (si Es Músculo Agrupador) -->
+                <div class="field mt-2" *ngIf="isGroup">
+                    <h5>Asociar Músculos</h5>
+                    <p-pickList [source]="musclesToPick" [target]="musclesAssociated" sourceHeader="Disponibles"
+                        targetHeader="Asociados" [dragdrop]="true" [responsive]="true"
+                        [sourceStyle]="{ 'height': '250px' }" [targetStyle]="{ 'height': '250px' }">
+                        <ng-template let-muscle pTemplate="item">
+                            <div>{{ muscle.name }}</div>
+                        </ng-template>
+                    </p-pickList>
+                </div>
+
+                <!-- Botón Guardar -->
+                <div class="card text-center mt-4">
+                    <button pButton type="button" label="{{ isEditMode ? 'Actualizar' : 'Guardar' }}"
+                        class="p-button-success w-full" (click)="onSubmit()"></button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

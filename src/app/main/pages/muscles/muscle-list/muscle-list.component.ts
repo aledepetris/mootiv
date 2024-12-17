@@ -26,7 +26,8 @@ export class MuscleListComponent implements OnInit {
     loadMuscles(): void {
         this.musclesService.getMuscles().subscribe({
             next: (muscles: Muscle[]) => {
-                this.musclesTree = this.buildMuscleTree(muscles);
+                let musclesOrdered = muscles.sort((a, b) => a.name.localeCompare(b.name))
+                this.musclesTree = this.buildMuscleTree(musclesOrdered);
             },
             error: (error) => {
                 console.error('Error al cargar músculos:', error);

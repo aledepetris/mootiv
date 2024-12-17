@@ -18,7 +18,7 @@ export class TemplateListComponent implements OnInit {
     ngOnInit() {
         this.exerciseService.getExercisesTemplate()
             .subscribe(templates => {
-                this.templates = templates;
+                this.templates = templates.sort((a, b) => a.name.localeCompare(b.name));;
             })
 
     }

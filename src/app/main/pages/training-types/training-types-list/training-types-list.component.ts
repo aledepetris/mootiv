@@ -35,7 +35,7 @@ export class TrainingTypeListComponent implements OnInit {
     loadTrainingTypes(): void {
         this.trainingTypeService.getTrainingTypes().subscribe({
             next: (trainingTypes: TrainingType[]) => {
-                this.trainingTypes = trainingTypes;
+                this.trainingTypes = trainingTypes.sort((a, b) => a.name.localeCompare(b.name));
             },
             error: (error) => {
                 console.error('Error al cargar los tipos de ejercicio:', error);

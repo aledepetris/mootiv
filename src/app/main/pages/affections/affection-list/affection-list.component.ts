@@ -25,7 +25,7 @@ export class AffectionListComponent implements OnInit {
     ngOnInit() {
         this.affectionService.getAffections()
             .subscribe(affections => {
-                this.affections = affections;
+                this.affections = affections.sort((a, b) => a.name.localeCompare(b.name));;
             })
 
         this.sortOptions = [

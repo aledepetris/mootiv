@@ -25,7 +25,7 @@ export class EquipmentListComponent implements OnInit {
     ngOnInit() {
         this.equipmentService.getEquipments()
             .subscribe(equipments => {
-                this.equipments = equipments;
+                this.equipments = equipments.sort((a, b) => a.name.localeCompare(b.name));
             })
 
         this.sortOptions = [

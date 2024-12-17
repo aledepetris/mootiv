@@ -34,7 +34,7 @@ export class GoalListComponent implements OnInit {
     loadGoals(): void {
         this.goalService.getGoals().subscribe({
             next: (goals: Goal[]) => {
-                this.goals = goals;
+                this.goals = goals.sort((a, b) => a.name.localeCompare(b.name));
             },
             error: (error) => {
                 console.error('Error al cargar los objetivos:', error);

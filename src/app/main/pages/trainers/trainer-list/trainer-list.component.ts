@@ -25,7 +25,7 @@ export class TrainerListComponent implements OnInit {
     ngOnInit() {
         this.trainerService.getTrainers()
             .subscribe(trainers => {
-                this.trainers = trainers;
+                this.trainers = trainers.sort((a, b) => a.lastName.localeCompare(b.lastName));
             })
 
         this.sortOptions = [

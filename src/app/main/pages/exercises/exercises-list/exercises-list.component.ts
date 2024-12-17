@@ -22,7 +22,7 @@ export class ExerciseListComponent implements OnInit {
     loadExercises(): void {
         this.exercisesService.getExercises().subscribe({
             next: (data: Exercise[]) => {
-                this.exercises = data;
+                this.exercises = data.sort((a, b) => a.name.localeCompare(b.name));
             },
             error: (err) => {
                 console.error('Error al cargar los ejercicios:', err);

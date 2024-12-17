@@ -55,7 +55,7 @@ export class TemplateComponent implements OnInit {
             next: (template: Template) => {
                 this.templateForm = {
                     ...template,
-                    exercises: [...template.exercises],
+                    exercises: [...template.exercises.sort((a, b) => (a.id || 0) - (b.id || 0))],
                 };
             },
             error: () => {

@@ -9,6 +9,6 @@ export interface Trainer {
     dni:              string;
     telephone:        string;
     students:         Student[];
-    active:           boolean;
+    active?:           boolean;
     birthdate:        string;
 }

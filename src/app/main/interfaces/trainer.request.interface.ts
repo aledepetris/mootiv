@@ -5,6 +5,7 @@ export interface TrainerRequest {
     email: string;
     telephone: string;
     birthdate: Date | null;
-    active: boolean;
+    active?: boolean;
     idsStudents: number[];
+    alt_img?: string;
   }

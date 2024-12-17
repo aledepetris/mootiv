@@ -1,78 +1,75 @@
 <div class="grid">
-    <!-- Columna Izquierda -->
-    <div class="col-12 md:col-6">
-        <div class="card p-fluid">
-            <h5>Información Básica</h5>
-
-            <!-- DNI -->
-            <div class="field">
-                <label for="dni">DNI</label>
-                <input pInputText id="dni" type="number" placeholder="Ingrese su DNI" [(ngModel)]="studentForm.dni"
-                    name="dni" />
-            </div>
-
-            <!-- Nombre y Apellido -->
-            <div class="p-formgrid grid">
-                <div class="field col">
-                    <label for="name">Nombre</label>
-                    <input pInputText id="name" type="text" placeholder="Ingrese su nombre"
-                        [(ngModel)]="studentForm.name" name="name" />
-                </div>
-                <div class="field col">
-                    <label for="lastName">Apellido</label>
-                    <input pInputText id="lastName" type="text" placeholder="Ingrese su apellido"
-                        [(ngModel)]="studentForm.lastName" name="lastName" />
-                </div>
-            </div>
-
-            <!-- Correo Electrónico -->
-            <div class="field">
-                <label for="email">Correo Electrónico</label>
-                <input pInputText id="email" type="email" placeholder="Ingrese su correo electrónico"
-                    [(ngModel)]="studentForm.email" name="email" />
-            </div>
-        </div>
-    </div>
-
-    <!-- Columna Derecha -->
-    <div class="col-12 md:col-6">
-        <div class="card p-fluid">
-            <h5>Información Adicional</h5>
-
-            <!-- Teléfono -->
-            <div class="field grid">
-                <label for="telephone" class="col-12 mb-2 md:col-3 md:mb-0">Teléfono</label>
-                <div class="col-12 md:col-9">
-                    <input pInputText id="telephone" type="text" placeholder="Ingrese su teléfono"
-                        [(ngModel)]="studentForm.telephone" name="telephone" />
-                </div>
-            </div>
-
-            <!-- Fecha de Nacimiento -->
-            <div class="field">
-                <label for="birthdate">Fecha de Nacimiento</label>
-                <p-calendar id="birthdate" [showIcon]="true" placeholder="Seleccione su fecha de nacimiento"
-                    [(ngModel)]="studentForm.birthdate" name="birthdate"></p-calendar>
-            </div>
-
-            <div class="field">
-                <label for="startDate">Fecha de inicio actividad</label>
-                <p-calendar id="startDate" [showIcon]="true" placeholder="Seleccione su fecha de inicio"
-                    [(ngModel)]="studentForm.startDate" name="startDate"></p-calendar>
-            </div>
-
-            <!-- Activo -->
-            <div class="field-checkbox">
-                <p-checkbox id="active" binary="true" [(ngModel)]="studentForm.active" name="active"></p-checkbox>
-                <label for="active">¿Activo?</label>
-            </div>
-        </div>
-    </div>
-
-    <!-- Botón Enviar -->
     <div class="col-12">
-        <div class="card">
-            <button pButton type="button" label="Enviar" icon="pi pi-check" class="p-button-success w-full"
+        <div class="card p-fluid">
+            <h5>{{ isEditMode ? 'Editar Estudiante' : 'Nuevo Estudiante' }}</h5>
+
+            <div class="grid">
+                <!-- Sección Foto -->
+                <div class="col-12 md:col-4 text-center">
+                    <img [src]="photoUrl" 
+                         (error)="onImageError()" 
+                         alt="Foto del Estudiante" 
+                         class="circle-photo mb-3">
+                    <div class="field">
+                        <label for="photoUrl">URL de la Foto</label>
+                        <input id="photoUrl" 
+                               pInputText 
+                               type="text" 
+                               placeholder="Pegue la URL de la foto"
+                               [(ngModel)]="photoUrl" 
+                               (ngModelChange)="updatePhotoUrl($event)">
+                    </div>
+                </div>
+
+                <!-- Sección Información -->
+                <div class="col-12 md:col-8">
+                    <div class="field">
+                        <label for="dni">DNI</label>
+                        <input pInputText id="dni" type="number" placeholder="Ingrese DNI"
+                            [(ngModel)]="studentForm.dni">
+                    </div>
+
+                    <div class="p-formgrid grid">
+                        <div class="field col">
+                            <label for="name">Nombre</label>
+                            <input pInputText id="name" type="text" placeholder="Ingrese Nombre"
+                                [(ngModel)]="studentForm.name">
+                        </div>
+                        <div class="field col">
+                            <label for="lastName">Apellido</label>
+                            <input pInputText id="lastName" type="text" placeholder="Ingrese Apellido"
+                                [(ngModel)]="studentForm.lastName">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label for="email">Correo Electrónico</label>
+                        <input pInputText id="email" type="email" placeholder="Ingrese Email"
+                            [(ngModel)]="studentForm.email">
+                    </div>
+
+                    <div class="field">
+                        <label for="telephone">Teléfono</label>
+                        <input pInputText id="telephone" type="text" placeholder="Ingrese Teléfono"
+                            [(ngModel)]="studentForm.telephone">
+                    </div>
+
+                    <div class="field">
+                        <label for="birthdate">Fecha de Nacimiento</label>
+                        <p-calendar id="birthdate" [(ngModel)]="studentForm.birthdate" dateFormat="dd/mm/yy"
+                            placeholder="Seleccione Fecha"></p-calendar>
+                    </div>
+
+                    <div class="field">
+                        <label for="startDate">Fecha de Inicio de Actividad</label>
+                        <p-calendar id="startDate" [(ngModel)]="studentForm.startDate" dateFormat="dd/mm/yy"
+                            placeholder="Seleccione Fecha"></p-calendar>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botón Guardar -->
+            <button pButton type="button" label="Guardar" icon="pi pi-check" class="p-button-success w-full mt-3"
                 (click)="onSubmit()"></button>
         </div>
     </div>

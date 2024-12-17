@@ -5,17 +5,19 @@ import { TrainerRequest } from 'src/app/main/interfaces/trainer.request.interfac
 import Swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
 
-
 @Component({
     selector: 'app-trainer',
     templateUrl: './trainer.component.html',
-    styleUrl: './trainer.component.scss'
+    styleUrls: ['./trainer.component.scss']
 })
 export class TrainerComponent implements OnInit {
-
-    studentOptions: { label: string; value: string }[] = [];
+    studentOptions: { label: string; value: number }[] = [];
     selectedStudents: number[] = [];
-    isEditMode = false; // Indica si el formulario está en modo edición
+    trainerId: number;
+    isEditMode = false;
+
+    defaultPhoto = 'assets/no-image.png'; // Imagen por defecto
+    photoUrl: string = ''; // URL temporal de la foto
     trainerForm: TrainerRequest = {
         dni: null,
         name: '',
@@ -23,8 +25,8 @@ export class TrainerComponent implements OnInit {
         email: '',
         telephone: '',
         birthdate: null,
-        active: false,
         idsStudents: [],
+        alt_img: ''
     };
 
     constructor(
@@ -32,123 +34,100 @@ export class TrainerComponent implements OnInit {
         private studentsService: StudentsService,
         private router: Router,
         private activatedRoute: ActivatedRoute
-
     ) { }
 
     ngOnInit(): void {
         this.loadStudents();
-
-        // Verifica si es edición
-        this.activatedRoute.params.subscribe((params) => {
-            const trainerId = params['id'];
-            if (trainerId) {
-                this.isEditMode = true; // Activa el modo edición
-                this.loadTrainer(trainerId);
-            }
-        });
-
+        this.checkIfEditMode();
     }
 
+    // Cargar lista de estudiantes disponibles
     loadStudents(): void {
         this.studentsService.getStudents().subscribe({
             next: (students) => {
                 this.studentOptions = students.map(student => ({
                     label: `${student.name} ${student.lastName}`,
-                    value: student.id || ''
+                    value: +student.id!
                 }));
             },
-            error: (error) => {
-                console.error('Error al cargar los estudiantes:', error);
+            error: () => {
+                Swal.fire('Error', 'No se pudieron cargar los estudiantes.', 'error');
             }
         });
     }
 
-    onSubmit(): void {
-        this.trainerForm.idsStudents = this.selectedStudents;
-        const trainerId = this.activatedRoute.snapshot.params['id'];
-        if (this.isEditMode) {
-            // PUT para actualizar
-            this.trainersService.updateTrainer(trainerId, this.trainerForm).subscribe({
-                next: (response) => {
-                    Swal.fire({
-                        icon: 'success',
-                        title: '¡Éxito!',
-                        text: 'El entrenador se actualizó correctamente.',
-                        confirmButtonText: 'Aceptar',
-                    }).then(() => {
-                        this.router.navigate(['/trainers']);
-                    });
-                },
-                error: (error) => {
-                    const errorMessage =
-                        error?.error?.error?.[0]?.errorMessage ||
-                        'Hubo un problema al actualizar los datos. Intente nuevamente.';
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: errorMessage,
-                        confirmButtonText: 'Aceptar',
-                    });
-                },
-            });
-        } else {
-            // POST para crear
-            this.trainersService.postTrainer(this.trainerForm).subscribe({
-                next: (response) => {
-                    Swal.fire({
-                        icon: 'success',
-                        title: '¡Éxito!',
-                        text: 'El entrenador se creó correctamente.',
-                        confirmButtonText: 'Aceptar',
-                    }).then(() => {
-                        this.router.navigate(['/trainers']);
-                    });
-                },
-                error: (error) => {
-                    const errorMessage =
-                        error?.error?.error?.[0]?.errorMessage ||
-                        'Hubo un problema al guardar los datos. Intente nuevamente.';
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: errorMessage,
-                        confirmButtonText: 'Aceptar',
-                    });
-                },
-            });
-        }
+    // Verifica si es edición
+    checkIfEditMode(): void {
+        this.activatedRoute.params.subscribe((params) => {
+            this.trainerId = params['id'];
+            if (this.trainerId) {
+                this.isEditMode = true;
+                this.loadTrainer(this.trainerId.toString());
+            }
+        });
     }
 
-
-
+    // Cargar entrenador en modo edición
     loadTrainer(trainerId: string): void {
         this.trainersService.getTrainerById(trainerId).subscribe({
             next: (trainer) => {
                 this.trainerForm = {
-                    dni: Number(trainer.dni),
+                    dni: trainer.dni ? Number(trainer.dni) : null,
                     name: trainer.name,
                     lastName: trainer.lastName,
                     email: trainer.email,
                     telephone: trainer.telephone,
                     birthdate: trainer.birthdate ? new Date(trainer.birthdate) : null,
                     active: trainer.active,
-                    idsStudents: trainer.students ? trainer.students.map((student: any) => student.id) : [] // Mapear IDs
+                    idsStudents: trainer.students.map(s => +s.id),
+                    alt_img: trainer.alt_img || this.defaultPhoto
                 };
                 this.selectedStudents = [...this.trainerForm.idsStudents];
+                this.photoUrl = this.trainerForm.alt_img!;
             },
-            error: (error) => {
-                console.error('Error al cargar el entrenador:', error);
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: 'No se pudo cargar el entrenador. Intente nuevamente.',
-                    confirmButtonText: 'Aceptar',
-                }).then(() => {
-                    this.router.navigate(['/trainers']);
-                });
-            },
+            error: () => {
+                Swal.fire('Error', 'No se pudo cargar el entrenador.', 'error');
+            }
         });
     }
 
+    // Actualizar URL de la foto
+    updatePhotoUrl(url: string): void {
+        this.photoUrl = url;
+    }
 
+    // Si la imagen falla, mostrar imagen por defecto
+    onImageError(): void {
+        this.photoUrl = this.defaultPhoto;
+    }
+
+    // Enviar formulario
+    onSubmit(): void {
+        this.trainerForm.alt_img = this.photoUrl;
+        this.trainerForm.idsStudents = this.selectedStudents;
+
+        if (this.isEditMode) {
+            // PUT para actualizar
+            this.trainersService.updateTrainer(this.trainerId.toString(), this.trainerForm).subscribe({
+                next: () => {
+                    Swal.fire('¡Éxito!', 'El entrenador ha sido actualizado correctamente.', 'success')
+                        .then(() => this.router.navigate(['/trainers']));
+                },
+                error: () => {
+                    Swal.fire('Error', 'No se pudo actualizar el entrenador.', 'error');
+                }
+            });
+        } else {
+            // POST para crear
+            this.trainersService.postTrainer(this.trainerForm).subscribe({
+                next: () => {
+                    Swal.fire('¡Éxito!', 'El entrenador ha sido creado correctamente.', 'success')
+                        .then(() => this.router.navigate(['/trainers']));
+                },
+                error: () => {
+                    Swal.fire('Error', 'No se pudo crear el entrenador.', 'error');
+                }
+            });
+        }
+    }
 }

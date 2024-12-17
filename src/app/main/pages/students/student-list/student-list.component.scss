@@ -18,3 +18,13 @@
         /* Opcional: límite máximo del ancho de los botones */
     }
 }
+
+.circle-photo {
+    width: 100%;               /* Ancho relativo */
+    max-width: 250px;          /* Tamaño máximo más grande (50% más) */
+    height: auto;              /* Ajusta la altura automáticamente */
+    aspect-ratio: 1 / 1;       /* Cuadrado perfecto para mantener la circularidad */
+    border-radius: 50%;        /* Hace la imagen redonda */
+    object-fit: cover;         /* Ajusta la imagen sin deformarla */
+    border: 2px solid var(--surface-border); /* Borde opcional para resaltar */
+}

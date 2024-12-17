@@ -6,7 +6,7 @@ export interface Student {
     email: string;
     dni: number | null;
     telephone: string;
-    active: boolean;
+    active?: boolean;
     birthdate: Date | null;
     startDate: Date | null;
 }

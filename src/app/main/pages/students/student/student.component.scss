@@ -1,0 +1,7 @@
+.circle-photo {
+    width: 180px;           /* Tamaño fijo más grande */
+    height: 180px;          /* Alto igual al ancho */
+    border-radius: 50%;     /* Hace la imagen circular */
+    object-fit: cover;      /* Ajusta la imagen sin deformarla */
+    border: 2px solid #ccc; /* Borde opcional para resaltar */
+}
